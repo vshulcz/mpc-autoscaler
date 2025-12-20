@@ -14,10 +14,18 @@ spec:
     targetRevision: 58.1.1
     helm:
       releaseName: toy-monitoring
+      skipCrds: true
       values: |
         grafana:
           enabled: true
           defaultDashboardsEnabled: true
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
           sidecar:
             dashboards:
               enabled: true
@@ -27,10 +35,47 @@ spec:
         prometheus:
           enabled: true
           prometheusSpec:
+            retention: 2h
+            resources:
+              requests:
+                cpu: 100m
+                memory: 256Mi
+              limits:
+                cpu: 300m
+                memory: 512Mi
             serviceMonitorSelectorNilUsesHelmValues: false
             serviceMonitorNamespaceSelector: {}
             podMonitorSelectorNilUsesHelmValues: false
             podMonitorNamespaceSelector: {}
+
+        kubeStateMetrics:
+          enabled: true
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 150m
+              memory: 256Mi
+
+        nodeExporter:
+          enabled: true
+          resources:
+            requests:
+              cpu: 20m
+              memory: 64Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
+
+        prometheusOperator:
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 200m
+              memory: 256Mi
 
         alertmanager:
           enabled: false
@@ -40,3 +85,4 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - ServerSideApply=true
