@@ -1,0 +1,21 @@
+{{- if .Values.prometheusOperator.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "toy-load.fullname" . }}
+  namespace: {{ default (include "toy-load.namespace" .) .Values.prometheusOperator.serviceMonitor.namespace }}
+  labels:
+    {{- include "toy-load.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ include "toy-load.name" . }}
+  namespaceSelector:
+    matchNames:
+      - {{ include "toy-load.namespace" . }}
+  endpoints:
+    - port: http
+      path: {{ .Values.config.metricsPath }}
+      interval: {{ .Values.prometheusOperator.serviceMonitor.interval }}
+      scrapeTimeout: {{ .Values.prometheusOperator.serviceMonitor.scrapeTimeout }}
+{{- end }}

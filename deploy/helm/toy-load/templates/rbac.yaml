@@ -1,0 +1,10 @@
+{{- if .Values.rbac.create }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "toy-load.fullname" . }}
+  namespace: {{ include "toy-load.namespace" . }}
+  labels:
+    {{- include "toy-load.labels" . | nindent 4 }}
+rules: []
+{{- end }}

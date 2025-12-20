@@ -1,0 +1,148 @@
+{
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "title": "Toy Load Dashboard",
+  "uid": "toy-load",
+  "timezone": "",
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "30s",
+  "tags": [
+    "toy-load"
+  ],
+  "templating": {
+    "list": [
+      {
+        "name": "namespace",
+        "type": "query",
+        "label": "Namespace",
+        "datasource": "${DS_PROMETHEUS}",
+        "definition": "label_values(kube_pod_info, namespace)",
+        "query": "label_values(kube_pod_info, namespace)",
+        "refresh": 2,
+        "current": {
+          "text": "default",
+          "value": "default"
+        }
+      },
+      {
+        "name": "app",
+        "type": "query",
+        "label": "App",
+        "datasource": "${DS_PROMETHEUS}",
+        "definition": "label_values(kube_pod_labels{namespace=\"$namespace\"}, label_app)",
+        "query": "label_values(kube_pod_labels{namespace=\"$namespace\"}, label_app)",
+        "refresh": 2,
+        "current": {
+          "text": "toy-load",
+          "value": "toy-load"
+        }
+      }
+    ]
+  },
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Request Rate",
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "sum(rate(toy_http_requests_total{path=\"/work\",namespace=\"$namespace\",app=\"$app\"}[1m]))",
+          "legendFormat": "rps"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 0, "w": 12, "h": 7 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Error Rate",
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "sum(rate(toy_http_requests_total{path=\"/work\",code=~\"5..\",namespace=\"$namespace\",app=\"$app\"}[1m]))",
+          "legendFormat": "5xx rps"
+        }
+      ],
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 7 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Latency Quantiles",
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, sum(rate(toy_http_request_duration_seconds_bucket{path=\"/work\",namespace=\"$namespace\",app=\"$app\"}[1m])) by (le))",
+          "legendFormat": "p50"
+        },
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(toy_http_request_duration_seconds_bucket{path=\"/work\",namespace=\"$namespace\",app=\"$app\"}[1m])) by (le))",
+          "legendFormat": "p95"
+        },
+        {
+          "expr": "histogram_quantile(0.99, sum(rate(toy_http_request_duration_seconds_bucket{path=\"/work\",namespace=\"$namespace\",app=\"$app\"}[1m])) by (le))",
+          "legendFormat": "p99"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 7, "w": 12, "h": 8 }
+    },
+    {
+      "type": "stat",
+      "title": "In-Flight Requests",
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "sum(toy_in_flight_requests{namespace=\"$namespace\",app=\"$app\"})",
+          "legendFormat": "inflight"
+        }
+      ],
+      "gridPos": { "x": 12, "y": 7, "w": 4, "h": 8 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Replicas",
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "kube_deployment_status_replicas_available{deployment=\"toy-load\",namespace=\"$namespace\"}",
+          "legendFormat": "available"
+        },
+        {
+          "expr": "kube_deployment_spec_replicas{deployment=\"toy-load\",namespace=\"$namespace\"}",
+          "legendFormat": "desired"
+        }
+      ],
+      "gridPos": { "x": 16, "y": 7, "w": 8, "h": 8 }
+    },
+    {
+      "type": "timeseries",
+      "title": "CPU Usage",
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "sum(rate(container_cpu_usage_seconds_total{namespace=\"$namespace\",pod=~\"toy-load-.*\"}[1m]))",
+          "legendFormat": "cpu"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 15, "w": 12, "h": 8 }
+    },
+    {
+      "type": "timeseries",
+      "title": "Memory Usage",
+      "datasource": "${DS_PROMETHEUS}",
+      "targets": [
+        {
+          "expr": "sum(container_memory_working_set_bytes{namespace=\"$namespace\",pod=~\"toy-load-.*\"})",
+          "legendFormat": "memory"
+        }
+      ],
+      "gridPos": { "x": 12, "y": 15, "w": 12, "h": 8 }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{{- if .Values.dashboard.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "toy-load.fullname" . }}-dashboard
+  namespace: {{ default (include "toy-load.namespace" .) .Values.dashboard.namespace }}
+  labels:
+    grafana_dashboard: "1"
+    {{- include "toy-load.labels" . | nindent 4 }}
+data:
+  toy-load-dashboard.json: |
+{{ .Files.Get "files/toy-load-dashboard.json" | indent 4 }}
+{{- end }}

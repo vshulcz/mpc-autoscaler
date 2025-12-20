@@ -1,0 +1,20 @@
+{{- if and .Values.prometheusOperator.enabled .Values.prometheusOperator.podMonitor.enabled }}
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: {{ include "toy-load.fullname" . }}
+  namespace: {{ default (include "toy-load.namespace" .) .Values.prometheusOperator.podMonitor.namespace }}
+  labels:
+    {{- include "toy-load.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ include "toy-load.name" . }}
+  namespaceSelector:
+    matchNames:
+      - {{ include "toy-load.namespace" . }}
+  podMetricsEndpoints:
+    - port: http
+      path: {{ .Values.config.metricsPath }}
+      interval: {{ .Values.prometheusOperator.podMonitor.interval }}
+{{- end }}

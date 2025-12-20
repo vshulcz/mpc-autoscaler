@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: toy-load
+  namespace: default
+  labels:
+    app: toy-load
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: toy-load
+  template:
+    metadata:
+      labels:
+        app: toy-load
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+        prometheus.io/path: "/metrics"
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        fsGroup: 65532
+      containers:
+        - name: toy-load
+          image: ghcr.io/vshulcz/toy-load:main
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 9090
+              name: http
+          env:
+            - name: PORT
+              value: "9090"
+            - name: METRICS_PATH
+              value: "/metrics"
+            - name: READ_TIMEOUT
+              value: "5s"
+            - name: WRITE_TIMEOUT
+              value: "10s"
+            - name: IDLE_TIMEOUT
+              value: "60s"
+            - name: MAX_HEADER_BYTES
+              value: "1048576"
+            - name: LOG_LEVEL
+              value: "info"
+            - name: APP_NAME
+              value: "toy-load"
+          resources:
+            limits:
+              cpu: 500m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 64Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 9090
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 9090
+            initialDelaySeconds: 5
+            timeoutSeconds: 2

@@ -1,0 +1,126 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    tags:
+      - "v*.*.*"
+  pull_request:
+    branches: [main]
+
+env:
+  GO_VERSION: "1.25"
+  IMAGE_REPO: ghcr.io/vshulcz/toy-load
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  lint-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: true
+
+      - name: Verify gofmt
+        run: |
+          fmt_output=$(gofmt -l .)
+          if [[ -n "$fmt_output" ]]; then
+            echo "Run 'gofmt -w' on:"
+            echo "$fmt_output"
+            exit 1
+          fi
+
+      - name: Go vet
+        run: go vet ./...
+
+      - name: Go test
+        run: go test ./...
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+
+      - name: Helm lint
+        run: helm lint deploy/helm/toy-load
+
+      - name: Helm template
+        run: helm template toy-load deploy/helm/toy-load
+
+  build-and-push:
+    needs: lint-test
+    if: github.event_name == 'push' && !contains(github.event.head_commit.message, '[skip ci]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Determine image tags
+        id: meta
+        run: |
+          IMAGE=${IMAGE_REPO}
+          SHORT_SHA=$(echo "${GITHUB_SHA}" | cut -c1-7)
+          TAGS="${IMAGE}:${SHORT_SHA}"
+          if [[ "${GITHUB_REF}" == "refs/heads/main" ]]; then
+            TAGS="${IMAGE}:main,${TAGS}"
+          fi
+          if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
+            TAGS="${IMAGE}:${GITHUB_REF_NAME},${IMAGE}:latest,${TAGS}"
+          fi
+          echo "tags=${TAGS}" >> "$GITHUB_OUTPUT"
+          echo "short_sha=${SHORT_SHA}" >> "$GITHUB_OUTPUT"
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Update Helm image tag
+        if: github.ref == 'refs/heads/main'
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          tag = "${{ steps.meta.outputs.short_sha }}"
+          path = Path("deploy/helm/toy-load/values.yaml")
+          data = path.read_text()
+          data, n = re.subn(r'(?m)^\s*tag:\s*.*$', f'  tag: {tag}', data)
+          if n == 0:
+            raise SystemExit("tag not found in values.yaml")
+          path.write_text(data)
+          PY
+
+      - name: Commit Helm tag update
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add deploy/helm/toy-load/values.yaml
+          if git diff --cached --quiet; then
+            echo "No tag changes to commit"
+            exit 0
+          fi
+          git commit -m "ci: bump image tag [skip ci]"
+          git push

@@ -1,0 +1,6 @@
+apiVersion: v2
+name: toy-load
+description: Toy load generator service for autoscaling experiments
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
