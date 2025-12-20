@@ -1,0 +1,24 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: toy-prometheus
+  labels:
+    app.kubernetes.io/name: toy-prometheus
+spec:
+  version: v3.7.3
+  replicas: 1
+  serviceAccountName: toy-prometheus
+  serviceMonitorSelector:
+    matchLabels:
+      app.kubernetes.io/name: toy-load-servicemonitor
+  serviceMonitorNamespaceSelector: {}
+  podMonitorSelector: {}
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 150m
+    limits:
+      memory: 512Mi
+      cpu: 300m
+  retention: 2d
+  enableAdminAPI: false

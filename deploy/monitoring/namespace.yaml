@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: toy-monitoring
+  labels:
+    app.kubernetes.io/name: toy-monitoring

@@ -1,0 +1,13 @@
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaDashboard
+metadata:
+  name: toy-grafana-dashboard
+  labels:
+    app.kubernetes.io/name: toy-grafana
+spec:
+  instanceSelector:
+    matchLabels:
+      app.kubernetes.io/name: toy-grafana
+  configMapRef:
+    name: toy-grafana-dashboards
+    key: toy-load-dashboard.json

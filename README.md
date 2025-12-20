@@ -57,16 +57,15 @@ kubectl apply -n argocd -f deploy/argocd/toy-load.yaml
 The Application syncs the Helm chart from `main`, enabling automated prune/self-heal with namespace auto-create.
 
 ### Toy monitoring stack (isolated Grafana/Prometheus)
-Deploy a dedicated monitoring stack in `toy-monitoring` to avoid touching existing Grafana/Prometheus:
+Deploy a dedicated monitoring stack in `toy-monitoring` that reuses your existing Prometheus/Grafana operators (no Helm CRDs, no chart install):
 ```bash
 kubectl apply -n argocd -f deploy/argocd/toy-monitoring.yaml
 ```
 Access Grafana:
 ```bash
-kubectl -n toy-monitoring port-forward svc/toy-monitoring-grafana 3000:80
-kubectl -n toy-monitoring get secret toy-monitoring-grafana -o jsonpath='{.data.admin-password}' | base64 -d
+kubectl -n toy-monitoring port-forward svc/toy-grafana 3000:80
 ```
-Log in at `http://127.0.0.1:3000` with user `admin` and the decoded password. The dashboard is picked up via the `grafana_dashboard=1` label.
+Log in at `http://127.0.0.1:3000` with user `admin` and password `admin`. Anonymous viewer is enabled for quick access. The dashboard is picked up via the `grafana_dashboard=1` label.
 
 ### Validation checklist
 - Probes: `kubectl get pods` should show passing `/healthz` + `/readyz`.

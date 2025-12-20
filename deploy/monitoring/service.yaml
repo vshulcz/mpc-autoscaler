@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: toy-prometheus
+  labels:
+    app.kubernetes.io/name: toy-prometheus
+spec:
+  type: ClusterIP
+  selector:
+    prometheus: toy-prometheus
+  ports:
+    - name: http
+      port: 9090
+      targetPort: web

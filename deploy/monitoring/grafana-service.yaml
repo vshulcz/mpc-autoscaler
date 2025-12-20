@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: toy-grafana
+  labels:
+    app.kubernetes.io/name: toy-grafana
+    app: grafana
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: toy-grafana
+  ports:
+    - name: grafana
+      port: 80
+      targetPort: grafana
