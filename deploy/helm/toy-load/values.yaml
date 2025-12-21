@@ -44,15 +44,15 @@ resources:
 autoscaling:
   enabled: true
   minReplicas: 2
-  maxReplicas: 6
+  maxReplicas: 12
   targetCPUUtilizationPercentage: 60
   behavior:
     scaleUp:
       stabilizationWindowSeconds: 0
       policies:
         - type: Percent
-          value: 100
-          periodSeconds: 60
+          value: 200
+          periodSeconds: 30
     scaleDown:
       stabilizationWindowSeconds: 300
       policies:

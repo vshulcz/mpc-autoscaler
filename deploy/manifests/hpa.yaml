@@ -11,7 +11,7 @@ spec:
     kind: Deployment
     name: toy-load
   minReplicas: 2
-  maxReplicas: 6
+  maxReplicas: 12
   metrics:
     - type: Resource
       resource:
@@ -24,8 +24,8 @@ spec:
       stabilizationWindowSeconds: 0
       policies:
         - type: Percent
-          value: 100
-          periodSeconds: 60
+          value: 200
+          periodSeconds: 30
     scaleDown:
       stabilizationWindowSeconds: 300
       policies:
