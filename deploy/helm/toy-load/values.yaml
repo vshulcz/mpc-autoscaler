@@ -2,7 +2,7 @@ replicaCount: 2
 
 image:
   repository: ghcr.io/vshulcz/toy-load
-  tag: "f90d3c5"
+  tag: "ee4ea63"
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
