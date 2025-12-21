@@ -106,7 +106,7 @@ jobs:
           tag = "${{ steps.meta.outputs.short_sha }}"
           path = Path("deploy/helm/toy-load/values.yaml")
           data = path.read_text()
-          data, n = re.subn(r'(?m)^\s*tag:\s*.*$', f'  tag: {tag}', data)
+          data, n = re.subn(r'(?m)^\s*tag:\s*.*$', f'  tag: \"{tag}\"', data)
           if n == 0:
             raise SystemExit("tag not found in values.yaml")
           path.write_text(data)
