@@ -25,7 +25,7 @@ attack_phase() {
   local rate="$2"
   echo "Phase: rate=${rate} rps duration=${duration}"
   echo "GET ${TARGET}" | vegeta attack -duration="$duration" -rate="$rate" \
-    | tee >(cat >>"$BIN_FILE") \
+    | tee -a "$BIN_FILE" \
     | vegeta report
 }
 

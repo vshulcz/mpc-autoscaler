@@ -95,3 +95,10 @@ Typical metrics capture flow:
 - ServiceMonitor/PodMonitor and annotations ensure Prometheus coverage in operator or vanilla setups.
 - Grafana dashboard panels: request rate, error rate, latency quantiles, in-flight gauge, replica counts, CPU, and memory.
 - Metrics include `toy_work_cpu_ms`, `toy_work_sleep_ms`, `toy_work_jitter_ms`, and `toy_errors_total{reason="..."}` to drive HPA/MPC experiments.
+
+### HPA baseline (CPU)
+The Helm chart ships with a CPU-based HPA by default:
+- min/max replicas: 2/6
+- target CPU utilization: 60%
+- scale down stabilization: 300s
+Tune under `deploy/helm/toy-load/values.yaml` (`autoscaling.*`).
