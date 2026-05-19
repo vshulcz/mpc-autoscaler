@@ -204,20 +204,28 @@ The controller uses a backlog-state MPC formulation.
 
 State update between control ticks:
 
-$$b_0^{(t)} = \max\left\{0,\; b_0^{(t-1)} + \Delta t\bigl(\lambda_{t-1} - \mu\rho^* r_{t-1}\bigr)\right\}$$
+```math
+b_0^{(t)} = \max\!\left(0,\; b_0^{(t-1)} + \Delta t(\lambda_{t-1} - \mu\rho^\star r_{t-1})\right)
+```
 
 Optimization problem solved each tick:
 
-$$\min_{x,b}\; \alpha\|b\|^2 + \beta\|Dx - e_1 r_t\|^2 + \gamma \mathbf{1}^\top x$$
+```math
+\min_{x,b}\; \alpha\lVert b\rVert_2^2 + \beta\lVert D x - e_1 r_t\rVert_2^2 + \gamma \mathbf{1}^{\mathsf{T}}x
+```
 
 subject to:
 
-- $b_k \ge b_{k-1} + \Delta t\bigl(\hat\lambda_{t+k} - \mu\rho^* x_k\bigr)$
-- $b_k \ge 0$
-- $|x_k - x_{k-1}| \le x^{\max\text{-step}}$
-- $x^{\min} \le x_k \le x^{\max}$
+```math
+\begin{aligned}
+b_k &\ge b_{k-1} + \Delta t(\hat\lambda_{t+k} - \mu\rho^\star x_k), \\
+b_k &\ge 0, \\
+\lvert x_k - x_{k-1}\rvert &\le x^{\max\text{-step}}, \\
+x^{\min} &\le x_k \le x^{\max}.
+\end{aligned}
+```
 
-Here, $\hat\lambda$ is a short-horizon demand forecast, $\mu$ is the calibrated throughput capacity per replica, and $\rho^*$ is the target utilisation threshold.
+Here, $\hat\lambda$ is a short-horizon demand forecast, $\mu$ is the calibrated throughput capacity per replica, and $\rho^\star$ is the target utilisation threshold.
 
 ## Observability
 
