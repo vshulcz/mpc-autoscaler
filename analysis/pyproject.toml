@@ -1,0 +1,49 @@
+[project]
+name = "mpc-autoscaler-analysis"
+version = "0.1.0"
+description = "Analysis and reproducibility tooling for the MPC autoscaler thesis experiments."
+readme = "README.md"
+requires-python = ">=3.11"
+keywords = ["autoscaling", "kubernetes", "mpc", "qp", "reproducibility"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering",
+]
+dependencies = [
+  "cvxpy>=1.5",
+  "osqp>=0.6",
+  "numpy>=1.26",
+  "pandas>=2.2",
+  "statsmodels>=0.14",
+  "matplotlib>=3.9",
+]
+
+[project.scripts]
+mpc-summarize-run = "mpc_autoscaler_analysis.cli.summarize_run:main"
+mpc-summarize-costs = "mpc_autoscaler_analysis.cli.summarize_costs:main"
+mpc-control-loop = "mpc_autoscaler_analysis.online.control_loop:main"
+mpc-build-trace = "mpc_autoscaler_analysis.offline.trace_from_phases:main"
+mpc-generate-synthetic-trace = "mpc_autoscaler_analysis.offline.synthetic_trace:main"
+mpc-offline-sim = "mpc_autoscaler_analysis.offline.simulation:main"
+mpc-grid-search = "mpc_autoscaler_analysis.offline.grid_search:main"
+mpc-realistic-grid = "mpc_autoscaler_analysis.offline.realistic_sim:main"
+
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = [
+  "mpc_autoscaler_analysis",
+  "mpc_autoscaler_analysis.artifacts",
+  "mpc_autoscaler_analysis.cli",
+  "mpc_autoscaler_analysis.data",
+  "mpc_autoscaler_analysis.mpc",
+  "mpc_autoscaler_analysis.offline",
+  "mpc_autoscaler_analysis.online",
+]
+
+[tool.setuptools.package-data]
+mpc_autoscaler_analysis.data = ["traces/*.csv"]

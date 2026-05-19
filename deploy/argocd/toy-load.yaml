@@ -11,12 +11,20 @@ spec:
   source:
     repoURL: https://github.com/vshulcz/mpc-autoscaler.git
     targetRevision: main
-    path: deploy/helm/toy-load
+    path: toy-load/deploy/helm/toy-load
     helm:
       releaseName: toy-load
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      name: toy-load-toy-load
+      namespace: default
+      jsonPointers:
+        - /spec/replicas
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - RespectIgnoreDifferences=true

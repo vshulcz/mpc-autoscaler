@@ -12,5 +12,13 @@ resources:
   - grafana.yaml
   - grafana-service.yaml
   - grafana-datasource.yaml
-  - grafana-dashboard-configmap.yaml
   - grafana-dashboard.yaml
+
+configMapGenerator:
+  - name: toy-grafana-dashboards
+    files:
+      - toy-load-dashboard.json=dashboards/toy-load-dashboard.json
+    options:
+      disableNameSuffixHash: true
+      labels:
+        grafana_dashboard: "1"

@@ -1,0 +1,31 @@
+scenario: "step|spike|seasonality"
+mode: "baseline-incluster|mpc-online|hpa-target-grid|mpc-isolation"
+run_id: "20260504T115414Z-es_safety-step-r1"
+started_at_utc: "2026-05-04T11:54:14Z"
+finished_at_utc: "2026-05-04T12:09:14Z"
+target_url: "http://toy-load-toy-load.default.svc.cluster.local/work?cpu_ms=20&jitter_ms=5"
+profile_file: "phases.csv"
+canonical_alias: "thesis/main/hybrid_sa_max70_tuned"
+
+workload_knobs:
+  cpu_ms: 20
+  jitter_ms: 5
+
+client:
+  timeout: "30s"
+  runner: "in-cluster vegeta pod"
+
+git:
+  commit: "abcdef123456"
+  branch: "main"
+  dirty: false
+
+artifacts:
+  phases_csv: "phases.csv"
+  target_txt: "target.txt"
+  incluster_report: "incluster-report.txt"
+  hpa_live: "hpa-live.yaml"
+  deployment_live: "deployment-live.yaml"
+  replica_watch: "replica-watch.csv"
+  mpc_control_log: "mpc-control-log.csv"
+  mpc_loop_log: "mpc-loop.log"

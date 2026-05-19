@@ -1,0 +1,43 @@
+# macOS
+.DS_Store
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Analysis outputs
+analysis/out/
+
+# Coverage reports
+coverage/
+.coverage
+*.coverprofile
+
+# Experiment artifacts
+experiments/*
+!experiments/README.md
+!experiments/MANIFEST.md
+!experiments/EVIDENCE_MAP.csv
+!experiments/ARCHIVE_INDEX.md
+!experiments/package-thesis-evidence.sh
+!experiments/templates/
+!experiments/templates/**
+experiments/_runs/
+loadgen/results/
+
+# Go build output
+/bin/
+/toy-load/bin/
+
+# Editor
+.idea/
+.vscode/
+*.swp

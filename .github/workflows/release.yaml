@@ -1,0 +1,106 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing semver tag to publish, for example v0.1.0"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
+  cancel-in-progress: false
+
+env:
+  GO_VERSION: "1.25"
+
+jobs:
+  build-release:
+    name: Build Release Assets
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve tag
+        id: release
+        shell: bash
+        run: |
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+            TAG="${{ inputs.tag }}"
+          else
+            TAG="${GITHUB_REF_NAME}"
+          fi
+          if [[ ! "${TAG}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            printf 'Invalid release tag: %s\n' "${TAG}" >&2
+            exit 1
+          fi
+          printf 'tag=%s\n' "${TAG}" >> "$GITHUB_OUTPUT"
+          printf 'version=%s\n' "${TAG#v}" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.release.outputs.tag }}
+          fetch-depth: 0
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: true
+          cache-dependency-path: toy-load/go.sum
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v4
+
+      - name: Build toy-load binaries
+        shell: bash
+        run: |
+          mkdir -p dist
+          for GOOS in linux darwin; do
+            for GOARCH in amd64 arm64; do
+              name="toy-load-${{ steps.release.outputs.tag }}-${GOOS}-${GOARCH}"
+              mkdir -p "dist/${name}"
+              (
+                cd toy-load
+                CGO_ENABLED=0 GOOS="${GOOS}" GOARCH="${GOARCH}" \
+                  go build -trimpath -o "../dist/${name}/toy-load" ./cmd/toy-load
+              )
+              tar -C "dist/${name}" -czf "dist/${name}.tar.gz" toy-load
+              rm -rf "dist/${name}"
+            done
+          done
+
+      - name: Package Helm chart
+        run: |
+          helm package toy-load/deploy/helm/toy-load \
+            --version "${{ steps.release.outputs.version }}" \
+            --app-version "${{ steps.release.outputs.version }}" \
+            --destination dist
+
+      - name: Write checksums
+        run: |
+          shasum -a 256 dist/* > dist/SHA256SUMS
+
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ steps.release.outputs.tag }}
+          path: dist/*
+          if-no-files-found: error
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.release.outputs.tag }}
+          generate_release_notes: true
+          files: dist/*
+          body: |
+            Release `${{ steps.release.outputs.tag }}`.
+
+            Container image: `ghcr.io/vshulcz/toy-load:${{ steps.release.outputs.tag }}`
+            Helm chart package and cross-platform toy-load binaries are attached below.

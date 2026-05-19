@@ -1,0 +1,10 @@
+alias,class,status,raw_path,scenarios,notes
+thesis/main/hpa60_cpu_hpa_max70,primary,used,experiments/thesis-evidence/main/hpa60-cpu-hpa-max70,"step;spike;seasonality",CPU-HPA60 baseline under max70 comparison setup
+thesis/main/hybrid_sa_max70_tuned,primary,used,experiments/thesis-evidence/main/hybrid-sa-max70-tuned,"step;spike;seasonality",Final tuned Hybrid-SA root used for corrected thesis results
+thesis/comparator/proxy_hpa_safety_max70,comparator,used,experiments/thesis-evidence/comparators/proxy-hpa-safety-max70,"step;spike;seasonality",Reactive proxy-HPA+safety comparator
+thesis/comparator/no_qp_reactive_max70,comparator,used,experiments/thesis-evidence/comparators/no-qp-reactive-max70,"step;spike;seasonality",No-QP reactive comparator
+thesis/comparator/vanilla_hpa80_max70,comparator,used,experiments/thesis-evidence/comparators/vanilla-hpa80-max70,"step;spike;seasonality",Vanilla HPA80 comparator
+archive/supporting/hpa_target_grid_argofix,supporting,kept,experiments/archive/supporting/hpa-target-grid-argofix,"step;spike;seasonality",Earlier HPA target sweep and audit trail
+archive/superseded/hybrid_argofix_3scenarios,superseded,kept,experiments/archive/superseded/hybrid-argofix-3scenarios,"step;spike;seasonality",Earlier Hybrid-SA root before max70 tuned rerun
+archive/superseded/hybrid_sa_max70_onepass,superseded,kept,experiments/archive/superseded/hybrid-sa-max70-onepass,"step;spike;seasonality",Earlier max70 Hybrid-SA run superseded by tuned root
+archive/supporting/hybrid_common_max70,supporting,kept,experiments/archive/supporting/hybrid-common-max70,"step;spike;seasonality",Common Hybrid refresh run

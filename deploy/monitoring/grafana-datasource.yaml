@@ -15,7 +15,7 @@ spec:
     access: proxy
     url: http://toy-prometheus:9090
     jsonData:
-      timeInterval: 15s
+      timeInterval: 30s
       httpMethod: POST
     editable: true
     isDefault: true

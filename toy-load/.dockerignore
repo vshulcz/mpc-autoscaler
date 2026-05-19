@@ -1,0 +1,7 @@
+.DS_Store
+.git/
+.github/
+bin/
+coverage.out
+deploy/
+*.test

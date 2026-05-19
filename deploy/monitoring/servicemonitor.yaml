@@ -13,6 +13,6 @@ spec:
       app: toy-load
   endpoints:
     - port: http
-      interval: 15s
+      interval: 30s
       path: /metrics
       scheme: http
