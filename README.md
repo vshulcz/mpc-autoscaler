@@ -21,6 +21,8 @@ The core question: can a small Model Predictive Control loop anticipate demand a
 
 Docs site: <https://vshulcz.github.io/mpc-autoscaler/>.
 
+Roadmap board: <https://github.com/users/vshulcz/projects/2>. Active work is tracked through milestones `v0.2.0`, `thesis-reproducibility`, and `v0.3.0`.
+
 Contribution guidelines live in `CONTRIBUTING.md`. Support guidance lives in `SUPPORT.md`. Release steps are documented in `docs/RELEASE.md`. Security reporting guidance lives in `SECURITY.md`.
 
 ## Highlights
