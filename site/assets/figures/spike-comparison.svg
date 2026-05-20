@@ -30,46 +30,47 @@
   </g>
 
   <g filter="url(#shadow)" font-family="Arial, sans-serif">
-    <rect x="48" y="132" width="190" height="96" rx="22" fill="url(#card)" stroke="#2b416b"/>
-    <text x="74" y="166" fill="#9fb0cd" font-size="15" font-weight="850" letter-spacing="1.2">THROUGHPUT</text>
-    <text x="74" y="207" fill="#ecf3ff" font-size="38" font-weight="900">201.5</text>
-    <text x="178" y="207" fill="#9fb0cd" font-size="18">rps</text>
+    <rect x="48" y="130" width="190" height="92" rx="22" fill="url(#card)" stroke="#2b416b"/>
+    <text x="74" y="163" fill="#9fb0cd" font-size="15" font-weight="850" letter-spacing="1.2">THROUGHPUT</text>
+    <text x="74" y="203" fill="#ecf3ff" font-size="38" font-weight="900">201.5</text>
+    <text x="178" y="203" fill="#9fb0cd" font-size="18">rps</text>
 
-    <rect x="270" y="132" width="190" height="96" rx="22" fill="url(#card)" stroke="#2b416b"/>
-    <text x="296" y="166" fill="#9fb0cd" font-size="15" font-weight="850" letter-spacing="1.2">SUCCESS</text>
-    <text x="296" y="207" fill="#60e6a8" font-size="38" font-weight="900">100%</text>
+    <rect x="270" y="130" width="190" height="92" rx="22" fill="url(#card)" stroke="#2b416b"/>
+    <text x="296" y="163" fill="#9fb0cd" font-size="15" font-weight="850" letter-spacing="1.2">SUCCESS</text>
+    <text x="296" y="203" fill="#60e6a8" font-size="38" font-weight="900">100%</text>
 
-    <rect x="492" y="132" width="190" height="96" rx="22" fill="url(#card)" stroke="#2b416b"/>
-    <text x="518" y="166" fill="#9fb0cd" font-size="15" font-weight="850" letter-spacing="1.2">SOLVER</text>
-    <text x="518" y="207" fill="#60e6a8" font-size="38" font-weight="900">optimal</text>
+    <rect x="492" y="130" width="190" height="92" rx="22" fill="url(#card)" stroke="#2b416b"/>
+    <text x="518" y="163" fill="#9fb0cd" font-size="15" font-weight="850" letter-spacing="1.2">SOLVER</text>
+    <text x="518" y="203" fill="#60e6a8" font-size="38" font-weight="900">optimal</text>
 
-    <rect x="714" y="132" width="198" height="96" rx="22" fill="url(#card)" stroke="#2b416b"/>
-    <text x="740" y="166" fill="#9fb0cd" font-size="15" font-weight="850" letter-spacing="1.2">SAFETY PATH</text>
-    <text x="740" y="207" fill="#ecf3ff" font-size="38" font-weight="900">6</text>
-    <text x="779" y="207" fill="#ffb86b" font-size="20" font-weight="850">scale-ups</text>
+    <rect x="714" y="130" width="198" height="92" rx="22" fill="url(#card)" stroke="#2b416b"/>
+    <text x="740" y="163" fill="#9fb0cd" font-size="15" font-weight="850" letter-spacing="1.2">SAFETY PATH</text>
+    <text x="740" y="203" fill="#ecf3ff" font-size="38" font-weight="900">6</text>
+    <text x="779" y="203" fill="#ffb86b" font-size="20" font-weight="850">scale-ups</text>
   </g>
 
   <g filter="url(#shadow)">
-    <rect x="48" y="270" width="864" height="196" rx="26" fill="#101a2d" stroke="#2b416b"/>
-    <rect x="516" y="320" width="126" height="116" rx="18" fill="url(#burst)" stroke="#ff6ea8" stroke-opacity="0.38"/>
-    <g stroke="#233756" stroke-width="1">
-      <line x1="102" y1="426" x2="868" y2="426"/>
-      <line x1="102" y1="376" x2="868" y2="376"/>
+    <rect x="48" y="260" width="864" height="210" rx="26" fill="#101a2d" stroke="#2b416b"/>
+    <rect x="506" y="344" width="118" height="82" rx="16" fill="url(#burst)" stroke="#ff6ea8" stroke-opacity="0.38"/>
+    <g stroke="#243856" stroke-width="1">
+      <line x1="96" y1="426" x2="850" y2="426"/>
+      <line x1="96" y1="388" x2="850" y2="388"/>
+      <line x1="96" y1="350" x2="850" y2="350"/>
     </g>
-    <path d="M104 424 C240 424 356 424 438 421 C478 417 510 400 528 372 C548 334 566 310 596 306 C636 302 682 324 720 360 C760 398 792 428 868 426" fill="none" stroke="#5cc8ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M104 426 C262 426 384 426 458 425 C506 422 536 404 572 374 C612 340 646 318 692 324 C746 332 802 382 868 414" fill="none" stroke="#ff6ea8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M96 424 C240 424 356 424 438 418 C476 410 494 378 528 344 C558 338 594 340 620 350 C670 372 722 400 790 420 C814 424 834 424 850 424" fill="none" stroke="#5cc8ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M96 426 C260 426 386 426 462 424 C502 420 526 404 548 394 C586 374 616 360 640 360 C690 358 734 370 804 398 C822 405 838 411 850 414" fill="none" stroke="#ff6ea8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
     <g font-family="Arial, sans-serif">
-      <text x="78" y="308" fill="#ecf3ff" font-size="24" font-weight="850">Demand and replicas</text>
-      <text x="78" y="334" fill="#9fb0cd" font-size="17">Observed RPS rises first; replica target ramps up and drains down.</text>
-      <text x="534" y="312" fill="#ff6ea8" font-size="18" font-weight="850">30s burst</text>
-      <rect x="672" y="292" width="198" height="54" rx="16" fill="#0b1020" stroke="#283756"/>
-      <circle cx="696" cy="313" r="7" fill="#5cc8ff"/>
-      <text x="714" y="319" fill="#cfe7ff" font-size="16">observed RPS</text>
-      <circle cx="696" cy="334" r="7" fill="#ff6ea8"/>
-      <text x="714" y="340" fill="#ffd7e7" font-size="16">replica target</text>
-      <text x="100" y="450" fill="#9fb0cd" font-size="15">0s</text>
-      <text x="518" y="450" fill="#9fb0cd" font-size="15">190s</text>
-      <text x="834" y="450" fill="#9fb0cd" font-size="15">395s</text>
+      <text x="76" y="300" fill="#ecf3ff" font-size="24" font-weight="850">Demand and replica target</text>
+      <text x="76" y="324" fill="#9fb0cd" font-size="16">Burst arrives before replica target catches up, then drains down.</text>
+      <text x="522" y="334" fill="#ff6ea8" font-size="16" font-weight="850">burst window</text>
+      <rect x="682" y="282" width="184" height="52" rx="16" fill="#0b1020" stroke="#283756"/>
+      <circle cx="704" cy="302" r="7" fill="#5cc8ff"/>
+      <text x="722" y="307" fill="#cfe7ff" font-size="15">observed RPS</text>
+      <circle cx="704" cy="322" r="7" fill="#ff6ea8"/>
+      <text x="722" y="327" fill="#ffd7e7" font-size="15">replica target</text>
+      <text x="96" y="450" fill="#9fb0cd" font-size="15">0s</text>
+      <text x="512" y="450" fill="#9fb0cd" font-size="15">190s</text>
+      <text x="816" y="450" fill="#9fb0cd" font-size="15">395s</text>
     </g>
   </g>
 

@@ -29,13 +29,21 @@
   <g font-family="Arial, sans-serif">
     <rect x="74" y="146" width="390" height="132" rx="22" fill="url(#panel)" stroke="#283756"/>
     <text x="100" y="182" fill="#ecf3ff" font-size="20" font-weight="850">Request rate</text>
-    <path d="M100 238 C150 234 206 236 252 226 C304 214 316 168 356 172 C398 176 426 210 438 222" fill="none" stroke="#5cc8ff" stroke-width="6" stroke-linecap="round"/>
+    <g stroke="#263856" stroke-width="1">
+      <line x1="100" y1="236" x2="438" y2="236"/>
+      <line x1="100" y1="198" x2="438" y2="198"/>
+    </g>
+    <path d="M100 238 C154 236 212 234 270 224 C304 214 322 178 346 172 C382 166 416 198 438 224" fill="none" stroke="#5cc8ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
 
     <rect x="496" y="146" width="346" height="132" rx="22" fill="url(#panel)" stroke="#283756"/>
     <text x="522" y="182" fill="#ecf3ff" font-size="20" font-weight="850">Latency</text>
-    <path d="M522 238 C584 234 642 230 682 218 C714 208 722 184 754 186 C792 190 818 212 838 226" fill="none" stroke="#ffb86b" stroke-width="6" stroke-linecap="round"/>
-    <path d="M522 250 C584 246 642 244 682 236 C718 230 724 208 754 210 C794 214 818 232 838 242" fill="none" stroke="#5cc8ff" stroke-width="4" stroke-linecap="round"/>
-    <text x="754" y="184" fill="#ffb86b" font-size="17" font-weight="850">p95 / p99</text>
+    <g stroke="#263856" stroke-width="1">
+      <line x1="522" y1="236" x2="818" y2="236"/>
+      <line x1="522" y1="198" x2="818" y2="198"/>
+    </g>
+    <path d="M522 238 C584 234 642 228 688 216 C720 204 724 188 760 182 C788 184 804 202 818 216" fill="none" stroke="#ffb86b" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M522 250 C584 246 642 240 688 230 C720 218 724 210 760 204 C790 206 806 220 818 232" fill="none" stroke="#5cc8ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="744" y="172" fill="#ffb86b" font-size="16" font-weight="850">p95 / p99</text>
 
     <rect x="74" y="316" width="176" height="114" rx="22" fill="url(#panel)" stroke="#283756"/>
     <text x="100" y="350" fill="#ecf3ff" font-size="20" font-weight="850">In-flight</text>
@@ -47,7 +55,7 @@
 
     <rect x="486" y="316" width="356" height="114" rx="22" fill="url(#panel)" stroke="#283756"/>
     <text x="512" y="350" fill="#ecf3ff" font-size="20" font-weight="850">Runtime signals</text>
-    <path d="M512 392 C552 388 590 378 630 372 C668 368 696 380 726 390" fill="none" stroke="#ff6ea8" stroke-width="6" stroke-linecap="round"/>
-    <path d="M640 410 C690 406 742 404 812 400" fill="none" stroke="#60e6a8" stroke-width="6" stroke-linecap="round"/>
+    <path d="M512 394 C558 390 604 378 656 372 C692 376 716 382 742 392" fill="none" stroke="#ff6ea8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M640 410 C690 406 742 404 812 400" fill="none" stroke="#60e6a8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 </svg>
