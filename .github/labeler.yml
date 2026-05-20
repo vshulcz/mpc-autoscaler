@@ -1,0 +1,60 @@
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - README.md
+          - CONTRIBUTING.md
+          - SUPPORT.md
+          - SECURITY.md
+          - ROADMAP.md
+          - docs/**
+          - site/**
+
+docs-site:
+  - changed-files:
+      - any-glob-to-any-file:
+          - site/**
+          - .github/workflows/pages.yaml
+
+github-actions:
+  - changed-files:
+      - any-glob-to-any-file:
+          - .github/workflows/**
+          - .github/dependabot.yml
+          - .github/labeler.yml
+
+go:
+  - changed-files:
+      - any-glob-to-any-file:
+          - toy-load/**/*.go
+          - toy-load/go.mod
+          - toy-load/go.sum
+
+helm:
+  - changed-files:
+      - any-glob-to-any-file:
+          - toy-load/deploy/helm/**
+
+python:
+  - changed-files:
+      - any-glob-to-any-file:
+          - analysis/**
+
+observability:
+  - changed-files:
+      - any-glob-to-any-file:
+          - dashboards/**
+          - deploy/monitoring/**
+          - toy-load/deploy/helm/toy-load/files/**
+
+experiment-automation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - loadgen/**
+          - experiments/**
+
+release:
+  - changed-files:
+      - any-glob-to-any-file:
+          - .github/workflows/release.yaml
+          - .github/workflows/tag-release.yaml
+          - docs/RELEASE.md

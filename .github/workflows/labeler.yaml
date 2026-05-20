@@ -1,0 +1,19 @@
+name: Labeler
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  label:
+    name: Label Pull Request
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/labeler@v6.1.0
+        with:
+          sync-labels: true
+          dot: true

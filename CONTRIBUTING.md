@@ -8,6 +8,24 @@ This repository combines three kinds of work:
 
 Small, focused pull requests are easier to review than broad mixed changes.
 
+## Good First Issues
+
+External contributions are welcome. The fastest path is to pick an issue labeled `good first issue` or `help wanted` from the public roadmap board:
+
+- Roadmap board: <https://github.com/users/vshulcz/projects/2>
+- Starter issues: <https://github.com/vshulcz/mpc-autoscaler/labels/good%20first%20issue>
+- Broader contributor queue: <https://github.com/vshulcz/mpc-autoscaler/labels/help%20wanted>
+
+Good starter pull requests usually touch one of these areas:
+
+- documentation tables and examples;
+- Pages site copy or experiment-gallery links;
+- small Grafana dashboard improvements;
+- lightweight tests around parsers and CLI help;
+- release verification and reproducibility checklist improvements.
+
+Before starting, comment on the issue with your intended approach. This avoids duplicated work and makes review faster.
+
 ## Before Opening A Pull Request
 
 1. Make sure the change has a clear scope.
@@ -36,6 +54,7 @@ kubectl kustomize deploy/monitoring >/dev/null
 ## Pull Request Expectations
 
 - explain what changed and why;
+- link the issue you are addressing, for example `Fixes #14`;
 - mention affected areas (`toy-load`, `analysis`, `loadgen`, `deploy`);
 - note any experiment methodology impact;
 - call out follow-up work or known limitations.
