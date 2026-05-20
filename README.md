@@ -3,6 +3,7 @@
 [![CI](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/ci.yaml/badge.svg)](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/ci.yaml)
 [![Release](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/release.yaml/badge.svg)](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/release.yaml)
 [![Tag Release](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/tag-release.yaml/badge.svg)](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/tag-release.yaml)
+[![Pages](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/pages.yaml/badge.svg)](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/pages.yaml)
 [![Security](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/security.yaml/badge.svg)](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/security.yaml)
 [![CodeQL](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/codeql.yaml/badge.svg)](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/codeql.yaml)
 [![Trivy](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/trivy.yaml/badge.svg)](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/trivy.yaml)
@@ -17,6 +18,8 @@
 Predictive autoscaling playground for Kubernetes: a controllable Go workload, Helm deployment, live MPC controller, offline simulator, and reproducible experiment tooling.
 
 The core question: can a small Model Predictive Control loop anticipate demand and scale more smoothly than reactive HPA baselines under step, spike, and seasonal traffic?
+
+Docs site: <https://vshulcz.github.io/mpc-autoscaler/>.
 
 Contribution guidelines live in `CONTRIBUTING.md`. Support guidance lives in `SUPPORT.md`. Release steps are documented in `docs/RELEASE.md`. Security reporting guidance lives in `SECURITY.md`.
 

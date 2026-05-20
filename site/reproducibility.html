@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reproducibility | MPC Autoscaler</title>
+    <meta name="description" content="Reproducibility tiers for mpc-autoscaler experiments.">
+    <link rel="stylesheet" href="assets/style.css">
+  </head>
+  <body>
+    <header class="shell nav">
+      <a class="brand" href="index.html">mpc-autoscaler</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="architecture.html">Architecture</a>
+        <a href="reproducibility.html">Reproducibility</a>
+        <a href="experiments.html">Experiment Gallery</a>
+        <a href="https://github.com/vshulcz/mpc-autoscaler">GitHub</a>
+      </nav>
+    </header>
+
+    <main class="shell">
+      <section class="hero">
+        <div class="eyebrow">Rebuild Path</div>
+        <h1>Pick the lightest tier that answers your question.</h1>
+        <p class="lead">Local checks need no cluster. Offline simulation needs Python dependencies. Live experiments need Kubernetes, Helm, kubectl, and Prometheus access.</p>
+      </section>
+
+      <section class="section panel">
+        <div class="timeline">
+          <div class="step"><div class="step-num">1</div><div><h3>Local quality gates</h3><p>Run Go tests, Helm checks, Python unit tests, shell syntax checks, dashboard JSON validation.</p><pre><code>make check</code></pre></div></div>
+          <div class="step"><div class="step-num">2</div><div><h3>Offline MPC simulation</h3><p>Generate a synthetic trace, simulate the controller, inspect outputs under ignored analysis paths.</p><pre><code>python3 -m pip install -e analysis
+mpc-generate-synthetic-trace --scenario spike --out analysis/out/spike.csv
+mpc-offline-sim --trace-csv analysis/out/spike.csv --out-dir analysis/out/offline/spike</code></pre></div></div>
+          <div class="step"><div class="step-num">3</div><div><h3>Saved evidence summaries</h3><p>Use curated evidence roots when local raw artifacts are present.</p><pre><code>PYTHONPATH=analysis python3 -m mpc_autoscaler_analysis.cli.summarize_costs \
+  --hpa-root experiments/thesis-evidence/main/hpa60-cpu-hpa-max70 \
+  --hybrid-root experiments/thesis-evidence/main/hybrid-sa-max70-tuned \
+  --out-csv /tmp/mpc-cost-summary.csv \
+  --out-aggregate-csv /tmp/mpc-cost-aggregate.csv</code></pre></div></div>
+          <div class="step"><div class="step-num">4</div><div><h3>Live cluster experiments</h3><p>Deploy toy-load with Helm, then run HPA or MPC scripts against the service.</p><pre><code>helm upgrade --install toy-load toy-load/deploy/helm/toy-load --namespace default --create-namespace
+bash loadgen/scripts/run_hpa_experiment_incluster.sh spike
+bash loadgen/scripts/run_mpc_experiment_incluster.sh spike</code></pre></div></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="shell footer">Full checklist: <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/REPRODUCIBILITY.md">docs/REPRODUCIBILITY.md</a>.</footer>
+  </body>
+</html>

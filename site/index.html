@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MPC Autoscaler Docs</title>
+    <meta name="description" content="Documentation site for the mpc-autoscaler research repository.">
+    <link rel="stylesheet" href="assets/style.css">
+  </head>
+  <body>
+    <header class="shell nav">
+      <a class="brand" href="index.html">mpc-autoscaler</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="architecture.html">Architecture</a>
+        <a href="reproducibility.html">Reproducibility</a>
+        <a href="experiments.html">Experiment Gallery</a>
+        <a href="https://github.com/vshulcz/mpc-autoscaler">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="shell hero">
+        <div class="eyebrow">Predictive Kubernetes Autoscaling</div>
+        <h1>Research-grade MPC autoscaling playground.</h1>
+        <p class="lead">A controllable Go workload, Helm deployment, live MPC controller, offline simulator, and evidence workflow for comparing predictive scaling against HPA baselines.</p>
+        <div class="chips" aria-label="Project badges">
+          <span class="chip">v0.1.0 release</span>
+          <span class="chip">Go 1.25</span>
+          <span class="chip">Python 3.11+</span>
+          <span class="chip">GHCR image</span>
+          <span class="chip">Apache-2.0</span>
+        </div>
+      </section>
+
+      <section class="shell section">
+        <div class="grid grid-3">
+          <article class="card">
+            <h3>Architecture</h3>
+            <p>Follow load profiles through toy-load, Prometheus metrics, HPA, MPC, and analysis artifacts.</p>
+            <p><a href="architecture.html">Open system view</a></p>
+          </article>
+          <article class="card">
+            <h3>Reproducibility</h3>
+            <p>Start with local checks, then offline simulation, saved evidence summaries, or live cluster runs.</p>
+            <p><a href="reproducibility.html">Run the tiers</a></p>
+          </article>
+          <article class="card">
+            <h3>Experiment Gallery</h3>
+            <p>Browse dashboard previews, spike-response figures, release artifacts, and evidence roots.</p>
+            <p><a href="experiments.html">View gallery</a></p>
+          </article>
+        </div>
+      </section>
+
+      <section class="shell section">
+        <div class="grid grid-2">
+          <figure class="figure">
+            <img src="assets/figures/architecture.svg" alt="MPC autoscaler architecture diagram">
+            <figcaption class="figure-caption">System boundary: traffic generator, workload, Prometheus, reactive HPA, predictive MPC, and analysis pipeline.</figcaption>
+          </figure>
+          <figure class="figure">
+            <img src="assets/figures/spike-comparison.svg" alt="Spike experiment sample chart">
+            <figcaption class="figure-caption">Sample spike evidence from committed run summaries. Values are shown as snapshots, not universal claims.</figcaption>
+          </figure>
+        </div>
+      </section>
+    </main>
+
+    <footer class="shell footer">
+      Built from repository sources. Main docs: <a href="https://github.com/vshulcz/mpc-autoscaler/tree/main/docs">docs/</a>. Release: <a href="https://github.com/vshulcz/mpc-autoscaler/releases/tag/v0.1.0">v0.1.0</a>.
+    </footer>
+  </body>
+</html>
