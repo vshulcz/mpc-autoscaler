@@ -55,7 +55,7 @@ jobs:
           cache-dependency-path: toy-load/go.sum
 
       - name: Set up Helm
-        uses: azure/setup-helm@v4
+        uses: azure/setup-helm@v5
 
       - name: Build toy-load binaries
         shell: bash

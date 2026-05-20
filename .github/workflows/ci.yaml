@@ -52,10 +52,10 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Set up Helm
-        uses: azure/setup-helm@v4
+        uses: azure/setup-helm@v5
 
       - name: Set up kubectl
-        uses: azure/setup-kubectl@v4
+        uses: azure/setup-kubectl@v5
 
       - name: Repository checks
         run: make check
@@ -116,7 +116,7 @@ jobs:
           if-no-files-found: error
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v6
         with:
           files: coverage/toy-load.out,coverage/analysis.xml
           flags: toy-load,analysis
