@@ -53,9 +53,11 @@ jobs:
         id: revision
         shell: bash
         run: |
-          printf 'sha=%s\n' "$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
-          printf 'short_sha=%s\n' "$(git rev-parse --short=12 HEAD)" >> "$GITHUB_OUTPUT"
-          printf 'created=%s\n' "$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> "$GITHUB_OUTPUT"
+          {
+            printf 'sha=%s\n' "$(git rev-parse HEAD)"
+            printf 'short_sha=%s\n' "$(git rev-parse --short=12 HEAD)"
+            printf 'created=%s\n' "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Set up Go
         uses: actions/setup-go@v6
