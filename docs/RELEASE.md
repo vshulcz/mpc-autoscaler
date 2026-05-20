@@ -26,6 +26,41 @@ The `Release` workflow publishes the matching container image tags to GHCR:
 - `ghcr.io/vshulcz/toy-load:latest`
 - `ghcr.io/vshulcz/toy-load:sha-<short-sha>`
 
+## Verify Release Assets
+
+Download `SHA256SUMS` with the binary or Helm chart you plan to use, then
+verify the selected files before unpacking them.
+
+Linux:
+
+```bash
+VERSION=v0.1.0
+ARCH=amd64 # or arm64
+BASE="https://github.com/vshulcz/mpc-autoscaler/releases/download/${VERSION}"
+
+curl -LO "${BASE}/toy-load-${VERSION}-linux-${ARCH}.tar.gz"
+curl -LO "${BASE}/toy-load-${VERSION#v}.tgz"
+curl -LO "${BASE}/SHA256SUMS"
+
+grep -E " (toy-load-${VERSION}-linux-${ARCH}.tar.gz|toy-load-${VERSION#v}.tgz)$" SHA256SUMS \
+  | sha256sum -c -
+```
+
+macOS:
+
+```bash
+VERSION=v0.1.0
+ARCH=arm64 # or amd64
+BASE="https://github.com/vshulcz/mpc-autoscaler/releases/download/${VERSION}"
+
+curl -LO "${BASE}/toy-load-${VERSION}-darwin-${ARCH}.tar.gz"
+curl -LO "${BASE}/toy-load-${VERSION#v}.tgz"
+curl -LO "${BASE}/SHA256SUMS"
+
+grep -E " (toy-load-${VERSION}-darwin-${ARCH}.tar.gz|toy-load-${VERSION#v}.tgz)$" SHA256SUMS \
+  | shasum -a 256 -c -
+```
+
 ## Local Preflight
 
 Run before creating a release tag:
@@ -39,5 +74,8 @@ helm template toy-load toy-load/deploy/helm/toy-load \
   --set dashboard.enabled=true >/dev/null
 kubectl kustomize deploy/monitoring >/dev/null
 ```
+
+After the release finishes, download `SHA256SUMS` and verify at least one Linux
+binary, one macOS binary, and the Helm chart package with the commands above.
 
 Keep raw experiment outputs ignored under `experiments/`; export thesis evidence with `experiments/package-thesis-evidence.sh` when an external archive is needed.

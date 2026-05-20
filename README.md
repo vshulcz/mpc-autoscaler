@@ -197,6 +197,42 @@ helm upgrade --install toy-load toy-load/deploy/helm/toy-load \
   --set image.tag=<commit-or-release-tag>
 ```
 
+## Verifying Release Downloads
+
+GitHub Releases include cross-platform `toy-load` binaries, a packaged Helm
+chart, and `SHA256SUMS`. Verify downloaded assets before unpacking or installing
+them.
+
+Linux:
+
+```bash
+VERSION=v0.1.0
+ARCH=amd64 # or arm64
+BASE="https://github.com/vshulcz/mpc-autoscaler/releases/download/${VERSION}"
+
+curl -LO "${BASE}/toy-load-${VERSION}-linux-${ARCH}.tar.gz"
+curl -LO "${BASE}/toy-load-${VERSION#v}.tgz"
+curl -LO "${BASE}/SHA256SUMS"
+
+grep -E " (toy-load-${VERSION}-linux-${ARCH}.tar.gz|toy-load-${VERSION#v}.tgz)$" SHA256SUMS \
+  | sha256sum -c -
+```
+
+macOS:
+
+```bash
+VERSION=v0.1.0
+ARCH=arm64 # or amd64
+BASE="https://github.com/vshulcz/mpc-autoscaler/releases/download/${VERSION}"
+
+curl -LO "${BASE}/toy-load-${VERSION}-darwin-${ARCH}.tar.gz"
+curl -LO "${BASE}/toy-load-${VERSION#v}.tgz"
+curl -LO "${BASE}/SHA256SUMS"
+
+grep -E " (toy-load-${VERSION}-darwin-${ARCH}.tar.gz|toy-load-${VERSION#v}.tgz)$" SHA256SUMS \
+  | shasum -a 256 -c -
+```
+
 ## Running Experiments
 
 For a staged reproduction path, start with `docs/REPRODUCIBILITY.md`. It separates local checks, offline simulations, saved-artifact summaries, live Kubernetes experiments, and release reproduction.
