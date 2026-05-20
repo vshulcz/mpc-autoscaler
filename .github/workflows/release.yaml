@@ -42,7 +42,7 @@ jobs:
           printf 'tag=%s\n' "${TAG}" >> "$GITHUB_OUTPUT"
           printf 'version=%s\n' "${TAG#v}" >> "$GITHUB_OUTPUT"
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6.0.2
         with:
           ref: ${{ steps.release.outputs.tag }}
           fetch-depth: 0

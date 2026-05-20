@@ -16,7 +16,7 @@ updates:
         patterns:
           - "*"
     commit-message:
-      prefix: "chore(deps)"
+      prefix: "chore"
       include: "scope"
 
   - package-ecosystem: "gomod"
@@ -35,7 +35,7 @@ updates:
         patterns:
           - "*"
     commit-message:
-      prefix: "chore(deps)"
+      prefix: "chore"
       include: "scope"
 
   - package-ecosystem: "pip"
@@ -54,7 +54,7 @@ updates:
         patterns:
           - "*"
     commit-message:
-      prefix: "chore(deps)"
+      prefix: "chore"
       include: "scope"
 
   - package-ecosystem: "docker"
@@ -72,6 +72,11 @@ updates:
       docker-dependencies:
         patterns:
           - "*"
+    ignore:
+      - dependency-name: "golang"
+        update-types:
+          - "version-update:semver-major"
+          - "version-update:semver-minor"
     commit-message:
-      prefix: "chore(deps)"
+      prefix: "chore"
       include: "scope"
