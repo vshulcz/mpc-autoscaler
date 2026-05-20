@@ -7,7 +7,7 @@ Releases are semver-tag driven and attach reproducible build outputs to GitHub R
 1. Open the `Tag Release` workflow in GitHub Actions.
 2. Enter a tag like `v0.1.0`.
 3. The workflow creates and pushes an annotated tag from the selected branch.
-4. The tag push starts `CI` and `Release`.
+4. The workflow dispatches `Release` for that tag.
 
 ## Release Outputs
 
@@ -20,7 +20,7 @@ The `Release` workflow publishes:
 - `toy-load-<chart-version>.tgz`
 - `SHA256SUMS`
 
-The `CI` workflow publishes the matching container image tags to GHCR:
+The `Release` workflow publishes the matching container image tags to GHCR:
 
 - `ghcr.io/vshulcz/toy-load:<tag>`
 - `ghcr.io/vshulcz/toy-load:latest`

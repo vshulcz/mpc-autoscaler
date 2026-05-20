@@ -311,14 +311,13 @@ GitHub Actions runs the following checks on pushes and pull requests:
 - OpenSSF Scorecard supply-chain checks
 - dependency review on pull requests
 
-Container images are built and published to `ghcr.io/vshulcz/toy-load` on push events. Tags include `main`, `sha-*`, semver release tags, and `latest` for semver releases.
+Container images are built and published to `ghcr.io/vshulcz/toy-load` on main pushes and release runs. Tags include `main`, `sha-*`, semver release tags, and `latest` for semver releases.
 The image build also publishes SBOM and provenance attestations.
 
 Release automation is tag driven:
 
 - run the `Tag Release` workflow with a tag like `v0.1.0`, or push an annotated `v*.*.*` tag manually;
-- `Release` builds cross-platform `toy-load` binaries, packages the Helm chart, writes checksums, and creates a GitHub Release;
-- the CI image job publishes the matching GHCR image tag for the same release tag.
+- `Release` builds cross-platform `toy-load` binaries, packages the Helm chart, writes checksums, publishes the GHCR image, and creates a GitHub Release.
 
 See `docs/RELEASE.md` for the full release checklist.
 

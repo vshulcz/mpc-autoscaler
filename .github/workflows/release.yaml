@@ -13,6 +13,7 @@ on:
 
 permissions:
   contents: write
+  packages: write
 
 concurrency:
   group: release-${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
@@ -20,6 +21,7 @@ concurrency:
 
 env:
   GO_VERSION: "1.25"
+  IMAGE_REPO: ghcr.io/vshulcz/toy-load
 
 jobs:
   build-release:
@@ -46,6 +48,14 @@ jobs:
         with:
           ref: ${{ steps.release.outputs.tag }}
           fetch-depth: 0
+
+      - name: Resolve release revision
+        id: revision
+        shell: bash
+        run: |
+          printf 'sha=%s\n' "$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          printf 'short_sha=%s\n' "$(git rev-parse --short=12 HEAD)" >> "$GITHUB_OUTPUT"
+          printf 'created=%s\n' "$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> "$GITHUB_OUTPUT"
 
       - name: Set up Go
         uses: actions/setup-go@v6
@@ -85,6 +95,50 @@ jobs:
       - name: Write checksums
         run: |
           shasum -a 256 dist/* > dist/SHA256SUMS
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Docker metadata
+        id: meta
+        uses: docker/metadata-action@v6
+        with:
+          images: ${{ env.IMAGE_REPO }}
+          tags: |
+            type=raw,value=${{ steps.release.outputs.tag }}
+            type=raw,value=latest
+            type=raw,value=sha-${{ steps.revision.outputs.short_sha }}
+          labels: |
+            org.opencontainers.image.version=${{ steps.release.outputs.tag }}
+            org.opencontainers.image.revision=${{ steps.revision.outputs.sha }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v7.1.0
+        with:
+          context: ./toy-load
+          file: ./toy-load/Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            VERSION=${{ steps.release.outputs.tag }}
+            REVISION=${{ steps.revision.outputs.sha }}
+            CREATED=${{ steps.revision.outputs.created }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          sbom: true
+          provenance: mode=max
 
       - name: Upload release artifacts
         uses: actions/upload-artifact@v7
