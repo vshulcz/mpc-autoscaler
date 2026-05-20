@@ -4,6 +4,9 @@
 [![Release](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/release.yaml/badge.svg)](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/release.yaml)
 [![Tag Release](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/tag-release.yaml/badge.svg)](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/tag-release.yaml)
 [![Security](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/security.yaml/badge.svg)](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/security.yaml)
+[![CodeQL](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/codeql.yaml/badge.svg)](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/codeql.yaml)
+[![Trivy](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/trivy.yaml/badge.svg)](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/trivy.yaml)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/vshulcz/mpc-autoscaler/badge)](https://securityscorecards.dev/viewer/?uri=github.com/vshulcz/mpc-autoscaler)
 [![Codecov](https://codecov.io/gh/vshulcz/mpc-autoscaler/branch/main/graph/badge.svg)](https://codecov.io/gh/vshulcz/mpc-autoscaler)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 ![Go](https://img.shields.io/badge/go-1.25-00ADD8?logo=go&logoColor=white)
@@ -297,12 +300,19 @@ GitHub Actions runs the following checks on pushes and pull requests:
 - Go and Python coverage collection with uploaded CI artifacts
 - dependency-light Python unit tests and compile checks
 - shell syntax checks for experiment runners
+- GitHub Actions workflow linting with `actionlint`
 - JSON validation for Grafana dashboards and Helm schema
 - Helm lint
 - Helm template rendering
 - Kustomize rendering for monitoring manifests
+- CodeQL analysis for Go and Python
+- Go vulnerability scanning with `govulncheck`
+- Trivy filesystem and container image scanning with SARIF uploads
+- OpenSSF Scorecard supply-chain checks
+- dependency review on pull requests
 
 Container images are built and published to `ghcr.io/vshulcz/toy-load` on push events. Tags include `main`, `sha-*`, semver release tags, and `latest` for semver releases.
+The image build also publishes SBOM and provenance attestations.
 
 Release automation is tag driven:
 

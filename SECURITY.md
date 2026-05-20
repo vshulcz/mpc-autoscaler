@@ -28,6 +28,15 @@ The preferred report should cover:
 - realistic impact;
 - suggested mitigation, if known.
 
-## Dependency Scanning
+## Automated Security Checks
 
-The repository runs scheduled security checks in GitHub Actions and uses Dependabot for routine dependency updates. Those checks are helpful, but they do not replace manual review of release, deployment, and experiment infrastructure changes.
+The repository runs scheduled security checks in GitHub Actions:
+
+- `govulncheck` for Go vulnerability scanning;
+- CodeQL for Go and Python static analysis;
+- Trivy for filesystem and container-image vulnerability scanning;
+- OpenSSF Scorecard for supply-chain posture;
+- dependency review on pull requests;
+- Dependabot for routine dependency updates.
+
+Those checks are helpful, but they do not replace manual review of release, deployment, and experiment infrastructure changes.

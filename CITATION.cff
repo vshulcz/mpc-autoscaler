@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this repository in academic work, please cite it using this metadata."
+title: "mpc-autoscaler: predictive autoscaling experiments for Kubernetes"
+type: software
+authors:
+  - name: "vshulcz"
+repository-code: "https://github.com/vshulcz/mpc-autoscaler"
+url: "https://github.com/vshulcz/mpc-autoscaler"
+license: "Apache-2.0"
+version: "0.1.0"
+keywords:
+  - kubernetes
+  - autoscaling
+  - model-predictive-control
+  - hpa
+  - reproducible-research
+abstract: "Research software for comparing reactive Kubernetes autoscaling baselines with a Model Predictive Control loop under repeatable traffic profiles."
