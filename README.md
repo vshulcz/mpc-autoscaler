@@ -5,12 +5,26 @@
 [![Tag Release](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/tag-release.yaml/badge.svg)](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/tag-release.yaml)
 [![Security](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/security.yaml/badge.svg)](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/security.yaml)
 [![Codecov](https://codecov.io/gh/vshulcz/mpc-autoscaler/branch/main/graph/badge.svg)](https://codecov.io/gh/vshulcz/mpc-autoscaler)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 ![Go](https://img.shields.io/badge/go-1.25-00ADD8?logo=go&logoColor=white)
 ![Python](https://img.shields.io/badge/python-3.11%2B-3776AB?logo=python&logoColor=white)
 ![Helm](https://img.shields.io/badge/helm-chart-0F1689?logo=helm&logoColor=white)
 ![Container](https://img.shields.io/badge/GHCR-toy--load-181717?logo=github&logoColor=white)
 
-Implementation repository for a bachelor's thesis on predictive autoscaling in Kubernetes with Model Predictive Control (MPC).
+Predictive autoscaling playground for Kubernetes: a controllable Go workload, Helm deployment, live MPC controller, offline simulator, and reproducible experiment tooling.
+
+The core question: can a small Model Predictive Control loop anticipate demand and scale more smoothly than reactive HPA baselines under step, spike, and seasonal traffic?
+
+Contribution guidelines live in `CONTRIBUTING.md`. Support guidance lives in `SUPPORT.md`. Release steps are documented in `docs/RELEASE.md`. Security reporting guidance lives in `SECURITY.md`.
+
+## Highlights
+
+- controllable HTTP workload with Prometheus metrics, Helm chart, raw manifests, and GHCR release image;
+- online MPC controller that can run in dry-run mode or apply Kubernetes scale decisions;
+- offline simulator and grid-search tooling for controller tuning;
+- repeatable HPA and MPC runners for `step`, `spike`, and `seasonality` scenarios;
+- curated evidence policy that keeps bulky raw runs out of Git while preserving provenance;
+- CI, release, dependency-update, issue-template, and security automation for public maintenance.
 
 The project combines three parts:
 
@@ -27,6 +41,23 @@ Supported experiment scenarios:
 - `step`: sustained increase in load.
 - `spike`: short high-intensity burst.
 - `seasonality`: smooth sinusoidal variation.
+
+## Architecture
+
+```mermaid
+flowchart LR
+  Load[Load profiles] --> Workload[toy-load /work]
+  Workload --> Metrics[Prometheus metrics]
+  Metrics --> HPA[HPA baseline]
+  Metrics --> MPC[MPC controller]
+  HPA --> Scale[Kubernetes scale target]
+  MPC --> Scale
+  Scale --> Workload
+  Runs[Run artifacts] --> Analysis[Analysis package]
+  Analysis --> Results[Summaries and figures]
+```
+
+See `docs/ARCHITECTURE.md` for component boundaries, data flow, and extension points.
 
 ## Prerequisites
 
@@ -61,6 +92,7 @@ deploy/
   monitoring/                  Kustomize monitoring stack manifests used in experiments
 dashboards/                    Grafana dashboard JSON
 loadgen/scripts/               Local and in-cluster load-generation entry points
+docs/                          Architecture, reproducibility, and release notes
 ```
 
 New experiment artifacts are written to ignored `experiments/_runs/` by default.
@@ -77,6 +109,7 @@ These are the scripts and commands you are most likely to use:
 - `bash loadgen/scripts/run_hpa_mpc_batch.sh [N_MPC [N_HPA]]`: run matched HPA and MPC batches.
 - `bash loadgen/scripts/run_mpc_v3_batch.sh [scenario|all]`: run the calibrated MPC-only batch.
 - `mpc-offline-sim ...`: run the offline simulator on a trace after installing `analysis`.
+- `docs/REPRODUCIBILITY.md`: choose the lightest reproduction path for local checks, offline simulation, saved evidence, or live cluster runs.
 
 ## Local Development
 
@@ -157,6 +190,8 @@ helm upgrade --install toy-load toy-load/deploy/helm/toy-load \
 ```
 
 ## Running Experiments
+
+For a staged reproduction path, start with `docs/REPRODUCIBILITY.md`. It separates local checks, offline simulations, saved-artifact summaries, live Kubernetes experiments, and release reproduction.
 
 Single-run baseline and MPC workflows:
 
@@ -276,3 +311,13 @@ Release automation is tag driven:
 - the CI image job publishes the matching GHCR image tag for the same release tag.
 
 See `docs/RELEASE.md` for the full release checklist.
+
+## Contributing
+
+Useful contribution areas include controller comparators, traffic traces, dashboard panels, artifact parsers, Kubernetes portability, and documentation for reproducible experiments.
+
+See `ROADMAP.md` for project directions and `CONTRIBUTING.md` before opening a pull request.
+
+## License
+
+Apache License 2.0. See `LICENSE`.

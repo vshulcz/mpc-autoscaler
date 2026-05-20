@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Release process
+    url: https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/RELEASE.md
+    about: Read the release checklist and tag workflow before opening a release-related issue.
+  - name: Experiment evidence layout
+    url: https://github.com/vshulcz/mpc-autoscaler/blob/main/experiments/README.md
+    about: Check the experiment and evidence documentation before reporting missing artifacts.

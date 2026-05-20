@@ -1,0 +1,43 @@
+name: Feature request
+description: Propose an improvement to the service, analysis tooling, or repository operations.
+title: "feat: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or need
+      description: What gap does this request address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Describe the desired behavior or interface.
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      options:
+        - toy-load application
+        - analysis tooling
+        - load generation scripts
+        - deployment or Helm
+        - CI or release automation
+        - documentation
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Optional. Mention rejected ideas or tradeoffs.
+  - type: textarea
+    id: impact
+    attributes:
+      label: Expected impact
+      description: Why is this change worth doing?

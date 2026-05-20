@@ -1,0 +1,47 @@
+name: Experiment regression
+description: Report that a baseline, MPC run, or analysis workflow no longer reproduces expected experiment behavior.
+title: "exp: "
+labels:
+  - bug
+body:
+  - type: dropdown
+    id: scenario
+    attributes:
+      label: Scenario
+      options:
+        - step
+        - spike
+        - seasonality
+        - multiple scenarios
+    validations:
+      required: true
+  - type: dropdown
+    id: method
+    attributes:
+      label: Affected method
+      options:
+        - HPA baseline
+        - MPC v3
+        - offline analysis only
+        - multiple methods
+    validations:
+      required: true
+  - type: textarea
+    id: regression
+    attributes:
+      label: Regression summary
+      description: What changed compared to expected behavior?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Include run IDs, report paths, summaries, or figure references.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction path
+      description: Commands or scripts used to reproduce the issue.
