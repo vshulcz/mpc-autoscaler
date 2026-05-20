@@ -1,18 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 620" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
   <title id="title">MPC autoscaler architecture</title>
-  <desc id="desc">Traffic enters toy-load, Prometheus exposes metrics, HPA and MPC calculate replica targets, Kubernetes scales toy-load, and evidence flows into analysis outputs.</desc>
+  <desc id="desc">Load flows through toy-load into Prometheus metrics, then into HPA and MPC policies that choose replica targets and produce experiment evidence.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#08111f"/>
-      <stop offset="0.55" stop-color="#0d1730"/>
-      <stop offset="1" stop-color="#100c22"/>
+      <stop offset="0" stop-color="#071120"/>
+      <stop offset="0.58" stop-color="#0c1730"/>
+      <stop offset="1" stop-color="#130f28"/>
     </linearGradient>
     <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#172846"/>
       <stop offset="1" stop-color="#101a2d"/>
     </linearGradient>
     <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#000" flood-opacity="0.36"/>
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000" flood-opacity="0.36"/>
     </filter>
     <marker id="arrow-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#5cc8ff"/>
@@ -22,67 +22,62 @@
     </marker>
   </defs>
 
-  <rect width="1080" height="620" rx="34" fill="url(#bg)"/>
-  <circle cx="148" cy="66" r="170" fill="#5cc8ff" opacity="0.08"/>
-  <circle cx="946" cy="110" r="210" fill="#ff6ea8" opacity="0.07"/>
+  <rect width="960" height="540" rx="32" fill="url(#bg)"/>
+  <circle cx="90" cy="52" r="170" fill="#5cc8ff" opacity="0.08"/>
+  <circle cx="880" cy="82" r="210" fill="#ff6ea8" opacity="0.07"/>
 
   <g font-family="Arial, sans-serif">
-    <text x="58" y="72" fill="#ecf3ff" font-size="34" font-weight="800">Architecture at experiment time</text>
-    <text x="58" y="104" fill="#9fb0cd" font-size="16">Workload metrics feed two scaling policies. Runners preserve the evidence trail for analysis.</text>
+    <text x="48" y="64" fill="#ecf3ff" font-size="34" font-weight="850">Autoscaling loop</text>
+    <text x="48" y="98" fill="#9fb0cd" font-size="18">One service, observable metrics, two policy paths, reproducible evidence.</text>
   </g>
 
-  <g fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M212 210 H312" stroke="#5cc8ff" marker-end="url(#arrow-blue)"/>
-    <path d="M500 210 H600" stroke="#5cc8ff" marker-end="url(#arrow-blue)"/>
-    <path d="M700 264 C628 300 512 308 436 332" stroke="#5cc8ff" marker-end="url(#arrow-blue)"/>
-    <path d="M760 264 C736 294 714 308 704 332" stroke="#5cc8ff" marker-end="url(#arrow-blue)"/>
-    <path d="M352 434 V446 H906 V434" stroke="#60e6a8" marker-end="url(#arrow-green)"/>
-    <path d="M760 382 H812" stroke="#60e6a8" marker-end="url(#arrow-green)"/>
-    <path d="M902 332 C918 272 872 230 838 212" stroke="#60e6a8" marker-end="url(#arrow-green)"/>
-    <path d="M300 500 H382" stroke="#60e6a8" marker-end="url(#arrow-green)"/>
-    <path d="M642 500 H714" stroke="#60e6a8" marker-end="url(#arrow-green)"/>
+  <g fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M184 196 H244" stroke="#5cc8ff" marker-end="url(#arrow-blue)"/>
+    <path d="M404 196 H464" stroke="#5cc8ff" marker-end="url(#arrow-blue)"/>
+    <path d="M624 196 H684" stroke="#5cc8ff" marker-end="url(#arrow-blue)"/>
+    <path d="M794 272 V334" stroke="#60e6a8" marker-end="url(#arrow-green)"/>
+    <path d="M474 398 H520" stroke="#60e6a8" marker-end="url(#arrow-green)"/>
   </g>
 
   <g filter="url(#shadow)" font-family="Arial, sans-serif">
-    <rect x="58" y="156" width="154" height="108" rx="24" fill="url(#card)" stroke="#2b416b"/>
-    <text x="86" y="200" fill="#ecf3ff" font-size="24" font-weight="800">Load</text>
-    <text x="86" y="230" fill="#9fb0cd" font-size="15">step / spike</text>
+    <rect x="48" y="146" width="136" height="100" rx="24" fill="url(#card)" stroke="#2b416b"/>
+    <text x="74" y="190" fill="#ecf3ff" font-size="26" font-weight="850">Load</text>
+    <text x="74" y="218" fill="#9fb0cd" font-size="16">step / spike</text>
 
-    <rect x="312" y="156" width="188" height="108" rx="24" fill="url(#card)" stroke="#2b416b"/>
-    <text x="340" y="200" fill="#ecf3ff" font-size="24" font-weight="800">toy-load</text>
-    <text x="340" y="230" fill="#9fb0cd" font-size="15">work endpoint + probes</text>
+    <rect x="244" y="146" width="160" height="100" rx="24" fill="url(#card)" stroke="#2b416b"/>
+    <text x="270" y="190" fill="#ecf3ff" font-size="26" font-weight="850">toy-load</text>
+    <text x="270" y="218" fill="#9fb0cd" font-size="16">Go service</text>
 
-    <rect x="600" y="156" width="238" height="108" rx="24" fill="url(#card)" stroke="#2b416b"/>
-    <text x="628" y="200" fill="#ecf3ff" font-size="24" font-weight="800">Prometheus</text>
-    <text x="628" y="230" fill="#9fb0cd" font-size="15">RPS, CPU, latency, in-flight</text>
+    <rect x="464" y="146" width="160" height="100" rx="24" fill="url(#card)" stroke="#2b416b"/>
+    <text x="490" y="190" fill="#ecf3ff" font-size="25" font-weight="850">Metrics</text>
+    <text x="490" y="218" fill="#9fb0cd" font-size="16">Prometheus</text>
 
-    <rect x="252" y="326" width="200" height="108" rx="24" fill="#13233d" stroke="#2b416b"/>
-    <text x="280" y="370" fill="#ecf3ff" font-size="24" font-weight="800">HPA baseline</text>
-    <text x="280" y="400" fill="#9fb0cd" font-size="15">reactive policy</text>
+    <rect x="684" y="126" width="228" height="146" rx="26" fill="#11233c" stroke="#2b416b"/>
+    <text x="710" y="168" fill="#ecf3ff" font-size="25" font-weight="850">Policy runner</text>
+    <rect x="710" y="188" width="74" height="34" rx="12" fill="#172846" stroke="#344d79"/>
+    <text x="728" y="211" fill="#cfe7ff" font-size="16" font-weight="800">HPA</text>
+    <rect x="796" y="188" width="88" height="34" rx="12" fill="#103040" stroke="#2b6b58"/>
+    <text x="818" y="211" fill="#60e6a8" font-size="16" font-weight="800">MPC</text>
+    <text x="710" y="246" fill="#9fb0cd" font-size="16">choose replica target</text>
 
-    <rect x="592" y="326" width="168" height="108" rx="24" fill="#13233d" stroke="#2b416b"/>
-    <text x="620" y="370" fill="#ecf3ff" font-size="24" font-weight="800">MPC</text>
-    <text x="620" y="400" fill="#9fb0cd" font-size="15">QP horizon</text>
+    <rect x="700" y="334" width="212" height="88" rx="24" fill="#0f2b32" stroke="#2b6b58"/>
+    <text x="728" y="371" fill="#60e6a8" font-size="24" font-weight="850">Scale target</text>
+    <text x="728" y="398" fill="#cfe7ff" font-size="16">Deployment replicas</text>
 
-    <rect x="812" y="326" width="188" height="108" rx="24" fill="#10293d" stroke="#2b6b58"/>
-    <text x="840" y="370" fill="#ecf3ff" font-size="22" font-weight="800">Scale target</text>
-    <text x="840" y="398" fill="#9fb0cd" font-size="15">Deployment replicas</text>
+    <rect x="48" y="354" width="190" height="88" rx="24" fill="#102235" stroke="#2b416b"/>
+    <text x="74" y="391" fill="#ecf3ff" font-size="23" font-weight="850">Run artifacts</text>
+    <text x="74" y="418" fill="#9fb0cd" font-size="16">logs + summaries</text>
 
-    <rect x="92" y="458" width="208" height="86" rx="24" fill="#0f2b32" stroke="#2b6b58"/>
-    <text x="120" y="492" fill="#60e6a8" font-size="20" font-weight="800">Run artifacts</text>
-    <text x="120" y="518" fill="#9fb0cd" font-size="14">logs, summaries, YAML</text>
+    <rect x="284" y="354" width="190" height="88" rx="24" fill="#102235" stroke="#2b416b"/>
+    <text x="310" y="391" fill="#ecf3ff" font-size="23" font-weight="850">Analysis</text>
+    <text x="310" y="418" fill="#9fb0cd" font-size="16">Python package</text>
 
-    <rect x="382" y="458" width="260" height="86" rx="24" fill="#0f2b32" stroke="#2b6b58"/>
-    <text x="410" y="492" fill="#60e6a8" font-size="20" font-weight="800">Analysis package</text>
-    <text x="410" y="518" fill="#9fb0cd" font-size="14">simulation, parsers, reports</text>
-
-    <rect x="714" y="458" width="286" height="86" rx="24" fill="#0f2b32" stroke="#2b6b58"/>
-    <text x="742" y="492" fill="#60e6a8" font-size="20" font-weight="800">Figures and evidence</text>
-    <text x="742" y="518" fill="#9fb0cd" font-size="14">curated docs, release artifacts</text>
+    <rect x="520" y="354" width="150" height="88" rx="24" fill="#102235" stroke="#2b416b"/>
+    <text x="546" y="391" fill="#ecf3ff" font-size="23" font-weight="850">Evidence</text>
+    <text x="546" y="418" fill="#9fb0cd" font-size="16">figures/docs</text>
   </g>
 
-  <g font-family="Arial, sans-serif">
-    <rect x="58" y="570" width="964" height="1" fill="#2b416b" opacity="0.7"/>
-    <text x="58" y="594" fill="#9fb0cd" font-size="14">Source of truth: root research repo plus standalone toy-load Go module.</text>
+  <g font-family="Arial, sans-serif" fill="#9fb0cd" font-size="15">
+    <text x="48" y="494">Root repo: research automation and docs. toy-load/: standalone Go workload.</text>
   </g>
 </svg>

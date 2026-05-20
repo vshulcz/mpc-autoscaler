@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 640" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
   <title id="title">Toy Load Grafana dashboard preview</title>
-  <desc id="desc">Grafana-style dashboard preview showing request rate, latency, in-flight requests, target health, CPU, memory, and controller events.</desc>
+  <desc id="desc">Dashboard preview with request rate, latency, in-flight requests, targets, controller events, CPU, and memory panels.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#070d1b"/>
+      <stop offset="0" stop-color="#07101f"/>
       <stop offset="1" stop-color="#11152b"/>
     </linearGradient>
     <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
@@ -11,60 +11,43 @@
       <stop offset="1" stop-color="#111a2d"/>
     </linearGradient>
     <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#000" flood-opacity="0.40"/>
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000" flood-opacity="0.38"/>
     </filter>
   </defs>
 
-  <rect width="1080" height="640" rx="34" fill="url(#bg)"/>
-  <rect x="42" y="38" width="996" height="546" rx="30" fill="#0e1729" stroke="#2b416b" filter="url(#shadow)"/>
+  <rect width="960" height="540" rx="32" fill="url(#bg)"/>
+  <rect x="42" y="38" width="876" height="464" rx="28" fill="#0e1729" stroke="#2b416b" filter="url(#shadow)"/>
 
   <g font-family="Arial, sans-serif">
-    <text x="76" y="82" fill="#ecf3ff" font-size="30" font-weight="800">Toy Load Dashboard</text>
-    <text x="76" y="112" fill="#9fb0cd" font-size="15">Prometheus view for live experiments. JSON is committed and Helm-embeddable.</text>
-    <rect x="790" y="64" width="208" height="38" rx="14" fill="#101a2d" stroke="#283756"/>
-    <circle cx="818" cy="83" r="7" fill="#60e6a8"/>
-    <text x="836" y="89" fill="#cfe7ff" font-size="14" font-weight="700">namespace: default</text>
+    <text x="74" y="82" fill="#ecf3ff" font-size="32" font-weight="850">Toy Load Dashboard</text>
+    <text x="74" y="113" fill="#9fb0cd" font-size="17">Prometheus panels for live autoscaling runs.</text>
+    <rect x="728" y="62" width="156" height="38" rx="14" fill="#101a2d" stroke="#283756"/>
+    <circle cx="754" cy="81" r="7" fill="#60e6a8"/>
+    <text x="772" y="87" fill="#cfe7ff" font-size="15" font-weight="800">targets up</text>
   </g>
 
   <g font-family="Arial, sans-serif">
-    <rect x="76" y="142" width="440" height="140" rx="20" fill="url(#panel)" stroke="#283756"/>
-    <text x="100" y="176" fill="#ecf3ff" font-size="17" font-weight="800">Request rate</text>
-    <g stroke="#263856" stroke-width="1"><line x1="100" y1="240" x2="486" y2="240"/><line x1="100" y1="205" x2="486" y2="205"/></g>
-    <path d="M104 250 C154 245 210 247 262 238 C312 229 330 168 370 174 C416 181 444 215 488 232" fill="none" stroke="#5cc8ff" stroke-width="5" stroke-linecap="round"/>
-    <text x="404" y="176" fill="#5cc8ff" font-size="15" font-weight="700">200 rps burst</text>
+    <rect x="74" y="146" width="390" height="132" rx="22" fill="url(#panel)" stroke="#283756"/>
+    <text x="100" y="182" fill="#ecf3ff" font-size="20" font-weight="850">Request rate</text>
+    <path d="M100 238 C150 234 206 236 252 226 C304 214 316 168 356 172 C398 176 426 210 438 222" fill="none" stroke="#5cc8ff" stroke-width="6" stroke-linecap="round"/>
 
-    <rect x="548" y="142" width="450" height="140" rx="20" fill="url(#panel)" stroke="#283756"/>
-    <text x="572" y="176" fill="#ecf3ff" font-size="17" font-weight="800">Latency quantiles</text>
-    <g stroke="#263856" stroke-width="1"><line x1="572" y1="240" x2="968" y2="240"/><line x1="572" y1="205" x2="968" y2="205"/></g>
-    <path d="M576 248 C632 246 692 244 744 235 C782 229 802 188 836 190 C884 194 926 220 970 238" fill="none" stroke="#ffb86b" stroke-width="5" stroke-linecap="round"/>
-    <path d="M576 258 C632 256 692 254 744 248 C786 244 806 218 838 220 C886 224 930 242 970 252" fill="none" stroke="#5cc8ff" stroke-width="3" stroke-linecap="round"/>
-    <text x="858" y="176" fill="#ffb86b" font-size="15" font-weight="700">p95 / p99</text>
+    <rect x="496" y="146" width="346" height="132" rx="22" fill="url(#panel)" stroke="#283756"/>
+    <text x="522" y="182" fill="#ecf3ff" font-size="20" font-weight="850">Latency</text>
+    <path d="M522 238 C584 234 642 230 682 218 C714 208 722 184 754 186 C792 190 818 212 838 226" fill="none" stroke="#ffb86b" stroke-width="6" stroke-linecap="round"/>
+    <path d="M522 250 C584 246 642 244 682 236 C718 230 724 208 754 210 C794 214 818 232 838 242" fill="none" stroke="#5cc8ff" stroke-width="4" stroke-linecap="round"/>
+    <text x="754" y="184" fill="#ffb86b" font-size="17" font-weight="850">p95 / p99</text>
 
-    <rect x="76" y="314" width="214" height="116" rx="20" fill="url(#panel)" stroke="#283756"/>
-    <text x="100" y="346" fill="#ecf3ff" font-size="17" font-weight="800">In-flight</text>
-    <text x="100" y="396" fill="#ecf3ff" font-size="42" font-weight="800">11.3</text>
-    <text x="196" y="396" fill="#9fb0cd" font-size="16">max</text>
+    <rect x="74" y="316" width="176" height="114" rx="22" fill="url(#panel)" stroke="#283756"/>
+    <text x="100" y="350" fill="#ecf3ff" font-size="20" font-weight="850">In-flight</text>
+    <text x="100" y="400" fill="#ecf3ff" font-size="42" font-weight="900">11.3</text>
 
-    <rect x="322" y="314" width="214" height="116" rx="20" fill="url(#panel)" stroke="#283756"/>
-    <text x="346" y="346" fill="#ecf3ff" font-size="17" font-weight="800">Targets</text>
-    <text x="346" y="396" fill="#60e6a8" font-size="42" font-weight="800">up</text>
-    <text x="412" y="396" fill="#9fb0cd" font-size="16">scraped</text>
+    <rect x="280" y="316" width="176" height="114" rx="22" fill="url(#panel)" stroke="#283756"/>
+    <text x="306" y="350" fill="#ecf3ff" font-size="20" font-weight="850">Controller</text>
+    <text x="306" y="395" fill="#60e6a8" font-size="32" font-weight="900">optimal</text>
 
-    <rect x="568" y="314" width="430" height="116" rx="20" fill="url(#panel)" stroke="#283756"/>
-    <text x="592" y="346" fill="#ecf3ff" font-size="17" font-weight="800">Controller events</text>
-    <rect x="594" y="370" width="74" height="30" rx="10" fill="rgba(255,184,107,0.16)" stroke="#ffb86b"/>
-    <text x="613" y="391" fill="#ffb86b" font-size="15" font-weight="800">scale</text>
-    <rect x="686" y="370" width="90" height="30" rx="10" fill="rgba(96,230,168,0.14)" stroke="#60e6a8"/>
-    <text x="704" y="391" fill="#60e6a8" font-size="15" font-weight="800">optimal</text>
-    <rect x="794" y="370" width="112" height="30" rx="10" fill="rgba(92,200,255,0.14)" stroke="#5cc8ff"/>
-    <text x="812" y="391" fill="#5cc8ff" font-size="15" font-weight="800">replica watch</text>
-
-    <rect x="76" y="462" width="440" height="76" rx="20" fill="url(#panel)" stroke="#283756"/>
-    <text x="100" y="494" fill="#ecf3ff" font-size="17" font-weight="800">Process CPU</text>
-    <path d="M254 508 C300 505 340 496 382 488 C424 481 456 492 488 502" fill="none" stroke="#ff6ea8" stroke-width="5" stroke-linecap="round"/>
-
-    <rect x="548" y="462" width="450" height="76" rx="20" fill="url(#panel)" stroke="#283756"/>
-    <text x="572" y="494" fill="#ecf3ff" font-size="17" font-weight="800">Resident memory</text>
-    <path d="M752 508 C800 505 846 504 896 500 C928 498 944 498 968 497" fill="none" stroke="#60e6a8" stroke-width="5" stroke-linecap="round"/>
+    <rect x="486" y="316" width="356" height="114" rx="22" fill="url(#panel)" stroke="#283756"/>
+    <text x="512" y="350" fill="#ecf3ff" font-size="20" font-weight="850">Runtime signals</text>
+    <path d="M512 392 C552 388 590 378 630 372 C668 368 696 380 726 390" fill="none" stroke="#ff6ea8" stroke-width="6" stroke-linecap="round"/>
+    <path d="M640 410 C690 406 742 404 812 400" fill="none" stroke="#60e6a8" stroke-width="6" stroke-linecap="round"/>
   </g>
 </svg>

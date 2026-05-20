@@ -1,102 +1,79 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 640" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
   <title id="title">Hybrid-SA spike control trace</title>
-  <desc id="desc">Tuned Hybrid-SA spike run showing burst throughput, success ratio, solver status, safety events, observed demand, and applied replicas.</desc>
+  <desc id="desc">Curated Hybrid-SA spike run with throughput, success, solver status, safety scale-ups, observed demand, and replica ramp.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#06111f"/>
-      <stop offset="0.54" stop-color="#0c1730"/>
-      <stop offset="1" stop-color="#140d28"/>
+      <stop offset="0.58" stop-color="#0b1730"/>
+      <stop offset="1" stop-color="#150d28"/>
     </linearGradient>
     <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#172846"/>
       <stop offset="1" stop-color="#111a2d"/>
     </linearGradient>
     <linearGradient id="burst" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#ff6ea8" stop-opacity="0.26"/>
-      <stop offset="1" stop-color="#ff6ea8" stop-opacity="0.05"/>
+      <stop offset="0" stop-color="#ff6ea8" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#ff6ea8" stop-opacity="0.04"/>
     </linearGradient>
     <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#000" flood-opacity="0.40"/>
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000" flood-opacity="0.38"/>
     </filter>
   </defs>
 
-  <rect width="1080" height="640" rx="34" fill="url(#bg)"/>
-  <circle cx="152" cy="80" r="205" fill="#5cc8ff" opacity="0.08"/>
-  <circle cx="1002" cy="68" r="230" fill="#ff6ea8" opacity="0.08"/>
+  <rect width="960" height="540" rx="32" fill="url(#bg)"/>
+  <circle cx="116" cy="74" r="180" fill="#5cc8ff" opacity="0.08"/>
+  <circle cx="890" cy="58" r="210" fill="#ff6ea8" opacity="0.08"/>
 
   <g font-family="Arial, sans-serif">
-    <text x="58" y="72" fill="#ecf3ff" font-size="34" font-weight="800">Hybrid-SA spike control trace</text>
-    <text x="58" y="104" fill="#9fb0cd" font-size="16">One curated run: controller behavior under burst load, not a one-number policy ranking.</text>
-    <text x="58" y="130" fill="#60e6a8" font-size="14" font-weight="700">source: experiments/thesis-evidence/main/hybrid-sa-max70-tuned/spike/.../mpc-control-log.csv</text>
+    <text x="48" y="64" fill="#ecf3ff" font-size="34" font-weight="850">Hybrid-SA spike run</text>
+    <text x="48" y="98" fill="#9fb0cd" font-size="18">Controller behavior under burst load. Full comparisons stay in benchmark reports.</text>
   </g>
 
   <g filter="url(#shadow)" font-family="Arial, sans-serif">
-    <rect x="58" y="166" width="216" height="118" rx="24" fill="url(#card)" stroke="#2b416b"/>
-    <text x="82" y="198" fill="#9fb0cd" font-size="13" font-weight="800" letter-spacing="1.4">BURST THROUGHPUT</text>
-    <text x="82" y="244" fill="#ecf3ff" font-size="40" font-weight="900">201.5</text>
-    <text x="194" y="244" fill="#9fb0cd" font-size="17">rps</text>
-    <text x="82" y="264" fill="#9fb0cd" font-size="13">phase 2 service rate</text>
+    <rect x="48" y="132" width="190" height="96" rx="22" fill="url(#card)" stroke="#2b416b"/>
+    <text x="74" y="166" fill="#9fb0cd" font-size="15" font-weight="850" letter-spacing="1.2">THROUGHPUT</text>
+    <text x="74" y="207" fill="#ecf3ff" font-size="38" font-weight="900">201.5</text>
+    <text x="178" y="207" fill="#9fb0cd" font-size="18">rps</text>
 
-    <rect x="306" y="166" width="216" height="118" rx="24" fill="url(#card)" stroke="#2b416b"/>
-    <text x="330" y="198" fill="#9fb0cd" font-size="13" font-weight="800" letter-spacing="1.4">SUCCESS RATIO</text>
-    <text x="330" y="244" fill="#60e6a8" font-size="40" font-weight="900">100%</text>
-    <text x="330" y="264" fill="#9fb0cd" font-size="13">all phases completed</text>
+    <rect x="270" y="132" width="190" height="96" rx="22" fill="url(#card)" stroke="#2b416b"/>
+    <text x="296" y="166" fill="#9fb0cd" font-size="15" font-weight="850" letter-spacing="1.2">SUCCESS</text>
+    <text x="296" y="207" fill="#60e6a8" font-size="38" font-weight="900">100%</text>
 
-    <rect x="554" y="166" width="216" height="118" rx="24" fill="url(#card)" stroke="#2b416b"/>
-    <text x="578" y="198" fill="#9fb0cd" font-size="13" font-weight="800" letter-spacing="1.4">SOLVER STATUS</text>
-    <text x="578" y="244" fill="#60e6a8" font-size="40" font-weight="900">optimal</text>
-    <text x="578" y="264" fill="#9fb0cd" font-size="13">73 control samples</text>
+    <rect x="492" y="132" width="190" height="96" rx="22" fill="url(#card)" stroke="#2b416b"/>
+    <text x="518" y="166" fill="#9fb0cd" font-size="15" font-weight="850" letter-spacing="1.2">SOLVER</text>
+    <text x="518" y="207" fill="#60e6a8" font-size="38" font-weight="900">optimal</text>
 
-    <rect x="802" y="166" width="216" height="118" rx="24" fill="url(#card)" stroke="#2b416b"/>
-    <text x="826" y="198" fill="#9fb0cd" font-size="13" font-weight="800" letter-spacing="1.4">SAFETY SCALE-UPS</text>
-    <text x="826" y="244" fill="#ecf3ff" font-size="40" font-weight="900">6</text>
-    <text x="860" y="244" fill="#ffb86b" font-size="18" font-weight="800">events</text>
-    <text x="826" y="264" fill="#9fb0cd" font-size="13">burst protection path</text>
+    <rect x="714" y="132" width="198" height="96" rx="22" fill="url(#card)" stroke="#2b416b"/>
+    <text x="740" y="166" fill="#9fb0cd" font-size="15" font-weight="850" letter-spacing="1.2">SAFETY PATH</text>
+    <text x="740" y="207" fill="#ecf3ff" font-size="38" font-weight="900">6</text>
+    <text x="779" y="207" fill="#ffb86b" font-size="20" font-weight="850">scale-ups</text>
   </g>
 
   <g filter="url(#shadow)">
-    <rect x="58" y="326" width="962" height="246" rx="28" fill="#101a2d" stroke="#2b416b"/>
-    <rect x="580" y="396" width="128" height="132" rx="18" fill="url(#burst)" stroke="#ff6ea8" stroke-opacity="0.36"/>
-
-    <g stroke="#223453" stroke-width="1">
-      <line x1="130" y1="528" x2="970" y2="528"/>
-      <line x1="130" y1="488" x2="970" y2="488"/>
-      <line x1="130" y1="448" x2="970" y2="448"/>
-      <line x1="130" y1="408" x2="970" y2="408"/>
+    <rect x="48" y="270" width="864" height="196" rx="26" fill="#101a2d" stroke="#2b416b"/>
+    <rect x="516" y="320" width="126" height="116" rx="18" fill="url(#burst)" stroke="#ff6ea8" stroke-opacity="0.38"/>
+    <g stroke="#233756" stroke-width="1">
+      <line x1="102" y1="426" x2="868" y2="426"/>
+      <line x1="102" y1="376" x2="868" y2="376"/>
     </g>
-
+    <path d="M104 424 C240 424 356 424 438 421 C478 417 510 400 528 372 C548 334 566 310 596 306 C636 302 682 324 720 360 C760 398 792 428 868 426" fill="none" stroke="#5cc8ff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M104 426 C262 426 384 426 458 425 C506 422 536 404 572 374 C612 340 646 318 692 324 C746 332 802 382 868 414" fill="none" stroke="#ff6ea8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
     <g font-family="Arial, sans-serif">
-      <text x="86" y="366" fill="#ecf3ff" font-size="22" font-weight="900">Demand and replica decision shape</text>
-      <text x="86" y="390" fill="#9fb0cd" font-size="14">Observed RPS rises sharply; applied replicas ramp up, then drain down after demand settles.</text>
-      <text x="600" y="374" fill="#ff6ea8" font-size="14" font-weight="800">30s burst</text>
-      <text x="116" y="552" fill="#9fb0cd" font-size="13">0s</text>
-      <text x="574" y="552" fill="#9fb0cd" font-size="13">190s</text>
-      <text x="936" y="552" fill="#9fb0cd" font-size="13">395s</text>
-      <text x="94" y="532" fill="#9fb0cd" font-size="12">0</text>
-      <text x="86" y="452" fill="#9fb0cd" font-size="12">100</text>
-      <text x="86" y="412" fill="#9fb0cd" font-size="12">200</text>
-    </g>
-
-    <path d="M134 521 C238 521 348 521 470 521 C528 516 562 504 582 484 C596 462 608 432 626 407 C650 386 688 398 720 420 C756 446 782 486 822 510 C872 530 926 528 966 520" fill="none" stroke="#5cc8ff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M134 522 C270 522 406 522 512 522 C548 518 572 506 596 488 C628 464 650 438 682 419 C716 400 754 405 796 424 C850 450 908 486 966 506" fill="none" stroke="#ff6ea8" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-
-    <g font-family="Arial, sans-serif">
-      <rect x="784" y="350" width="196" height="60" rx="16" fill="#0b1020" stroke="#283756"/>
-      <circle cx="810" cy="373" r="6" fill="#5cc8ff"/>
-      <text x="828" y="378" fill="#cfe7ff" font-size="14">observed RPS</text>
-      <circle cx="810" cy="394" r="6" fill="#ff6ea8"/>
-      <text x="828" y="399" fill="#ffd7e7" font-size="14">applied replicas</text>
-
-      <circle cx="626" cy="407" r="7" fill="#5cc8ff"/>
-      <rect x="532" y="422" width="184" height="32" rx="12" fill="#0b1020" stroke="#2b416b"/>
-      <text x="552" y="443" fill="#5cc8ff" font-size="14" font-weight="800">189 rps peak observed</text>
-      <circle cx="720" cy="420" r="7" fill="#ff6ea8"/>
-      <rect x="720" y="448" width="142" height="32" rx="12" fill="#0b1020" stroke="#2b416b"/>
-      <text x="740" y="469" fill="#ff6ea8" font-size="14" font-weight="800">42 max replicas</text>
+      <text x="78" y="308" fill="#ecf3ff" font-size="24" font-weight="850">Demand and replicas</text>
+      <text x="78" y="334" fill="#9fb0cd" font-size="17">Observed RPS rises first; replica target ramps up and drains down.</text>
+      <text x="534" y="312" fill="#ff6ea8" font-size="18" font-weight="850">30s burst</text>
+      <rect x="672" y="292" width="198" height="54" rx="16" fill="#0b1020" stroke="#283756"/>
+      <circle cx="696" cy="313" r="7" fill="#5cc8ff"/>
+      <text x="714" y="319" fill="#cfe7ff" font-size="16">observed RPS</text>
+      <circle cx="696" cy="334" r="7" fill="#ff6ea8"/>
+      <text x="714" y="340" fill="#ffd7e7" font-size="16">replica target</text>
+      <text x="100" y="450" fill="#9fb0cd" font-size="15">0s</text>
+      <text x="518" y="450" fill="#9fb0cd" font-size="15">190s</text>
+      <text x="834" y="450" fill="#9fb0cd" font-size="15">395s</text>
     </g>
   </g>
 
   <g font-family="Arial, sans-serif">
-    <text x="58" y="612" fill="#9fb0cd" font-size="14">Run metrics: phase-2 p95 174 ms, p99 255 ms, max latency 403 ms. Full comparisons belong in generated benchmark reports.</text>
+    <text x="48" y="506" fill="#9fb0cd" font-size="15">Curated run: phase-2 p95 174 ms, p99 255 ms, max latency 403 ms.</text>
   </g>
 </svg>

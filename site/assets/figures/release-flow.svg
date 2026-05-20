@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 540" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
   <title id="title">Release workflow preview</title>
-  <desc id="desc">Release pipeline showing tag creation, validation, binary and Helm packaging, GHCR image publishing, and GitHub Release assets.</desc>
+  <desc id="desc">Semver release lane from tag to build, ship, and publish, with binaries, Helm, GHCR, and checksums outputs.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#09111f"/>
@@ -12,61 +12,58 @@
       <stop offset="1" stop-color="#111a2d"/>
     </linearGradient>
     <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#000" flood-opacity="0.40"/>
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000" flood-opacity="0.38"/>
     </filter>
     <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#60e6a8"/>
     </marker>
   </defs>
 
-  <rect width="1080" height="540" rx="34" fill="url(#bg)"/>
-  <circle cx="930" cy="70" r="210" fill="#60e6a8" opacity="0.08"/>
-  <circle cx="90" cy="500" r="180" fill="#5cc8ff" opacity="0.07"/>
+  <rect width="960" height="540" rx="32" fill="url(#bg)"/>
+  <circle cx="852" cy="62" r="190" fill="#60e6a8" opacity="0.08"/>
+  <circle cx="94" cy="480" r="170" fill="#5cc8ff" opacity="0.07"/>
 
   <g font-family="Arial, sans-serif">
-    <text x="58" y="72" fill="#ecf3ff" font-size="34" font-weight="800">Release lane</text>
-    <text x="58" y="104" fill="#9fb0cd" font-size="16">A semver tag produces verified assets, a multi-arch image, SBOM/provenance, and release notes.</text>
+    <text x="48" y="64" fill="#ecf3ff" font-size="34" font-weight="850">Release lane</text>
+    <text x="48" y="98" fill="#9fb0cd" font-size="18">Tag once. Build assets, publish image, attach checksums.</text>
   </g>
 
-  <g fill="none" stroke="#60e6a8" stroke-width="4" marker-end="url(#arrow)" opacity="0.95">
-    <path d="M236 244 H324"/>
-    <path d="M482 244 H570"/>
-    <path d="M728 244 H816"/>
-  </g>
-
-  <g filter="url(#shadow)" font-family="Arial, sans-serif">
-    <rect x="58" y="164" width="178" height="160" rx="26" fill="url(#card)" stroke="#2b416b"/>
-    <circle cx="92" cy="200" r="16" fill="#60e6a8"/>
-    <text x="86" y="207" fill="#07111f" font-size="18" font-weight="900">1</text>
-    <text x="86" y="250" fill="#ecf3ff" font-size="25" font-weight="800">Tag</text>
-    <text x="86" y="280" fill="#9fb0cd" font-size="15">v0.1.0</text>
-    <text x="86" y="306" fill="#9fb0cd" font-size="15">annotated release</text>
-
-    <rect x="324" y="164" width="178" height="160" rx="26" fill="url(#card)" stroke="#2b416b"/>
-    <circle cx="358" cy="200" r="16" fill="#60e6a8"/>
-    <text x="352" y="207" fill="#07111f" font-size="18" font-weight="900">2</text>
-    <text x="352" y="250" fill="#ecf3ff" font-size="25" font-weight="800">Build</text>
-    <text x="352" y="280" fill="#9fb0cd" font-size="15">linux + darwin</text>
-    <text x="352" y="306" fill="#9fb0cd" font-size="15">amd64 + arm64</text>
-
-    <rect x="570" y="164" width="178" height="160" rx="26" fill="url(#card)" stroke="#2b416b"/>
-    <circle cx="604" cy="200" r="16" fill="#60e6a8"/>
-    <text x="598" y="207" fill="#07111f" font-size="18" font-weight="900">3</text>
-    <text x="598" y="250" fill="#ecf3ff" font-size="25" font-weight="800">Ship</text>
-    <text x="598" y="280" fill="#9fb0cd" font-size="15">GHCR image</text>
-    <text x="598" y="306" fill="#9fb0cd" font-size="15">SBOM + provenance</text>
-
-    <rect x="816" y="164" width="206" height="160" rx="26" fill="url(#card)" stroke="#2b416b"/>
-    <circle cx="850" cy="200" r="16" fill="#60e6a8"/>
-    <text x="844" y="207" fill="#07111f" font-size="18" font-weight="900">4</text>
-    <text x="844" y="250" fill="#ecf3ff" font-size="25" font-weight="800">Publish</text>
-    <text x="844" y="280" fill="#9fb0cd" font-size="15">GitHub Release</text>
-    <text x="844" y="306" fill="#9fb0cd" font-size="15">assets + SHA256SUMS</text>
+  <g fill="none" stroke="#60e6a8" stroke-width="5" marker-end="url(#arrow)">
+    <path d="M214 252 H282"/>
+    <path d="M410 252 H478"/>
+    <path d="M606 252 H674"/>
   </g>
 
   <g filter="url(#shadow)" font-family="Arial, sans-serif">
-    <rect x="118" y="374" width="844" height="82" rx="26" fill="#0f2b32" stroke="#2b6b58"/>
-    <text x="152" y="410" fill="#60e6a8" font-size="20" font-weight="800">Release outputs</text>
-    <text x="152" y="438" fill="#cfe7ff" font-size="15">toy-load binaries, Helm chart package, SHA256SUMS, ghcr.io/vshulcz/toy-load:v0.1.0, latest, and sha-tagged image</text>
+    <rect x="54" y="172" width="160" height="160" rx="26" fill="url(#card)" stroke="#2b416b"/>
+    <circle cx="90" cy="210" r="18" fill="#60e6a8"/>
+    <text x="84" y="217" fill="#07111f" font-size="19" font-weight="900">1</text>
+    <text x="84" y="264" fill="#ecf3ff" font-size="28" font-weight="850">Tag</text>
+    <text x="84" y="294" fill="#9fb0cd" font-size="17">v0.1.0</text>
+
+    <rect x="282" y="172" width="128" height="160" rx="26" fill="url(#card)" stroke="#2b416b"/>
+    <circle cx="318" cy="210" r="18" fill="#60e6a8"/>
+    <text x="312" y="217" fill="#07111f" font-size="19" font-weight="900">2</text>
+    <text x="312" y="264" fill="#ecf3ff" font-size="28" font-weight="850">Build</text>
+    <text x="312" y="294" fill="#9fb0cd" font-size="17">multi-arch</text>
+
+    <rect x="478" y="172" width="128" height="160" rx="26" fill="url(#card)" stroke="#2b416b"/>
+    <circle cx="514" cy="210" r="18" fill="#60e6a8"/>
+    <text x="508" y="217" fill="#07111f" font-size="19" font-weight="900">3</text>
+    <text x="508" y="264" fill="#ecf3ff" font-size="28" font-weight="850">Ship</text>
+    <text x="508" y="294" fill="#9fb0cd" font-size="17">GHCR</text>
+
+    <rect x="674" y="172" width="232" height="160" rx="26" fill="url(#card)" stroke="#2b416b"/>
+    <circle cx="710" cy="210" r="18" fill="#60e6a8"/>
+    <text x="704" y="217" fill="#07111f" font-size="19" font-weight="900">4</text>
+    <text x="704" y="264" fill="#ecf3ff" font-size="28" font-weight="850">Publish</text>
+    <text x="704" y="294" fill="#9fb0cd" font-size="17">GitHub Release</text>
+
+    <rect x="100" y="382" width="760" height="76" rx="26" fill="#0f2b32" stroke="#2b6b58"/>
+    <text x="132" y="427" fill="#60e6a8" font-size="24" font-weight="850">Outputs</text>
+    <text x="240" y="427" fill="#cfe7ff" font-size="19">binaries</text>
+    <text x="360" y="427" fill="#cfe7ff" font-size="19">Helm chart</text>
+    <text x="512" y="427" fill="#cfe7ff" font-size="19">GHCR image</text>
+    <text x="674" y="427" fill="#cfe7ff" font-size="19">SHA256SUMS</text>
   </g>
 </svg>

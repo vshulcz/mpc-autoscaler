@@ -26,6 +26,7 @@ body {
     var(--bg);
   color: var(--text);
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 a {
@@ -135,7 +136,7 @@ p {
 }
 
 .grid-4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
 .grid-2 {
@@ -164,6 +165,7 @@ p {
 }
 
 .figure {
+  margin: 0;
   overflow: hidden;
 }
 
@@ -264,13 +266,39 @@ pre {
     flex-direction: column;
   }
 
+  .nav-links {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: clamp(2.35rem, 10vw, 4.2rem);
+  }
+
   .grid-2,
-  .grid-4,
   .grid-3 {
     grid-template-columns: 1fr;
   }
 
   .hero {
     padding-top: 42px;
+  }
+}
+
+@media (max-width: 480px) {
+  .shell {
+    width: min(100% - 24px, 1120px);
+  }
+
+  h1 {
+    font-size: 2.35rem;
+  }
+
+  .hero {
+    padding-bottom: 34px;
+  }
+
+  .card,
+  .panel {
+    padding: 20px;
   }
 }
