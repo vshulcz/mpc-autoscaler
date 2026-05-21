@@ -23,6 +23,24 @@ python3 -m pip install -U pip
 python3 -m pip install -e analysis
 ```
 
+Trace CSVs use one row per control step. The smallest useful shape is:
+
+```csv
+step,timestamp_s,rps
+0,0,20
+1,15,80
+2,30,40
+```
+
+- `step` is the zero-based sample index.
+- `timestamp_s` is elapsed time in seconds.
+- `rps` is the requested load in requests per second.
+
+Use `step` when you need a sustained load change, `spike` for a short burst,
+and `seasonality` for a smooth repeating profile. The
+`mpc-generate-synthetic-trace` command below writes this CSV format for those
+scenarios.
+
 Generate and simulate a trace:
 
 ```bash
