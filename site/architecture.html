@@ -19,10 +19,17 @@
     </header>
 
     <main class="shell">
-      <section class="hero">
-        <div class="eyebrow">System View</div>
-        <h1>Small service, visible metrics, explicit controller loop.</h1>
-        <p class="lead">The repository is a research meta-repo. The Go workload lives under <code>toy-load/</code>; analysis, monitoring, runners, docs, and release automation live at root.</p>
+      <section class="hero page-hero">
+        <div>
+          <div class="eyebrow">System View</div>
+          <h1>Small service, visible metrics, explicit controller loop.</h1>
+          <p class="lead">The repository is a research meta-repo. The Go workload lives under <code>toy-load/</code>; analysis, monitoring, runners, docs, and release automation live at root.</p>
+        </div>
+        <aside class="page-hero-card">
+          <span class="card-tag">boundary</span>
+          <strong>5 roles</strong>
+          <p>Workload, controller, runners, monitoring, and evidence paths stay separated.</p>
+        </aside>
       </section>
 
       <section class="section">
@@ -34,14 +41,17 @@
 
       <section class="section grid grid-3">
         <article class="card">
+          <span class="card-tag">01</span>
           <h3>Workload</h3>
           <p><strong>toy-load</strong> exposes <code>/work</code>, health probes, and Prometheus metrics with CPU, jitter, latency, request, and in-flight controls.</p>
         </article>
         <article class="card">
+          <span class="card-tag">02</span>
           <h3>Controllers</h3>
           <p><strong>HPA</strong> provides the reactive baseline. <strong>MPC</strong> solves a short-horizon control problem and can run dry-run or apply mode.</p>
         </article>
         <article class="card">
+          <span class="card-tag">03</span>
           <h3>Evidence</h3>
           <p>Runners write artifacts under experiment roots. Analysis commands rebuild summaries without committing bulky raw outputs.</p>
         </article>
