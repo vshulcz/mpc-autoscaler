@@ -192,3 +192,18 @@ In the thesis experiments, `toy-load` is the controlled workload under HPA and
 MPC policies. Load-generator scripts drive `/work`, Prometheus records service
 metrics, and analysis tooling summarizes latency, success ratio, in-flight
 requests, and replica behavior.
+
+## #89 Status Code Reference
+
+This section records the status codes users should expect while testing `/work`.
+
+| Scenario | Example | Expected status | Notes |
+| --- | --- | --- | --- |
+| Success | `curl -i "http://localhost:9090/work?id=baseline"` | `200` | Normal `/work` requests return a plain-text response. |
+| Invalid query values | `curl -i "http://localhost:9090/work?cpu_ms=abc"` | `400` | Invalid integer or float formats are rejected. |
+| Unknown path | `curl -i http://localhost:9090/does-not-exist` | `404` | Unrecognized paths return not found. |
+| Invalid method | `curl -i -X POST http://localhost:9090/work` | `405` | Only `GET` is supported; response includes `Allow: GET`. |
+| Forced error | `curl -i "http://localhost:9090/work?err_rate=1&id=forced-error"` | `500` | `err_rate=1` forces an application error response. |
+
+These examples match the curl style used above: they target `localhost:9090` and
+use `-i` when showing the HTTP status line and headers.
