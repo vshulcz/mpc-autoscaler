@@ -2,7 +2,7 @@
 
 This demo is the fast reader path: show why the repository exists without making a production claim.
 
-![Ten-second autoscaling loop](../site/assets/figures/ten-second-demo.svg)
+![Ten-second autoscaling loop](../site/assets/figures/ten-second-demo.gif)
 
 ## Storyboard
 

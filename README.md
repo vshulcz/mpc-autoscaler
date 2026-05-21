@@ -60,7 +60,7 @@ For broader coverage, see [`docs/BENCHMARK_MATRIX.md`](docs/BENCHMARK_MATRIX.md)
 
 ## Ten-Second Demo
 
-![Ten-second autoscaling loop](site/assets/figures/ten-second-demo.svg)
+![Ten-second autoscaling loop](site/assets/figures/ten-second-demo.gif)
 
 The short version: controlled traffic hits `toy-load`, Prometheus exposes service metrics, HPA reacts to measured pressure, MPC forecasts short-horizon demand, and analysis tools compare latency, success, and replica behavior. Full storyboard: [`docs/DEMO.md`](docs/DEMO.md).
 
