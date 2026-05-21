@@ -324,17 +324,34 @@ Key metrics exported by `toy-load`:
 | `toy_work_cpu_ms` | requested CPU work per request |
 | `toy_errors_total{reason}` | application error counters |
 
-Useful PromQL queries:
+### PromQL glossary
+
+| Query | What it tells you |
+| --- | --- |
+| `sum(rate(toy_http_requests_total{path="/work"}[1m]))` | Incoming request rate (RPS) |
+| `histogram_quantile(0.95, sum(rate(toy_http_request_duration_seconds_bucket{path="/work"}[1m])) by (le))` | p95 response latency |
+| `toy_in_flight_requests` | Concurrent requests at this instant |
+| `rate(toy_http_requests_total{code=~"5.."}[5m])` | Error rate (5xx responses per second) |
+| `sum(rate(toy_http_requests_total{path="/work"}[1m])) by (method)` | Request rate by HTTP method |
+| `toy_work_cpu_ms` | Configured CPU work per request in milliseconds |
+| `rate(toy_errors_total[5m])` | Application-layer error rate |
+| `max(toy_in_flight_requests)` | Peak concurrency in the window |
 
 ```promql
+# Request rate
 sum(rate(toy_http_requests_total{path="/work"}[1m]))
 
+# p95 latency
 histogram_quantile(
   0.95,
   sum(rate(toy_http_request_duration_seconds_bucket{path="/work"}[1m])) by (le)
 )
 
+# Current concurrency
 toy_in_flight_requests
+
+# 5xx error rate
+rate(toy_http_requests_total{code=~"5.."}[5m])
 ```
 
 ## CI And Releases
