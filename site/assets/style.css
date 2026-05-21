@@ -134,7 +134,7 @@ h2,
 h3 {
   line-height: 1.12;
   margin: 0;
-  letter-spacing: -0.04em;
+  letter-spacing: -0.026em;
 }
 
 h1 {
@@ -149,6 +149,7 @@ h1 {
   max-width: 720px;
   font-size: clamp(3.2rem, 6vw, 5.8rem);
   line-height: 0.98;
+  letter-spacing: -0.038em;
   background: linear-gradient(100deg, #ffffff 0%, #e8f2ff 35%, #80ddff 68%, #ff93c0 100%);
   -webkit-background-clip: text;
   background-clip: text;
@@ -162,6 +163,7 @@ h2 {
 
 h3 {
   font-size: 1.25rem;
+  letter-spacing: -0.018em;
 }
 
 p {
@@ -577,8 +579,11 @@ p {
 }
 
 .card-tag {
+  align-self: flex-start;
   display: inline-grid;
   place-items: center;
+  width: max-content;
+  max-width: 100%;
   min-width: 36px;
   height: 28px;
   margin-bottom: 18px;
@@ -895,6 +900,25 @@ pre {
     min-height: 0;
   }
 
+  .page-hero {
+    gap: 26px;
+  }
+
+  .page-hero h1 {
+    font-size: clamp(2.15rem, 7vw, 3.8rem);
+    line-height: 1.05;
+  }
+
+  .section-head h2 {
+    font-size: clamp(1.9rem, 6vw, 3rem);
+    line-height: 1.08;
+  }
+
+  .timeline pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
   .proof-grid,
   .loop-runway {
     grid-template-columns: 1fr;
@@ -941,16 +965,17 @@ pre {
 
 @media (max-width: 480px) {
   .shell {
-    width: min(100% - 24px, 1120px);
+    width: min(calc(100% - 24px), 1120px);
   }
 
   h1 {
     font-size: 2rem;
-    letter-spacing: -0.035em;
+    letter-spacing: -0.02em;
   }
 
   .hero-split h1 {
-    font-size: 2.42rem;
+    font-size: 2.34rem;
+    letter-spacing: -0.028em;
   }
 
   .nav-links {
@@ -996,9 +1021,13 @@ pre {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .hero-metrics div:last-child,
-  .scale-ladder span:last-child {
+  .hero-metrics div:last-child {
     grid-column: 1 / -1;
+  }
+
+  .step {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .proof-grid {
