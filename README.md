@@ -10,17 +10,14 @@
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/vshulcz/mpc-autoscaler/badge)](https://securityscorecards.dev/viewer/?uri=github.com/vshulcz/mpc-autoscaler)
 [![Codecov](https://codecov.io/gh/vshulcz/mpc-autoscaler/branch/main/graph/badge.svg)](https://codecov.io/gh/vshulcz/mpc-autoscaler)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/vshulcz/mpc-autoscaler?style=social)](https://github.com/vshulcz/mpc-autoscaler/stargazers)
 ![Go](https://img.shields.io/badge/go-1.25-00ADD8?logo=go&logoColor=white)
 ![Python](https://img.shields.io/badge/python-3.11%2B-3776AB?logo=python&logoColor=white)
 ![Helm](https://img.shields.io/badge/helm-chart-0F1689?logo=helm&logoColor=white)
 ![Container](https://img.shields.io/badge/GHCR-toy--load-181717?logo=github&logoColor=white)
 
-Predictive autoscaling playground for Kubernetes: a controllable Go workload, Helm deployment, live MPC controller, offline simulator, and reproducible experiment tooling.
+Research repository for controlled Kubernetes autoscaling experiments: a controllable Go workload, Helm deployment, HPA baseline, MPC controller, offline simulator, and reproducibility tooling.
 
 The core question: can a small Model Predictive Control loop anticipate demand and scale more smoothly than reactive HPA baselines under step, spike, and seasonal traffic?
-
-![Representative HPA versus Hybrid-SA spike result](site/assets/figures/hpa-vs-mpc-spike.svg)
 
 ## Current Status
 
@@ -35,7 +32,7 @@ In one tracked 200 rps spike pair, Hybrid-SA MPC showed lower burst p95 latency 
 | Public roadmap | <https://github.com/users/vshulcz/projects/2> |
 | Q&A for setup and reproducibility | <https://github.com/vshulcz/mpc-autoscaler/discussions/77> |
 
-If this helps your Kubernetes autoscaling or research-software work, stars and watches help other contributors find it. Methodology feedback is even more useful.
+Methodology feedback, baseline suggestions, and reproduction reports are welcome.
 
 Docs site: <https://vshulcz.github.io/mpc-autoscaler/>.
 
@@ -56,7 +53,7 @@ Representative tracked spike runs, not aggregate benchmark results:
 
 See [`docs/RESULTS.md`](docs/RESULTS.md), [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md), and [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md) before interpreting the numbers.
 
-## Highlights
+## Repository Contents
 
 - controllable HTTP workload with Prometheus metrics, Helm chart, raw manifests, and GHCR release image;
 - online MPC controller that can run in dry-run mode or apply Kubernetes scale decisions;
@@ -432,7 +429,7 @@ See `ROADMAP.md` for project directions and `CONTRIBUTING.md` before opening a p
 
 Current small-PR queue: [Contributor sprint discussion](https://github.com/vshulcz/mpc-autoscaler/discussions/94).
 
-Contributor ladder:
+Contribution scope:
 
 | Time | Good first contribution |
 | --- | --- |

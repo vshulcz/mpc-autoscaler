@@ -13,7 +13,7 @@
       <nav class="nav-links" aria-label="Primary">
         <a href="architecture.html">Architecture</a>
         <a href="reproducibility.html">Reproducibility</a>
-        <a href="experiments.html">Experiment Gallery</a>
+        <a href="experiments.html">Evidence</a>
         <a href="https://github.com/vshulcz/mpc-autoscaler/discussions/categories/q-a">Q&amp;A</a>
         <a href="https://github.com/vshulcz/mpc-autoscaler">GitHub</a>
       </nav>
@@ -24,13 +24,13 @@
         <div class="hero-copy">
           <div class="kicker-row">
             <div class="eyebrow">Kubernetes Autoscaling Research</div>
-            <span class="release-pill">public v0.1.0</span>
+            <span class="release-pill">research software</span>
           </div>
-          <h1>Research playground for predictive autoscaling.</h1>
-          <p class="lead">Controlled Go workload, Helm deployment, Prometheus metrics, HPA baseline, MPC controller, offline simulator, and documented limitations.</p>
+          <h1>Controlled experiments for reactive and predictive scaling.</h1>
+          <p class="lead">A Go workload, Helm deployment, Prometheus metrics, HPA baseline, MPC controller, offline simulator, methodology notes, and limitations.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="experiments.html">View evidence</a>
-            <a class="button" href="https://github.com/vshulcz/mpc-autoscaler/discussions/categories/q-a">Ask Q&amp;A</a>
+            <a class="button button-primary" href="experiments.html">Evidence</a>
+            <a class="button" href="https://github.com/vshulcz/mpc-autoscaler/discussions/categories/q-a">Q&amp;A</a>
             <a class="button" href="https://github.com/vshulcz/mpc-autoscaler">View repository</a>
           </div>
           <div class="chips" aria-label="Project badges">
@@ -39,8 +39,8 @@
             <span class="chip">GHCR image</span>
             <span class="chip">Apache-2.0</span>
           </div>
-          <div class="proof-grid" aria-label="Project proof points">
-            <span><strong>One repo</strong> service, runners, analysis, release automation.</span>
+          <div class="proof-grid" aria-label="Project notes">
+            <span><strong>One repository</strong> service, runners, analysis, release automation.</span>
             <span><strong>Curated evidence</strong> figures link back to source paths.</span>
             <span><strong>Public caveats</strong> methodology and limitations are documented.</span>
           </div>
@@ -94,7 +94,7 @@
       <section class="shell section">
         <div class="section-head section-head-row">
           <div>
-            <div class="eyebrow">Project Surface</div>
+            <div class="eyebrow">Repository</div>
             <h2>Complete experiment loop.</h2>
           </div>
           <p>Every path supports one research question: what should scale, when, and under which assumptions?</p>
@@ -102,22 +102,22 @@
         <div class="feature-bento">
           <article class="card feature-card feature-wide">
             <span class="card-tag">01</span>
-            <h3>Visible control loop</h3>
+            <h3>Control loop</h3>
             <p>Follow demand through toy-load, Prometheus metrics, HPA, MPC, and saved analysis artifacts.</p>
             <div class="mini-map" aria-hidden="true"><span>load</span><span>service</span><span>metrics</span><span>policy</span><span>target</span></div>
             <p><a href="architecture.html">Open system view</a></p>
           </article>
           <article class="card feature-card">
             <span class="card-tag">02</span>
-            <h3>Reproducible tiers</h3>
+            <h3>Reproduction tiers</h3>
             <p>Start local, move to offline simulation, then rebuild saved evidence or live cluster runs.</p>
             <p><a href="reproducibility.html">Run the tiers</a></p>
           </article>
           <article class="card feature-card">
             <span class="card-tag">03</span>
-            <h3>Curated evidence</h3>
+            <h3>Evidence policy</h3>
             <p>Charts point to committed sources and evidence roots; bulky raw artifacts stay out of Git.</p>
-            <p><a href="experiments.html">View gallery</a></p>
+            <p><a href="experiments.html">View evidence</a></p>
           </article>
           <article class="card feature-card feature-wide feature-release">
             <span class="card-tag">04</span>
@@ -127,7 +127,7 @@
           </article>
           <article class="card feature-card">
             <span class="card-tag">05</span>
-            <h3>Contributor credit</h3>
+            <h3>External contributions</h3>
             <p>External PRs have shipped release verification docs, toy-load examples, Helm/loadgen references, trace validation, and support docs.</p>
             <p><a href="https://github.com/vshulcz/mpc-autoscaler#external-contributors">See contributors</a></p>
           </article>
