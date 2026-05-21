@@ -57,10 +57,45 @@ Unknown paths return `404`. Unsupported methods return `405` with `Allow: GET`.
 Integer values outside bounds are clamped. Invalid integer or float formats
 return `400`.
 
-Example:
+## Curl Examples
+
+Start `toy-load` first:
 
 ```bash
-curl "http://localhost:9090/work?cpu_ms=25&sleep_ms=10&jitter_ms=5&payload_bytes=128&err_rate=0.01&id=demo"
+go run ./cmd/toy-load
+```
+
+Check liveness and metrics endpoints:
+
+```bash
+curl -i http://localhost:9090/healthz
+curl -i http://localhost:9090/metrics
+```
+
+`/healthz` returns HTTP `200` with body `ok`. `/metrics` returns HTTP `200`
+with Prometheus text output.
+
+Run common `/work` scenarios:
+
+```bash
+curl -i "http://localhost:9090/work?id=baseline"
+curl -i "http://localhost:9090/work?cpu_ms=250&id=cpu-heavy"
+curl -i "http://localhost:9090/work?sleep_ms=50&jitter_ms=100&id=jitter"
+curl -i "http://localhost:9090/work?err_rate=1&id=forced-error"
+```
+
+The baseline, CPU-heavy, and jitter requests return HTTP `200` with a
+plain-text response shaped like `work: cpu_ms=250 sleep_ms=0 jitter_ms=0`.
+The forced error-rate request returns HTTP `500` with body `error`.
+
+Generate a small burst for autoscaling and metrics checks:
+
+```bash
+for i in $(seq 1 10); do
+  curl -s "http://localhost:9090/work?cpu_ms=100&sleep_ms=25&id=burst-${i}" >/dev/null
+done
+
+curl -s http://localhost:9090/metrics | grep '^toy_http_requests_total'
 ```
 
 ## Configuration
