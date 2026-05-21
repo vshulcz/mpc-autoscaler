@@ -23,7 +23,7 @@ Missing production factors include:
 
 ## Limited Public Result Scope
 
-`docs/RESULTS.md` currently exposes a representative spike comparison, not a full aggregate benchmark suite.
+`docs/RESULTS.md` currently exposes a representative spike comparison, not a full aggregate benchmark suite. `docs/BENCHMARK_MATRIX.md` makes this explicit by separating indexed evidence coverage from published numeric cells.
 
 The current snapshot is useful for explaining the workflow and inviting review. It should not be read as a general claim that MPC outperforms HPA.
 

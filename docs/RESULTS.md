@@ -17,6 +17,10 @@ For this tracked pair, Hybrid-SA MPC lowers burst p95 latency by about 38%, p99 
 
 Reactive HPA waits for measured resource pressure. The MPC path forecasts short-horizon demand and chooses a replica target before the spike fully drains through the system. The interesting question is not whether MPC can scale more, but whether it can scale earlier with fewer latency spikes and reproducible evidence.
 
+## Benchmark Matrix
+
+The broader public matrix lives in [`docs/BENCHMARK_MATRIX.md`](BENCHMARK_MATRIX.md). It lists which controller/scenario cells are only indexed evidence roots and which cells have published numeric values. This avoids turning unavailable aggregate data into an implied benchmark claim.
+
 ## What Is Still Open
 
 | Gap | Why it matters | Useful contribution |

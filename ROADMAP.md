@@ -4,11 +4,19 @@ This project is useful for people interested in Kubernetes autoscaling, predicti
 
 ## Near-Term Directions
 
-- Publish compact result figures and a short experiment narrative in repository docs.
+- Expand the benchmark matrix from indexed evidence roots into published numeric cells where summaries can be rebuilt.
 - Add more offline policy comparators beside HPA and the current MPC variants.
 - Add a minimal local demo that exercises the service, metrics, and offline analysis without a cluster.
 - Improve dashboard panels for controller decisions, replica lag, and saturation signals.
 - Add stricter static checks for Python once the dependency footprint is stable.
+
+## Practitioner Roadmap
+
+| Milestone | Outcome | Why it matters |
+| --- | --- | --- |
+| `v0.2.0` | Stable public interface docs for workload endpoints, metrics, trace CSVs, CLIs, and evidence aliases. | Readers can script against documented surfaces instead of reverse-engineering internals. |
+| `thesis-reproducibility` | Benchmark matrix with rebuilt HPA, Hybrid-SA, and comparator cells where archives are available. | Result discussion moves beyond one representative spike pair without overclaiming. |
+| `v0.3.0` | Cluster-neutral quick demo and failure-mode checks for missing metrics, solver fallback, and dry-run recommendations. | Practitioners can evaluate safety boundaries before trying live apply mode. |
 
 ## Good First Contributions
 

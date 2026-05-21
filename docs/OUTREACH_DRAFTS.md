@@ -29,6 +29,8 @@ This is not a production autoscaler and not a claim that MPC is generally better
 Current snapshot: on one representative 200 rps spike pair, Hybrid-SA MPC showed lower p95/p99 latency than an HPA60 baseline while both kept 100% success. Details, caveats, and exact paths are documented here:
 
 - Results: https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/RESULTS.md
+- Benchmark matrix: https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/BENCHMARK_MATRIX.md
+- Ten-second demo: https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/DEMO.md
 - Methodology: https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/METHODOLOGY.md
 - Limitations: https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/LIMITATIONS.md
 

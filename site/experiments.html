@@ -64,6 +64,28 @@
           <img src="assets/figures/hpa-vs-mpc-spike.svg" alt="Representative HPA versus Hybrid-SA spike result">
           <figcaption class="figure-caption">Representative tracked spike pair: Hybrid-SA MPC shows lower burst p95/p99/max latency while both runs keep 100% success. Full caveats and run paths are in <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/RESULTS.md">docs/RESULTS.md</a>.</figcaption>
         </figure>
+        <figure class="figure gallery-card">
+          <img src="assets/figures/ten-second-demo.svg" alt="Ten-second autoscaling demo">
+          <figcaption class="figure-caption">Fast reader path: traffic profile, metrics, HPA/MPC policy comparison, benchmark matrix, and caveats in one view.</figcaption>
+        </figure>
+      </section>
+
+      <section class="section panel">
+        <h2>Benchmark Matrix</h2>
+        <p>Published numeric cells stay separate from indexed evidence roots. This makes the current scope useful without implying a full aggregate benchmark.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Controller</th><th>Step</th><th>Spike</th><th>Seasonality</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Controller">CPU HPA60 baseline</td><td data-label="Step">Indexed</td><td data-label="Spike">Published numeric pair</td><td data-label="Seasonality">Indexed</td><td data-label="Status">Primary reactive baseline.</td></tr>
+              <tr><td data-label="Controller">Hybrid-SA MPC</td><td data-label="Step">Indexed</td><td data-label="Spike">Indexed; supporting run published</td><td data-label="Seasonality">Indexed</td><td data-label="Status">Primary tuned predictive controller.</td></tr>
+              <tr><td data-label="Controller">Proxy-HPA plus safety</td><td data-label="Step">Indexed</td><td data-label="Spike">Indexed</td><td data-label="Seasonality">Indexed</td><td data-label="Status">Comparator summary still needed.</td></tr>
+              <tr><td data-label="Controller">No-QP reactive policy</td><td data-label="Step">Indexed</td><td data-label="Spike">Indexed</td><td data-label="Seasonality">Indexed</td><td data-label="Status">Comparator summary still needed.</td></tr>
+              <tr><td data-label="Controller">Vanilla HPA80</td><td data-label="Step">Indexed</td><td data-label="Spike">Indexed</td><td data-label="Seasonality">Indexed</td><td data-label="Status">Comparator summary still needed.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Full rules and rebuild path: <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/BENCHMARK_MATRIX.md">docs/BENCHMARK_MATRIX.md</a>.</p>
       </section>
 
       <section class="section panel">
@@ -84,6 +106,6 @@
       </section>
     </main>
 
-    <footer class="shell footer">Artifact policy: <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/experiments/MANIFEST.md">experiments/MANIFEST.md</a>. Evidence questions: <a href="https://github.com/vshulcz/mpc-autoscaler/discussions/categories/q-a">Q&amp;A Discussions</a>.</footer>
+    <footer class="shell footer">Artifact policy: <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/experiments/MANIFEST.md">experiments/MANIFEST.md</a>. Benchmark matrix: <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/BENCHMARK_MATRIX.md">docs/BENCHMARK_MATRIX.md</a>. Evidence questions: <a href="https://github.com/vshulcz/mpc-autoscaler/discussions/categories/q-a">Q&amp;A Discussions</a>.</footer>
   </body>
 </html>

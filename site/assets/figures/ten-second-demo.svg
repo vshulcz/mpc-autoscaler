@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" role="img" aria-labelledby="title desc">
+  <title id="title">Ten-second autoscaling demo</title>
+  <desc id="desc">Traffic spike flows through toy-load metrics, HPA and MPC policies, then evidence tables with caveats.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#07101f"/>
+      <stop offset="0.55" stop-color="#0d1730"/>
+      <stop offset="1" stop-color="#160f24"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" x2="1">
+      <stop offset="0" stop-color="#64c7ff"/>
+      <stop offset="1" stop-color="#70e0b2"/>
+    </linearGradient>
+    <linearGradient id="pink" x1="0" x2="1">
+      <stop offset="0" stop-color="#ff7ab6"/>
+      <stop offset="1" stop-color="#9d7cff"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="640" fill="url(#bg)"/>
+  <g opacity="0.22">
+    <path d="M0 108H1200M0 216H1200M0 324H1200M0 432H1200M0 540H1200" stroke="#28405f"/>
+    <path d="M120 0V640M240 0V640M360 0V640M480 0V640M600 0V640M720 0V640M840 0V640M960 0V640M1080 0V640" stroke="#28405f"/>
+  </g>
+  <text x="64" y="82" fill="#edf4ff" font-family="Inter, Segoe UI, sans-serif" font-size="44" font-weight="800">10-second autoscaling loop</text>
+  <text x="66" y="118" fill="#a7b5cc" font-family="Inter, Segoe UI, sans-serif" font-size="18">Controlled load, metrics, HPA baseline, MPC controller, evidence paths, caveats.</text>
+
+  <g transform="translate(60 170)">
+    <rect width="245" height="310" rx="26" fill="#101b31" stroke="#315072"/>
+    <text x="28" y="46" fill="#70e0b2" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="800" letter-spacing="2">01 LOAD</text>
+    <text x="28" y="82" fill="#edf4ff" font-family="Inter, Segoe UI, sans-serif" font-size="25" font-weight="800">spike / step</text>
+    <path d="M28 232 C70 232 92 232 112 210 C136 184 136 105 164 92 C190 80 206 152 218 220" fill="none" stroke="#64c7ff" stroke-width="8" stroke-linecap="round" filter="url(#glow)">
+      <animate attributeName="stroke-dasharray" values="0 360;360 0;360 0" dur="10s" repeatCount="indefinite"/>
+    </path>
+    <circle cx="164" cy="92" r="9" fill="#edf4ff">
+      <animate attributeName="r" values="6;11;6" dur="1.4s" begin="1s" repeatCount="indefinite"/>
+    </circle>
+    <text x="28" y="276" fill="#a7b5cc" font-family="Inter, Segoe UI, sans-serif" font-size="16">synthetic traffic profile</text>
+  </g>
+
+  <path d="M330 325H410" stroke="url(#blue)" stroke-width="5" stroke-linecap="round"/>
+  <path d="M396 311L414 325L396 339" fill="none" stroke="#70e0b2" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g transform="translate(430 170)">
+    <rect width="245" height="310" rx="26" fill="#101b31" stroke="#315072"/>
+    <text x="28" y="46" fill="#70e0b2" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="800" letter-spacing="2">02 METRICS</text>
+    <text x="28" y="82" fill="#edf4ff" font-family="Inter, Segoe UI, sans-serif" font-size="25" font-weight="800">toy-load</text>
+    <rect x="28" y="118" width="189" height="34" rx="9" fill="#0a1324" stroke="#26435f"/>
+    <text x="42" y="141" fill="#a7b5cc" font-family="SFMono-Regular, Menlo, monospace" font-size="14">/work latency</text>
+    <rect x="28" y="166" width="189" height="34" rx="9" fill="#0a1324" stroke="#26435f"/>
+    <text x="42" y="189" fill="#a7b5cc" font-family="SFMono-Regular, Menlo, monospace" font-size="14">request rate</text>
+    <rect x="28" y="214" width="189" height="34" rx="9" fill="#0a1324" stroke="#26435f"/>
+    <text x="42" y="237" fill="#a7b5cc" font-family="SFMono-Regular, Menlo, monospace" font-size="14">in-flight</text>
+    <circle cx="198" cy="135" r="5" fill="#64c7ff">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="198" cy="183" r="5" fill="#70e0b2">
+      <animate attributeName="opacity" values="1;0.3;1" dur="1.4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="198" cy="231" r="5" fill="#ff7ab6">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="1.6s" repeatCount="indefinite"/>
+    </circle>
+    <text x="28" y="276" fill="#a7b5cc" font-family="Inter, Segoe UI, sans-serif" font-size="16">Prometheus signal path</text>
+  </g>
+
+  <path d="M700 325H780" stroke="url(#blue)" stroke-width="5" stroke-linecap="round"/>
+  <path d="M766 311L784 325L766 339" fill="none" stroke="#70e0b2" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g transform="translate(800 170)">
+    <rect width="340" height="310" rx="26" fill="#101b31" stroke="#315072"/>
+    <text x="28" y="46" fill="#70e0b2" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="800" letter-spacing="2">03 POLICY</text>
+    <text x="28" y="82" fill="#edf4ff" font-family="Inter, Segoe UI, sans-serif" font-size="25" font-weight="800">HPA vs MPC</text>
+    <path d="M34 224 C92 224 122 224 150 210 C184 194 210 138 292 110" fill="none" stroke="url(#pink)" stroke-width="7" stroke-linecap="round"/>
+    <path d="M34 224 C100 224 132 204 160 160 C190 116 230 96 292 92" fill="none" stroke="url(#blue)" stroke-width="7" stroke-linecap="round"/>
+    <text x="34" y="262" fill="#a7b5cc" font-family="Inter, Segoe UI, sans-serif" font-size="16">HPA reacts after pressure</text>
+    <text x="34" y="286" fill="#a7b5cc" font-family="Inter, Segoe UI, sans-serif" font-size="16">MPC forecasts short horizon</text>
+    <circle cx="292" cy="92" r="8" fill="#70e0b2" filter="url(#glow)">
+      <animate attributeName="cy" values="112;92;112" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <g transform="translate(180 525)">
+    <rect width="840" height="74" rx="22" fill="#0b1425" stroke="#28405f"/>
+    <text x="28" y="31" fill="#edf4ff" font-family="Inter, Segoe UI, sans-serif" font-size="18" font-weight="800">Current public spike pair</text>
+    <text x="28" y="56" fill="#a7b5cc" font-family="Inter, Segoe UI, sans-serif" font-size="16">HPA p95 85.175 ms, MPC p95 52.483 ms, both 100% success. Single tracked pair, not production proof.</text>
+    <rect x="642" y="18" width="166" height="38" rx="19" fill="#102f2a" stroke="#70e0b2"/>
+    <text x="670" y="43" fill="#70e0b2" font-family="Inter, Segoe UI, sans-serif" font-size="15" font-weight="800">evidence paths</text>
+  </g>
+</svg>

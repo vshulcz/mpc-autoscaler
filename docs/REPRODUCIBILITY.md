@@ -78,6 +78,8 @@ PYTHONPATH=analysis python3 -m mpc_autoscaler_analysis.cli.summarize_costs \
 
 See `experiments/MANIFEST.md` for canonical evidence roots and export commands.
 
+The human-readable coverage table is `docs/BENCHMARK_MATRIX.md`. It should be updated only from committed summaries or evidence roots listed in `experiments/EVIDENCE_MAP.csv`.
+
 ## Tier 4: Live Kubernetes Experiments
 
 Live runs require a Kubernetes cluster, `kubectl`, Helm, Prometheus access, and a deployed `toy-load` service.

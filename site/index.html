@@ -30,6 +30,7 @@
           <p class="lead">A Go workload, Helm deployment, Prometheus metrics, HPA baseline, MPC controller, offline simulator, methodology notes, and limitations.</p>
           <div class="hero-actions">
             <a class="button button-primary" href="experiments.html">Evidence</a>
+            <a class="button" href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/BENCHMARK_MATRIX.md">Benchmark matrix</a>
             <a class="button" href="https://github.com/vshulcz/mpc-autoscaler/discussions/categories/q-a">Q&amp;A</a>
             <a class="button" href="https://github.com/vshulcz/mpc-autoscaler"><svg class="github-mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.62 7.62 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg><span>View repository</span></a>
           </div>
@@ -89,6 +90,56 @@
         <div class="runway-item"><span>03</span><strong>Metrics</strong><small>Prometheus</small></div>
         <div class="runway-item"><span>04</span><strong>Policy</strong><small>HPA / MPC</small></div>
         <div class="runway-item"><span>05</span><strong>Evidence</strong><small>figures / docs</small></div>
+      </section>
+
+      <section class="shell section">
+        <div class="section-head section-head-row">
+          <div>
+            <div class="eyebrow">Practitioner Value</div>
+            <h2>Useful as an autoscaling lab, not a production replacement.</h2>
+          </div>
+          <p>Use it to test workload knobs, metrics, HPA behavior, predictive control ideas, and evidence packaging.</p>
+        </div>
+        <div class="grid grid-3">
+          <article class="card">
+            <span class="card-tag">Use</span>
+            <h3>Inspectable workload</h3>
+            <p><code>toy-load</code> exposes controllable CPU, sleep, jitter, payload, error-rate, health, readiness, and Prometheus endpoints.</p>
+          </article>
+          <article class="card">
+            <span class="card-tag">Compare</span>
+            <h3>Policy playground</h3>
+            <p>Run reactive HPA-style baselines beside MPC recommendations, then compare p95, p99, success, and replica movement.</p>
+          </article>
+          <article class="card">
+            <span class="card-tag">Trust</span>
+            <h3>Visible caveats</h3>
+            <p>Published claims point to exact evidence paths. Missing benchmark cells stay visible instead of being implied.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="shell section proof-section">
+        <div class="section-head section-head-row">
+          <div>
+            <div class="eyebrow">Ten-Second Demo</div>
+            <h2>One visual path from traffic spike to evidence.</h2>
+          </div>
+          <p>The demo explains repository value without claiming production readiness.</p>
+        </div>
+        <div class="grid grid-2">
+          <figure class="figure showcase-card">
+            <img src="assets/figures/ten-second-demo.svg" alt="Ten-second autoscaling loop demo">
+            <figcaption class="figure-caption">Traffic profile, workload metrics, HPA and MPC policies, then evidence paths and caveats.</figcaption>
+          </figure>
+          <article class="card proof-card">
+            <span class="card-tag">Reader path</span>
+            <h3>Start with the matrix.</h3>
+            <p>The benchmark matrix separates public numeric values from indexed evidence roots, so the current spike pair stays honest.</p>
+            <p><a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/DEMO.md">Open demo narrative</a></p>
+            <p><a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/API.md">Open public interface</a></p>
+          </article>
+        </div>
       </section>
 
       <section class="shell section">
@@ -164,7 +215,7 @@
     </main>
 
     <footer class="shell footer">
-      Built from repository sources. Main docs: <a href="https://github.com/vshulcz/mpc-autoscaler/tree/main/docs">docs/</a>. Release: <a href="https://github.com/vshulcz/mpc-autoscaler/releases/tag/v0.1.0">v0.1.0</a>. <a href="https://github.com/vshulcz/mpc-autoscaler/discussions/categories/q-a">Q&amp;A</a>. <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/SECURITY.md">Security</a>.
+      Built from repository sources. Main docs: <a href="https://github.com/vshulcz/mpc-autoscaler/tree/main/docs">docs/</a>. Matrix: <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/BENCHMARK_MATRIX.md">benchmark</a>. API: <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/API.md">public interface</a>. Release: <a href="https://github.com/vshulcz/mpc-autoscaler/releases/tag/v0.1.0">v0.1.0</a>. <a href="https://github.com/vshulcz/mpc-autoscaler/discussions/categories/q-a">Q&amp;A</a>. <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/SECURITY.md">Security</a>.
     </footer>
   </body>
 </html>

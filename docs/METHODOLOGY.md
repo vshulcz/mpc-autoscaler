@@ -66,6 +66,8 @@ Do not use it as:
 - production guidance for Kubernetes clusters;
 - a claim about arbitrary workloads.
 
+The public benchmark coverage table lives in `docs/BENCHMARK_MATRIX.md`. A cell can be marked as published only when it has numeric values, exact evidence paths, and caveats. Evidence-root aliases alone are useful for reproducibility planning, but they are not result claims.
+
 ## Reproduction Tiers
 
 | Tier | Requires cluster | Purpose |

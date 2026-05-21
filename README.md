@@ -26,6 +26,9 @@ In one tracked 200 rps spike pair, Hybrid-SA MPC showed lower burst p95 latency 
 | What you can inspect | Path |
 | --- | --- |
 | Results snapshot and caveats | [`docs/RESULTS.md`](docs/RESULTS.md) |
+| Benchmark matrix | [`docs/BENCHMARK_MATRIX.md`](docs/BENCHMARK_MATRIX.md) |
+| Ten-second demo narrative | [`docs/DEMO.md`](docs/DEMO.md) |
+| Public interface | [`docs/API.md`](docs/API.md) |
 | Methodology | [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md) |
 | Known limitations | [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md) |
 | Static docs site | <https://vshulcz.github.io/mpc-autoscaler/> |
@@ -53,6 +56,14 @@ Representative tracked spike runs, not aggregate benchmark results:
 
 See [`docs/RESULTS.md`](docs/RESULTS.md), [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md), and [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md) before interpreting the numbers.
 
+For broader coverage, see [`docs/BENCHMARK_MATRIX.md`](docs/BENCHMARK_MATRIX.md). It separates indexed evidence roots from published numeric claims so missing cells stay visible.
+
+## Ten-Second Demo
+
+![Ten-second autoscaling loop](site/assets/figures/ten-second-demo.svg)
+
+The short version: controlled traffic hits `toy-load`, Prometheus exposes service metrics, HPA reacts to measured pressure, MPC forecasts short-horizon demand, and analysis tools compare latency, success, and replica behavior. Full storyboard: [`docs/DEMO.md`](docs/DEMO.md).
+
 ## Repository Contents
 
 - controllable HTTP workload with Prometheus metrics, Helm chart, raw manifests, and GHCR release image;
@@ -77,6 +88,23 @@ Supported experiment scenarios:
 - `step`: sustained increase in load.
 - `spike`: short high-intensity burst.
 - `seasonality`: smooth sinusoidal variation.
+
+## For Practitioners
+
+Use this repository when you need:
+
+- a small Kubernetes autoscaling lab that can be inspected end to end;
+- a controllable workload for testing metrics, HPA behavior, dashboards, and load profiles;
+- a reproducible comparison pattern for reactive and predictive scaling policies;
+- examples of evidence packaging, caveats, release automation, and public research-software maintenance.
+
+Do not use it as:
+
+- a drop-in production autoscaler;
+- proof that MPC is generally better than HPA;
+- tuning advice for arbitrary clusters or workloads.
+
+Public contracts and scripting surfaces are documented in [`docs/API.md`](docs/API.md).
 
 ## Architecture
 
