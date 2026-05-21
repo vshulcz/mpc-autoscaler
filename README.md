@@ -475,6 +475,7 @@ Thanks to contributors whose pull requests have shipped in this repository:
 | [@dicnunz](https://github.com/dicnunz) | Release checksum verification docs in #25. |
 | [@tatakaisun](https://github.com/tatakaisun) | toy-load examples, environment docs, Helm/loadgen references, trace sample docs, and trace CSV validator work in #37-#44. |
 | [@ayushkli86](https://github.com/ayushkli86) | support guide, docs-only checklist, labeler docs, and security footer link in #57-#60. |
+| [@msaqibatifj](https://github.com/msaqibatifj) | toy-load HTTP status code reference in #95. |
 
 Merged external PRs are credited here and in release notes when they affect a release.
 
