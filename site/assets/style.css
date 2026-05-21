@@ -1,18 +1,18 @@
 :root {
   color-scheme: dark;
-  --bg: #0b1020;
-  --panel: #121a2d;
-  --panel-2: #17223a;
-  --text: #ecf3ff;
-  --muted: #9fb0cd;
-  --line: #283756;
-  --blue: #5cc8ff;
-  --green: #60e6a8;
+  --bg: #080d18;
+  --panel: #101827;
+  --panel-2: #142035;
+  --text: #edf4ff;
+  --muted: #a7b5cc;
+  --line: #24334d;
+  --blue: #64c7ff;
+  --green: #70e0b2;
   --orange: #ffb86b;
-  --pink: #ff6ea8;
+  --pink: #e989b5;
   --violet: #9d7cff;
-  --glass: rgba(12, 18, 34, 0.72);
-  --shadow: 0 28px 90px rgba(0, 0, 0, 0.42);
+  --glass: rgba(12, 18, 32, 0.78);
+  --shadow: 0 20px 56px rgba(0, 0, 0, 0.34);
 }
 
 * {
@@ -23,10 +23,9 @@ body {
   margin: 0;
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background:
-    radial-gradient(circle at 18% -10%, rgba(92, 200, 255, 0.24), transparent 34rem),
-    radial-gradient(circle at 86% 6%, rgba(157, 124, 255, 0.2), transparent 32rem),
-    radial-gradient(circle at 78% 58%, rgba(255, 110, 168, 0.1), transparent 34rem),
-    linear-gradient(140deg, #060b16 0%, #0a1020 42%, #130b1d 100%),
+    radial-gradient(circle at 18% -8%, rgba(92, 200, 255, 0.16), transparent 32rem),
+    radial-gradient(circle at 88% 8%, rgba(157, 124, 255, 0.12), transparent 30rem),
+    linear-gradient(140deg, #060b14 0%, #09111f 50%, #100d1b 100%),
     var(--bg);
   color: var(--text);
   line-height: 1.6;
@@ -39,9 +38,9 @@ body::before {
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px),
-    radial-gradient(circle at 50% 20%, rgba(92, 200, 255, 0.16), transparent 52%);
+    linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    radial-gradient(circle at 50% 20%, rgba(92, 200, 255, 0.08), transparent 52%);
   background-size: 72px 72px, 72px 72px, auto;
   mask-image: linear-gradient(to bottom, black 0 70%, transparent 100%);
 }
@@ -72,9 +71,9 @@ a:hover {
   padding: 13px 18px;
   border: 1px solid rgba(92, 200, 255, 0.16);
   border-radius: 999px;
-  background: linear-gradient(135deg, rgba(11, 18, 34, 0.86), rgba(13, 18, 35, 0.62));
-  box-shadow: 0 18px 70px rgba(0, 0, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(18px);
+  background: linear-gradient(135deg, rgba(11, 18, 34, 0.9), rgba(13, 18, 35, 0.78));
+  box-shadow: 0 14px 44px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(14px);
 }
 
 .brand {
@@ -91,7 +90,7 @@ a:hover {
   margin-right: 9px;
   border-radius: 999px;
   background: linear-gradient(135deg, var(--green), var(--blue));
-  box-shadow: 0 0 22px rgba(96, 230, 168, 0.78);
+  box-shadow: 0 0 14px rgba(96, 230, 168, 0.42);
 }
 
 .nav-links {
@@ -102,19 +101,19 @@ a:hover {
 }
 
 .hero {
-  padding: 86px 0 52px;
+  padding: 78px 0 48px;
 }
 
 .hero-split {
   display: grid;
-  grid-template-columns: minmax(0, 1.08fr) minmax(360px, 520px);
-  gap: 56px;
+  grid-template-columns: minmax(0, 1.05fr) minmax(360px, 500px);
+  gap: 52px;
   align-items: center;
 }
 
 .hero-studio {
-  padding-top: 120px;
-  padding-bottom: 84px;
+  padding-top: 104px;
+  padding-bottom: 72px;
 }
 
 .hero-copy {
@@ -123,9 +122,9 @@ a:hover {
 
 .eyebrow {
   color: var(--green);
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 800;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -141,16 +140,16 @@ h1 {
   max-width: 860px;
   margin-top: 14px;
   color: var(--text);
-  font-size: clamp(2.8rem, 8vw, 6.6rem);
-  text-shadow: 0 24px 70px rgba(92, 200, 255, 0.12);
+  font-size: clamp(2.6rem, 6.8vw, 5.4rem);
+  text-shadow: 0 18px 44px rgba(92, 200, 255, 0.08);
 }
 
 .hero-split h1 {
   max-width: 720px;
-  font-size: clamp(3.2rem, 6vw, 5.8rem);
-  line-height: 0.98;
-  letter-spacing: -0.038em;
-  background: linear-gradient(100deg, #ffffff 0%, #e8f2ff 35%, #80ddff 68%, #ff93c0 100%);
+  font-size: clamp(3rem, 5.2vw, 5rem);
+  line-height: 1;
+  letter-spacing: -0.032em;
+  background: linear-gradient(100deg, #ffffff 0%, #e8f2ff 44%, #8edcff 78%, #e6a1c2 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -158,7 +157,7 @@ h1 {
 
 h2 {
   margin-bottom: 18px;
-  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-size: clamp(1.9rem, 3.2vw, 3rem);
 }
 
 h3 {
@@ -173,8 +172,8 @@ p {
 
 .lead {
   max-width: 760px;
-  margin-top: 22px;
-  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  margin-top: 20px;
+  font-size: clamp(1.04rem, 1.6vw, 1.24rem);
 }
 
 .kicker-row,
@@ -203,15 +202,16 @@ p {
   border: 1px solid rgba(92, 200, 255, 0.2);
   border-radius: 999px;
   background: rgba(10, 16, 30, 0.68);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 .release-pill {
-  padding: 6px 10px;
+  padding: 6px 11px;
   color: var(--blue);
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.04em;
+  line-height: 1;
 }
 
 .hero-actions {
@@ -228,14 +228,14 @@ p {
   min-height: 44px;
   padding: 0 18px;
   color: var(--text);
-  font-weight: 850;
+  font-weight: 780;
 }
 
 .button-primary {
   border-color: rgba(96, 230, 168, 0.36);
-  background: linear-gradient(135deg, rgba(96, 230, 168, 0.92), rgba(92, 200, 255, 0.92));
+  background: linear-gradient(135deg, rgba(112, 224, 178, 0.92), rgba(100, 199, 255, 0.88));
   color: #06101c;
-  box-shadow: 0 18px 50px rgba(92, 200, 255, 0.22);
+  box-shadow: 0 14px 34px rgba(92, 200, 255, 0.18);
 }
 
 .chips {
@@ -248,10 +248,10 @@ p {
 .chip {
   border: 1px solid var(--line);
   border-radius: 999px;
-  padding: 8px 12px;
-  background: rgba(18, 26, 45, 0.72);
+  padding: 7px 11px;
+  background: rgba(18, 26, 45, 0.58);
   color: var(--text);
-  font-size: 0.9rem;
+  font-size: 0.86rem;
 }
 
 .proof-grid {
@@ -263,10 +263,10 @@ p {
 
 .proof-grid span {
   border: 1px solid rgba(92, 200, 255, 0.15);
-  border-radius: 18px;
+  border-radius: 16px;
   padding: 14px;
   color: var(--muted);
-  background: rgba(8, 13, 25, 0.54);
+  background: rgba(8, 13, 25, 0.46);
 }
 
 .proof-grid strong {
@@ -279,13 +279,13 @@ p {
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(92, 200, 255, 0.26);
-  border-radius: 36px;
-  padding: 24px;
+  border-radius: 28px;
+  padding: 22px;
   background:
-    radial-gradient(circle at 16% 0%, rgba(92, 200, 255, 0.22), transparent 34%),
-    radial-gradient(circle at 100% 0%, rgba(255, 110, 168, 0.18), transparent 32%),
-    linear-gradient(180deg, rgba(18, 31, 55, 0.94), rgba(8, 12, 24, 0.98));
-  box-shadow: 0 38px 130px rgba(0, 0, 0, 0.54), 0 0 0 10px rgba(92, 200, 255, 0.03);
+    radial-gradient(circle at 16% 0%, rgba(92, 200, 255, 0.16), transparent 34%),
+    radial-gradient(circle at 100% 0%, rgba(233, 137, 181, 0.12), transparent 32%),
+    linear-gradient(180deg, rgba(18, 31, 55, 0.92), rgba(8, 12, 24, 0.98));
+  box-shadow: 0 28px 82px rgba(0, 0, 0, 0.44), 0 0 0 1px rgba(92, 200, 255, 0.04);
 }
 
 .control-console {
@@ -298,7 +298,7 @@ p {
   inset: 10px;
   z-index: 0;
   border: 1px solid rgba(255, 255, 255, 0.04);
-  border-radius: 28px;
+  border-radius: 22px;
   pointer-events: none;
 }
 
@@ -311,7 +311,7 @@ p {
   inset: 0;
   pointer-events: none;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 32%);
-  opacity: 0.35;
+  opacity: 0.18;
 }
 
 .panel-topline,
@@ -354,11 +354,11 @@ p {
 
 .console-dots i {
   display: block;
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 999px;
   background: var(--blue);
-  box-shadow: 0 0 18px rgba(92, 200, 255, 0.78);
+  box-shadow: 0 0 12px rgba(92, 200, 255, 0.42);
 }
 
 .console-dots i:nth-child(2) {
@@ -372,10 +372,11 @@ p {
 .status-dot {
   border: 1px solid rgba(96, 230, 168, 0.35);
   border-radius: 999px;
-  padding: 5px 9px;
+  padding: 6px 9px;
   color: var(--green);
   background: rgba(96, 230, 168, 0.1);
   letter-spacing: 0;
+  line-height: 1;
   text-transform: none;
 }
 
@@ -388,9 +389,9 @@ p {
 
 .hero-metrics div {
   border: 1px solid rgba(92, 200, 255, 0.18);
-  border-radius: 20px;
-  padding: 16px 14px;
-  background: linear-gradient(180deg, rgba(13, 23, 43, 0.82), rgba(7, 12, 24, 0.7));
+  border-radius: 16px;
+  padding: 15px 14px;
+  background: linear-gradient(180deg, rgba(13, 23, 43, 0.78), rgba(7, 12, 24, 0.66));
 }
 
 .hero-metrics strong,
@@ -400,7 +401,7 @@ p {
 
 .hero-metrics strong {
   color: var(--text);
-  font-size: 1.62rem;
+  font-size: 1.5rem;
   line-height: 1;
 }
 
@@ -421,9 +422,9 @@ p {
   width: 100%;
   margin-top: 0;
   border: 1px solid rgba(92, 200, 255, 0.16);
-  border-radius: 24px;
+  border-radius: 18px;
   background:
-    radial-gradient(circle at 62% 30%, rgba(92, 200, 255, 0.11), transparent 26%),
+    radial-gradient(circle at 62% 30%, rgba(92, 200, 255, 0.08), transparent 26%),
     rgba(7, 12, 24, 0.58);
 }
 
@@ -474,11 +475,12 @@ p {
 .scale-ladder span {
   border: 1px solid rgba(96, 230, 168, 0.16);
   border-radius: 999px;
-  padding: 8px 9px;
+  padding: 7px 9px;
   color: var(--green);
   background: rgba(96, 230, 168, 0.08);
-  font-size: 0.75rem;
-  font-weight: 850;
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1.1;
   text-align: center;
 }
 
@@ -505,17 +507,17 @@ p {
   gap: 10px;
   margin-top: -4px;
   border: 1px solid rgba(92, 200, 255, 0.18);
-  border-radius: 28px;
+  border-radius: 22px;
   padding: 12px;
-  background: linear-gradient(135deg, rgba(12, 20, 38, 0.7), rgba(9, 13, 26, 0.42));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 24px 80px rgba(0, 0, 0, 0.28);
+  background: linear-gradient(135deg, rgba(12, 20, 38, 0.64), rgba(9, 13, 26, 0.42));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035), 0 18px 52px rgba(0, 0, 0, 0.24);
 }
 
 .runway-item {
   position: relative;
   min-height: 96px;
   border: 1px solid rgba(92, 200, 255, 0.13);
-  border-radius: 20px;
+  border-radius: 16px;
   padding: 16px;
   background: rgba(7, 12, 24, 0.48);
 }
@@ -550,7 +552,7 @@ p {
   width: 16px;
   height: 2px;
   background: linear-gradient(90deg, var(--blue), var(--green));
-  box-shadow: 0 0 18px rgba(92, 200, 255, 0.55);
+  box-shadow: 0 0 12px rgba(92, 200, 255, 0.36);
 }
 
 .card,
@@ -559,16 +561,16 @@ p {
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(92, 200, 255, 0.18);
-  border-radius: 24px;
+  border-radius: 20px;
   background:
-    radial-gradient(circle at 18% 0%, rgba(92, 200, 255, 0.12), transparent 38%),
-    linear-gradient(180deg, rgba(25, 37, 63, 0.94), rgba(14, 21, 38, 0.96));
+    radial-gradient(circle at 18% 0%, rgba(92, 200, 255, 0.08), transparent 38%),
+    linear-gradient(180deg, rgba(22, 34, 56, 0.94), rgba(13, 20, 36, 0.96));
   box-shadow: var(--shadow);
   min-width: 0;
 }
 
 .card {
-  padding: 24px;
+  padding: 22px;
 }
 
 .card > *,
@@ -584,16 +586,18 @@ p {
   place-items: center;
   width: max-content;
   max-width: 100%;
-  min-width: 36px;
-  height: 28px;
-  margin-bottom: 18px;
+  min-width: 0;
+  min-height: 26px;
+  margin-bottom: 16px;
   border: 1px solid rgba(96, 230, 168, 0.34);
   border-radius: 999px;
+  padding: 6px 10px;
   color: var(--green);
   background: rgba(96, 230, 168, 0.09);
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 900;
   letter-spacing: 0.08em;
+  line-height: 1;
   text-transform: uppercase;
 }
 
@@ -611,8 +615,8 @@ p {
   display: flex;
   flex-direction: column;
   grid-column: span 5;
-  min-height: 260px;
-  padding: 30px;
+  min-height: 238px;
+  padding: 26px;
 }
 
 .feature-wide {
@@ -620,7 +624,7 @@ p {
 }
 
 .feature-card h3 {
-  font-size: clamp(1.6rem, 3vw, 2.35rem);
+  font-size: clamp(1.45rem, 2.4vw, 2rem);
 }
 
 .feature-card p:last-child {
@@ -629,9 +633,8 @@ p {
 
 .feature-release {
   background:
-    radial-gradient(circle at 82% 12%, rgba(96, 230, 168, 0.14), transparent 32%),
-    radial-gradient(circle at 18% 0%, rgba(92, 200, 255, 0.12), transparent 38%),
-    linear-gradient(180deg, rgba(25, 37, 63, 0.94), rgba(14, 21, 38, 0.96));
+    radial-gradient(circle at 82% 12%, rgba(96, 230, 168, 0.08), transparent 32%),
+    linear-gradient(180deg, rgba(22, 34, 56, 0.94), rgba(13, 21, 38, 0.96));
 }
 
 .mini-map {
@@ -645,11 +648,12 @@ p {
   position: relative;
   border: 1px solid rgba(92, 200, 255, 0.16);
   border-radius: 999px;
-  padding: 8px 11px;
+  padding: 7px 10px;
   color: var(--text);
   background: rgba(7, 12, 24, 0.52);
-  font-size: 0.82rem;
-  font-weight: 850;
+  font-size: 0.8rem;
+  font-weight: 800;
+  line-height: 1;
 }
 
 .mini-map span:not(:last-child)::after {
@@ -663,7 +667,7 @@ p {
 }
 
 .section {
-  padding: 54px 0;
+  padding: 48px 0;
 }
 
 .section-head {
@@ -713,7 +717,7 @@ p {
 
 .figure-caption {
   border-top: 1px solid var(--line);
-  padding: 18px 20px 20px;
+  padding: 16px 18px 18px;
   color: var(--muted);
   font-size: 0.92rem;
 }
@@ -731,7 +735,7 @@ p {
 }
 
 .proof-card {
-  min-height: 210px;
+  min-height: 190px;
 }
 
 .gallery-grid {
@@ -764,7 +768,7 @@ p {
 .page-hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
-  gap: 42px;
+  gap: 36px;
   align-items: end;
 }
 
@@ -772,24 +776,24 @@ p {
   position: relative;
   overflow: hidden;
   border: 1px solid rgba(92, 200, 255, 0.18);
-  border-radius: 28px;
-  padding: 26px;
+  border-radius: 20px;
+  padding: 24px;
   background:
-    radial-gradient(circle at 18% 0%, rgba(96, 230, 168, 0.16), transparent 34%),
-    linear-gradient(180deg, rgba(25, 37, 63, 0.94), rgba(14, 21, 38, 0.96));
+    radial-gradient(circle at 18% 0%, rgba(96, 230, 168, 0.1), transparent 34%),
+    linear-gradient(180deg, rgba(22, 34, 56, 0.94), rgba(13, 21, 38, 0.96));
   box-shadow: var(--shadow);
 }
 
 .page-hero-card strong {
   display: block;
   color: var(--text);
-  font-size: 2.2rem;
-  line-height: 1;
-  letter-spacing: -0.04em;
+  font-size: 2rem;
+  line-height: 1.05;
+  letter-spacing: -0.025em;
 }
 
 .panel {
-  padding: 28px;
+  padding: 26px;
 }
 
 .table-wrap {
@@ -830,10 +834,11 @@ pre {
   overflow: auto;
   max-width: 100%;
   border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 18px;
+  border-radius: 14px;
+  padding: 16px;
   background: #070b15;
   color: #d8e7ff;
+  line-height: 1.55;
 }
 
 .timeline {
@@ -847,7 +852,7 @@ pre {
   gap: 14px;
   align-items: start;
   border: 1px solid rgba(92, 200, 255, 0.12);
-  border-radius: 20px;
+  border-radius: 16px;
   padding: 16px;
   background: rgba(7, 12, 24, 0.28);
 }
@@ -861,7 +866,7 @@ pre {
   place-items: center;
   width: 44px;
   height: 44px;
-  border-radius: 14px;
+  border-radius: 12px;
   background: rgba(92, 200, 255, 0.16);
   color: var(--blue);
   font-weight: 800;
@@ -879,7 +884,7 @@ pre {
   .nav {
     align-items: flex-start;
     flex-direction: column;
-    border-radius: 26px;
+    border-radius: 22px;
   }
 
   .nav-links {
@@ -887,7 +892,7 @@ pre {
   }
 
   h1 {
-    font-size: clamp(2.35rem, 10vw, 4.2rem);
+    font-size: clamp(2.1rem, 8.5vw, 3.65rem);
   }
 
   .hero-split,
@@ -905,13 +910,13 @@ pre {
   }
 
   .page-hero h1 {
-    font-size: clamp(2.15rem, 7vw, 3.8rem);
-    line-height: 1.05;
+    font-size: clamp(2rem, 6.5vw, 3.3rem);
+    line-height: 1.07;
   }
 
   .section-head h2 {
-    font-size: clamp(1.9rem, 6vw, 3rem);
-    line-height: 1.08;
+    font-size: clamp(1.75rem, 5.2vw, 2.55rem);
+    line-height: 1.1;
   }
 
   .timeline pre {
@@ -969,13 +974,13 @@ pre {
   }
 
   h1 {
-    font-size: 2rem;
-    letter-spacing: -0.02em;
+    font-size: 1.88rem;
+    letter-spacing: -0.016em;
   }
 
   .hero-split h1 {
-    font-size: 2.34rem;
-    letter-spacing: -0.028em;
+    font-size: 2.12rem;
+    letter-spacing: -0.02em;
   }
 
   .nav-links {
@@ -995,7 +1000,7 @@ pre {
 
   .chip {
     padding: 7px 10px;
-    font-size: 0.84rem;
+    font-size: 0.82rem;
   }
 
   .hero {
@@ -1004,7 +1009,7 @@ pre {
 
   .control-console {
     padding: 18px;
-    border-radius: 28px;
+    border-radius: 22px;
   }
 
   .console-topline {
@@ -1041,18 +1046,17 @@ pre {
 
   .feature-card h3,
   .page-hero-card strong {
-    font-size: 1.55rem;
+    font-size: 1.45rem;
   }
 
   .card,
   .panel {
-    padding: 20px;
+    padding: 18px;
   }
 
   pre {
-    padding: 16px;
+    padding: 14px;
     font-size: 0.72rem;
-    white-space: pre;
   }
 }
 
