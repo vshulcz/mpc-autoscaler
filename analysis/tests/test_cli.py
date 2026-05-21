@@ -80,6 +80,7 @@ Success       [ratio]                    98.00%
             "mpc_autoscaler_analysis.online.control_loop",
             "mpc_autoscaler_analysis.offline.trace_from_phases",
             "mpc_autoscaler_analysis.offline.synthetic_trace",
+            "mpc_autoscaler_analysis.offline.validate_trace",
         ):
             result = subprocess.run(
                 [sys.executable, "-m", module, "--help"],
@@ -140,6 +141,56 @@ Success       [ratio]                    98.00%
 
             self.assertEqual([r["rps"] for r in self._read_csv(trace_out)], ["20", "20", "80"])
             self.assertEqual(len(self._read_csv(synthetic_out)), 26)
+
+    def test_validate_trace_reports_missing_and_malformed_fields(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            missing = root / "missing.csv"
+            self._write_csv(missing, ["step", "rps"], [{"step": "0", "rps": "20"}])
+
+            missing_result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "mpc_autoscaler_analysis.offline.validate_trace",
+                    "--trace-csv",
+                    str(missing),
+                ],
+                cwd=ANALYSIS_ROOT,
+                text=True,
+                capture_output=True,
+            )
+
+            self.assertNotEqual(missing_result.returncode, 0)
+            self.assertIn("missing required columns: timestamp_s", missing_result.stderr)
+
+            malformed = root / "malformed.csv"
+            self._write_csv(
+                malformed,
+                ["step", "timestamp_s", "rps"],
+                [
+                    {"step": "0", "timestamp_s": "0", "rps": "20"},
+                    {"step": "1", "timestamp_s": "15", "rps": "fast"},
+                    {"step": "2", "timestamp_s": "-30", "rps": "40"},
+                ],
+            )
+
+            malformed_result = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "mpc_autoscaler_analysis.offline.validate_trace",
+                    "--trace-csv",
+                    str(malformed),
+                ],
+                cwd=ANALYSIS_ROOT,
+                text=True,
+                capture_output=True,
+            )
+
+            self.assertNotEqual(malformed_result.returncode, 0)
+            self.assertIn("row 3: rps must be a number", malformed_result.stderr)
+            self.assertIn("row 4: timestamp_s must be >= 0 seconds", malformed_result.stderr)
 
     def _write_csv(self, path: Path, fieldnames: list[str], rows: list[dict[str, str]]) -> None:
         with path.open("w", encoding="utf-8", newline="") as f:
