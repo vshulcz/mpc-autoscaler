@@ -19,37 +19,69 @@
     </header>
 
     <main>
-      <section class="shell hero">
-        <div class="eyebrow">Predictive Kubernetes Autoscaling</div>
-        <h1>Research-grade MPC autoscaling playground.</h1>
-        <p class="lead">A controllable Go workload, Helm deployment, live MPC controller, offline simulator, and evidence workflow for comparing predictive scaling against HPA baselines.</p>
-        <div class="chips" aria-label="Project badges">
-          <span class="chip">v0.1.0 release</span>
-          <span class="chip">Go 1.25</span>
-          <span class="chip">Python 3.11+</span>
-          <span class="chip">GHCR image</span>
-          <span class="chip">Apache-2.0</span>
+      <section class="shell hero hero-split">
+        <div class="hero-copy">
+          <div class="eyebrow">Predictive Kubernetes Autoscaling</div>
+          <h1>Research-grade MPC autoscaling playground.</h1>
+          <p class="lead">A controllable Go workload, Helm deployment, live MPC controller, offline simulator, and evidence workflow for comparing predictive scaling against HPA baselines.</p>
+          <div class="chips" aria-label="Project badges">
+            <span class="chip">v0.1.0 release</span>
+            <span class="chip">Go 1.25</span>
+            <span class="chip">Python 3.11+</span>
+            <span class="chip">GHCR image</span>
+            <span class="chip">Apache-2.0</span>
+          </div>
         </div>
+        <aside class="hero-panel" aria-label="Project status summary">
+          <div class="panel-topline">
+            <span>control trace</span>
+            <span class="status-dot">optimal</span>
+          </div>
+          <div class="hero-metrics">
+            <div><strong>201.5</strong><span>burst rps</span></div>
+            <div><strong>100%</strong><span>success</span></div>
+            <div><strong>42</strong><span>max replicas</span></div>
+          </div>
+          <svg class="hero-chart" viewBox="0 0 420 170" role="img" aria-label="Stylized demand and replica curves">
+            <path d="M24 126 H396" stroke="#263856"/>
+            <path d="M24 86 H396" stroke="#263856"/>
+            <rect x="210" y="48" width="72" height="78" rx="14" fill="#ff6ea8" opacity="0.13"/>
+            <path d="M26 124 C114 124 164 124 190 116 C212 108 220 54 248 48 C290 42 318 92 396 122" fill="none" stroke="#5cc8ff" stroke-width="6" stroke-linecap="round"/>
+            <path d="M26 126 C166 126 202 128 230 106 C264 82 284 72 320 78 C350 84 370 106 396 118" fill="none" stroke="#ff6ea8" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+          <div class="hero-links">
+            <a href="experiments.html">View evidence</a>
+            <a href="architecture.html">System view</a>
+          </div>
+        </aside>
       </section>
 
       <section class="shell section">
+        <div class="section-head">
+          <div class="eyebrow">Project Surface</div>
+          <h2>One repo, complete experiment loop.</h2>
+        </div>
         <div class="grid grid-4">
           <article class="card">
+            <span class="card-tag">01</span>
             <h3>Architecture</h3>
             <p>Follow load profiles through toy-load, Prometheus metrics, HPA, MPC, and analysis artifacts.</p>
             <p><a href="architecture.html">Open system view</a></p>
           </article>
           <article class="card">
+            <span class="card-tag">02</span>
             <h3>Reproducibility</h3>
             <p>Start with local checks, then offline simulation, saved evidence summaries, or live cluster runs.</p>
             <p><a href="reproducibility.html">Run the tiers</a></p>
           </article>
           <article class="card">
+            <span class="card-tag">03</span>
             <h3>Experiment Gallery</h3>
             <p>Browse dashboard previews, spike-response figures, release artifacts, and evidence roots.</p>
             <p><a href="experiments.html">View gallery</a></p>
           </article>
           <article class="card">
+            <span class="card-tag">04</span>
             <h3>Roadmap</h3>
             <p>Follow active work across benchmark automation, reproducibility, controller comparisons, and dashboard polish.</p>
             <p><a href="https://github.com/users/vshulcz/projects/2">Open project board</a></p>
@@ -58,12 +90,19 @@
       </section>
 
       <section class="shell section">
+        <div class="section-head section-head-row">
+          <div>
+            <div class="eyebrow">Evidence Preview</div>
+            <h2>Controller story, not dashboard wallpaper.</h2>
+          </div>
+          <p>Figures are curated views into live runs, release automation, and reproducibility boundaries.</p>
+        </div>
         <div class="grid grid-2">
-          <figure class="figure">
+          <figure class="figure showcase-card">
             <img src="assets/figures/architecture.svg" alt="MPC autoscaler architecture diagram">
             <figcaption class="figure-caption">System boundary: traffic generator, workload, Prometheus, reactive HPA, predictive MPC, and analysis pipeline.</figcaption>
           </figure>
-          <figure class="figure">
+          <figure class="figure showcase-card">
             <img src="assets/figures/spike-comparison.svg" alt="Spike experiment sample chart">
             <figcaption class="figure-caption">Tuned Hybrid-SA control trace: burst detection, safety scale-up, solver status, and controlled downscale from one curated spike run.</figcaption>
           </figure>

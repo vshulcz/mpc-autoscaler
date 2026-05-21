@@ -25,20 +25,28 @@
         <p class="lead">These previews are intentionally lightweight. Full raw runs stay out of Git; committed manifests point to curated evidence roots and reproducible rebuild commands.</p>
       </section>
 
-      <section class="section grid grid-2">
-        <figure class="figure">
+      <section class="section gallery-grid">
+        <div class="section-head gallery-head">
+          <div>
+            <div class="eyebrow">Curated Views</div>
+            <h2>Run behavior, observability, and release proof.</h2>
+          </div>
+          <p>Same visual language across controller evidence, dashboard assets, release outputs, and source maps.</p>
+        </div>
+        <figure class="figure gallery-card gallery-primary">
           <img src="assets/figures/spike-comparison.svg" alt="Hybrid-SA spike control trace">
           <figcaption class="figure-caption">Hybrid-SA spike trace from curated evidence: 201.5 rps burst throughput, 100% success, optimal solver status, six safety scale-up events, and a 6-to-42 replica response.</figcaption>
         </figure>
-        <figure class="figure">
+        <figure class="figure gallery-card">
           <img src="assets/figures/grafana-dashboard.svg" alt="Grafana dashboard preview">
           <figcaption class="figure-caption">Dashboard preview based on committed Grafana JSON: request rate, errors, latency quantiles, in-flight requests, targets, CPU, and memory.</figcaption>
         </figure>
-        <figure class="figure">
+        <figure class="figure gallery-card">
           <img src="assets/figures/release-flow.svg" alt="Release workflow preview">
           <figcaption class="figure-caption">Release lane: annotated semver tag, binary builds, Helm package, GHCR image, checksums, and GitHub Release.</figcaption>
         </figure>
-        <article class="card">
+        <article class="card release-card">
+          <span class="card-tag">release</span>
           <h3>Release v0.1.0</h3>
           <p>The first public release includes Linux and macOS binaries, Helm package, checksums, GHCR image tags, SBOM, and provenance.</p>
           <p><a href="https://github.com/vshulcz/mpc-autoscaler/releases/tag/v0.1.0">Open GitHub Release</a></p>
@@ -52,11 +60,11 @@
           <table>
             <thead><tr><th>Alias</th><th>Role</th><th>Scenarios</th><th>Notes</th></tr></thead>
             <tbody>
-              <tr><td><code>thesis/main/hpa60_cpu_hpa_max70</code></td><td>Primary baseline</td><td>step, spike, seasonality</td><td>CPU-HPA60 baseline under max70 comparison setup.</td></tr>
-              <tr><td><code>thesis/main/hybrid_sa_max70_tuned</code></td><td>Primary MPC</td><td>step, spike, seasonality</td><td>Final tuned Hybrid-SA root used for corrected thesis results.</td></tr>
-              <tr><td><code>thesis/comparator/proxy_hpa_safety_max70</code></td><td>Comparator</td><td>step, spike, seasonality</td><td>Reactive proxy-HPA plus safety comparator.</td></tr>
-              <tr><td><code>thesis/comparator/no_qp_reactive_max70</code></td><td>Comparator</td><td>step, spike, seasonality</td><td>No-QP reactive comparator.</td></tr>
-              <tr><td><code>thesis/comparator/vanilla_hpa80_max70</code></td><td>Comparator</td><td>step, spike, seasonality</td><td>Vanilla HPA80 comparator.</td></tr>
+              <tr><td data-label="Alias"><code>thesis/main/hpa60_cpu_hpa_max70</code></td><td data-label="Role">Primary baseline</td><td data-label="Scenarios">step, spike, seasonality</td><td data-label="Notes">CPU-HPA60 baseline under max70 comparison setup.</td></tr>
+              <tr><td data-label="Alias"><code>thesis/main/hybrid_sa_max70_tuned</code></td><td data-label="Role">Primary MPC</td><td data-label="Scenarios">step, spike, seasonality</td><td data-label="Notes">Final tuned Hybrid-SA root used for corrected thesis results.</td></tr>
+              <tr><td data-label="Alias"><code>thesis/comparator/proxy_hpa_safety_max70</code></td><td data-label="Role">Comparator</td><td data-label="Scenarios">step, spike, seasonality</td><td data-label="Notes">Reactive proxy-HPA plus safety comparator.</td></tr>
+              <tr><td data-label="Alias"><code>thesis/comparator/no_qp_reactive_max70</code></td><td data-label="Role">Comparator</td><td data-label="Scenarios">step, spike, seasonality</td><td data-label="Notes">No-QP reactive comparator.</td></tr>
+              <tr><td data-label="Alias"><code>thesis/comparator/vanilla_hpa80_max70</code></td><td data-label="Role">Comparator</td><td data-label="Scenarios">step, spike, seasonality</td><td data-label="Notes">Vanilla HPA80 comparator.</td></tr>
             </tbody>
           </table>
         </div>
