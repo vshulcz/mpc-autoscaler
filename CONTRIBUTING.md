@@ -32,6 +32,10 @@ Before starting, comment on the issue with your intended approach. This avoids d
 2. Keep generated artifacts and local experiment outputs out of Git unless they are intentionally curated evidence files.
 3. Update documentation when commands, paths, or operational behavior change.
 
+## CODEOWNERS Review Routing
+
+The repository uses [`.github/CODEOWNERS`](.github/CODEOWNERS) to route reviews to the maintainer for sensitive changes. Expect extra care for workflow, release, security, and supply-chain paths because those files can affect published artifacts, automation credentials, or contributor trust.
+
 ## Local Checks
 
 Run the standard repository checks before opening a pull request:
