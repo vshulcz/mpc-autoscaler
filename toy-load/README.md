@@ -67,16 +67,16 @@ curl "http://localhost:9090/work?cpu_ms=25&sleep_ms=10&jitter_ms=5&payload_bytes
 
 Configuration is environment-based.
 
-| Env Var | Default | Meaning |
+| Variable | Description | Default |
 | --- | --- | --- |
-| `PORT` | `9090` | HTTP listen port. |
-| `METRICS_PATH` | `/metrics` | Prometheus metrics path. Must start with `/` and not overlap built-in endpoints. |
-| `READ_TIMEOUT` | `5s` | HTTP read timeout. Must be positive. |
-| `WRITE_TIMEOUT` | `20s` | HTTP write timeout. Must be positive. |
-| `IDLE_TIMEOUT` | `60s` | HTTP idle timeout. Must be positive. |
-| `MAX_HEADER_BYTES` | `1048576` | Max HTTP request header size. |
-| `LOG_LEVEL` | `info` | `debug`, `info`, `warn`, `warning`, or `error`. |
-| `APP_NAME` | `toy-load` | Name attached to structured logs. |
+| `PORT` | HTTP listen port. | `9090` |
+| `METRICS_PATH` | Prometheus metrics path. Must start with `/` and not overlap built-in endpoints. | `/metrics` |
+| `READ_TIMEOUT` | HTTP read timeout. Must be a positive Go duration. | `5s` |
+| `WRITE_TIMEOUT` | HTTP write timeout. Must be a positive Go duration. | `20s` |
+| `IDLE_TIMEOUT` | HTTP idle timeout. Must be a positive Go duration. | `60s` |
+| `MAX_HEADER_BYTES` | Maximum HTTP request header size in bytes. | `1048576` |
+| `LOG_LEVEL` | Log level: `debug`, `info`, `warn`, `warning`, or `error`. | `info` |
+| `APP_NAME` | Name attached to structured logs. | `toy-load` |
 
 ## Metrics
 
