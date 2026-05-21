@@ -31,7 +31,7 @@ In a tracked 200 rps spike pair, Hybrid-SA MPC held burst p95 latency to `52.483
 | Results snapshot and caveats | [`docs/RESULTS.md`](docs/RESULTS.md) |
 | Static docs site | <https://vshulcz.github.io/mpc-autoscaler/> |
 | Public roadmap | <https://github.com/users/vshulcz/projects/2> |
-| Starter discussion | <https://github.com/vshulcz/mpc-autoscaler/discussions/26> |
+| Q&A for setup and reproducibility | <https://github.com/vshulcz/mpc-autoscaler/discussions/77> |
 
 If this helps your Kubernetes autoscaling or research-software work, starring or watching the repository helps more contributors find it.
 
@@ -39,7 +39,7 @@ Docs site: <https://vshulcz.github.io/mpc-autoscaler/>.
 
 Roadmap board: <https://github.com/users/vshulcz/projects/2>. Active work is tracked through milestones `v0.2.0`, `thesis-reproducibility`, and `v0.3.0`.
 
-For lightweight contribution ideas, starter questions, or small PR proposals, use the [Discussions starter thread](https://github.com/vshulcz/mpc-autoscaler/discussions/26). Use Issues for tracked bugs and scoped implementation work.
+For setup questions, reproduction help, and "which path should I use?" questions, use the [Q&A entry thread](https://github.com/vshulcz/mpc-autoscaler/discussions/77). If an answer solves your question, mark it as accepted so the next reader can find it quickly. For lightweight contribution ideas or small PR proposals, use the [Discussions starter thread](https://github.com/vshulcz/mpc-autoscaler/discussions/26). Use Issues for tracked bugs and scoped implementation work.
 
 Contribution guidelines live in `CONTRIBUTING.md`. Support guidance lives in `SUPPORT.md`. Release steps are documented in `docs/RELEASE.md`. Security reporting guidance lives in `SECURITY.md`.
 

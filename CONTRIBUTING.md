@@ -26,6 +26,12 @@ Good starter pull requests usually touch one of these areas:
 
 Before starting, comment on the issue with your intended approach. This avoids duplicated work and makes review faster.
 
+## Questions Before Code
+
+Use the [Q&A entry thread](https://github.com/vshulcz/mpc-autoscaler/discussions/77) for setup, reproducibility, Docker, Helm, and analysis questions. This keeps how-to answers searchable instead of burying them in pull request comments.
+
+When an answer solves your question, mark it as accepted. That turns the thread into reusable project documentation for the next contributor.
+
 ## Before Opening A Pull Request
 
 1. Make sure the change has a clear scope.

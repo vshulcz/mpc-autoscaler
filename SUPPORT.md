@@ -1,5 +1,7 @@
 # Support
 
+Use the [Q&A entry thread](https://github.com/vshulcz/mpc-autoscaler/discussions/77) for setup help, reproducibility questions, Docker or Helm usage, and analysis command questions. If an answer solves the problem, mark it as accepted so future readers can find it.
+
 Use GitHub issues for reproducible bugs, feature requests, and experiment regressions.
 
 Good reports include:
