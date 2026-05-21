@@ -36,7 +36,7 @@ Contribution guidelines live in `CONTRIBUTING.md`. Support guidance lives in `SU
 
 The project combines three parts:
 
-- `toy-load/`: a standalone Go module with a controllable HTTP workload service. See `toy-load/README.md` for API and runtime details.
+- `toy-load/`: a standalone Go module with a controllable HTTP workload service. See `toy-load/README.md` for API details and the [runtime configuration table](toy-load/README.md#configuration).
 - `analysis/`: offline and online MPC tooling used to tune and evaluate the controller.
 - `deploy/`, `dashboards/`, and `loadgen/`: ArgoCD applications, monitoring assets, Grafana dashboards, and repeatable load-generation scripts. See `loadgen/README.md` for runner details.
 
