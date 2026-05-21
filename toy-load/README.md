@@ -193,7 +193,7 @@ MPC policies. Load-generator scripts drive `/work`, Prometheus records service
 metrics, and analysis tooling summarizes latency, success ratio, in-flight
 requests, and replica behavior.
 
-## #89 Status Code Reference
+## Status Code Reference
 
 This section records the status codes users should expect while testing `/work`.
 
