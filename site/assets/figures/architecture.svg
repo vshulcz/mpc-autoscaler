@@ -32,11 +32,11 @@
   </g>
 
   <g fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M184 196 H244" stroke="#5cc8ff" marker-end="url(#arrow-blue)"/>
-    <path d="M404 196 H464" stroke="#5cc8ff" marker-end="url(#arrow-blue)"/>
-    <path d="M624 196 H684" stroke="#5cc8ff" marker-end="url(#arrow-blue)"/>
-    <path d="M794 272 V334" stroke="#60e6a8" marker-end="url(#arrow-green)"/>
-    <path d="M474 398 H520" stroke="#60e6a8" marker-end="url(#arrow-green)"/>
+    <path d="M196 196 H224" stroke="#5cc8ff" marker-end="url(#arrow-blue)"/>
+    <path d="M416 196 H444" stroke="#5cc8ff" marker-end="url(#arrow-blue)"/>
+    <path d="M636 196 H664" stroke="#5cc8ff" marker-end="url(#arrow-blue)"/>
+    <path d="M798 284 V314" stroke="#60e6a8" marker-end="url(#arrow-green)"/>
+    <path d="M486 398 H508" stroke="#60e6a8" marker-end="url(#arrow-green)"/>
   </g>
 
   <g filter="url(#shadow)" font-family="Arial, sans-serif">
@@ -60,9 +60,9 @@
     <text x="818" y="211" fill="#60e6a8" font-size="16" font-weight="800">MPC</text>
     <text x="710" y="246" fill="#9fb0cd" font-size="16">choose replica target</text>
 
-    <rect x="700" y="334" width="212" height="88" rx="24" fill="#0f2b32" stroke="#2b6b58"/>
-    <text x="728" y="371" fill="#60e6a8" font-size="24" font-weight="850">Scale target</text>
-    <text x="728" y="398" fill="#cfe7ff" font-size="16">Deployment replicas</text>
+    <rect x="692" y="334" width="212" height="88" rx="24" fill="#0f2b32" stroke="#2b6b58"/>
+    <text x="720" y="371" fill="#60e6a8" font-size="24" font-weight="850">Scale target</text>
+    <text x="720" y="398" fill="#cfe7ff" font-size="16">Deployment replicas</text>
 
     <rect x="48" y="354" width="190" height="88" rx="24" fill="#102235" stroke="#2b416b"/>
     <text x="74" y="391" fill="#ecf3ff" font-size="23" font-weight="850">Run artifacts</text>

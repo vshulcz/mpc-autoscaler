@@ -38,28 +38,34 @@
   </g>
 
   <g filter="url(#shadow)">
-    <rect x="48" y="304" width="864" height="154" rx="26" fill="#101a2d" stroke="#2b416b"/>
+    <rect x="48" y="292" width="864" height="190" rx="26" fill="#101a2d" stroke="#2b416b"/>
     <g font-family="Arial, sans-serif">
-      <text x="78" y="346" fill="#ecf3ff" font-size="22" font-weight="850">Latency reduction in tracked spike pair</text>
-      <text x="78" y="376" fill="#9fb0cd" font-size="16">Lower is better. Values are from committed phase summaries.</text>
+      <text x="78" y="332" fill="#ecf3ff" font-size="22" font-weight="850">Latency reduction in tracked spike pair</text>
+      <text x="78" y="360" fill="#9fb0cd" font-size="16">Lower is better. Values are from committed phase summaries.</text>
     </g>
 
     <g font-family="Arial, sans-serif">
-      <text x="78" y="420" fill="#9fb0cd" font-size="15">p95</text>
-      <rect x="122" y="404" width="330" height="22" rx="11" fill="#ff6ea8" opacity="0.64"/>
-      <rect x="122" y="432" width="204" height="22" rx="11" fill="#60e6a8" opacity="0.88"/>
-      <text x="468" y="421" fill="#ffd7e7" font-size="15">HPA 85.175 ms</text>
-      <text x="342" y="449" fill="#c8ffe4" font-size="15">MPC 52.483 ms</text>
+      <text x="78" y="412" fill="#9fb0cd" font-size="15" font-weight="800">p95</text>
+      <text x="126" y="398" fill="#ffd7e7" font-size="15" font-weight="800">HPA</text>
+      <rect x="176" y="384" width="300" height="18" rx="9" fill="#ff6ea8" opacity="0.64"/>
+      <text x="742" y="398" fill="#ffd7e7" font-size="15" text-anchor="end">85.175 ms</text>
 
-      <text x="612" y="420" fill="#9fb0cd" font-size="15">p99</text>
-      <rect x="656" y="404" width="208" height="22" rx="11" fill="#ff6ea8" opacity="0.64"/>
-      <rect x="656" y="432" width="114" height="22" rx="11" fill="#60e6a8" opacity="0.88"/>
-      <text x="660" y="392" fill="#ffd7e7" font-size="15">HPA 128.983 ms</text>
-      <text x="780" y="449" fill="#c8ffe4" font-size="15">MPC 71.048 ms</text>
+      <text x="126" y="426" fill="#c8ffe4" font-size="15" font-weight="800">MPC</text>
+      <rect x="176" y="412" width="185" height="18" rx="9" fill="#60e6a8" opacity="0.88"/>
+      <text x="742" y="426" fill="#c8ffe4" font-size="15" text-anchor="end">52.483 ms</text>
+
+      <text x="78" y="464" fill="#9fb0cd" font-size="15" font-weight="800">p99</text>
+      <text x="126" y="454" fill="#ffd7e7" font-size="15" font-weight="800">HPA</text>
+      <rect x="176" y="440" width="455" height="18" rx="9" fill="#ff6ea8" opacity="0.64"/>
+      <text x="742" y="454" fill="#ffd7e7" font-size="15" text-anchor="end">128.983 ms</text>
+
+      <text x="126" y="476" fill="#c8ffe4" font-size="15" font-weight="800">MPC</text>
+      <rect x="176" y="462" width="250" height="18" rx="9" fill="#60e6a8" opacity="0.88"/>
+      <text x="742" y="476" fill="#c8ffe4" font-size="15" text-anchor="end">71.048 ms</text>
     </g>
   </g>
 
   <g font-family="Arial, sans-serif">
-    <text x="48" y="504" fill="#9fb0cd" font-size="15">See docs/RESULTS.md for exact run paths, caveats, and rebuild commands.</text>
+    <text x="48" y="518" fill="#9fb0cd" font-size="15">See docs/RESULTS.md for exact run paths, caveats, and rebuild commands.</text>
   </g>
 </svg>

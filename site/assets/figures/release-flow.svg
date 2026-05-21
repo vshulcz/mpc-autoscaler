@@ -29,9 +29,9 @@
   </g>
 
   <g fill="none" stroke="#60e6a8" stroke-width="5" marker-end="url(#arrow)">
-    <path d="M214 252 H282"/>
-    <path d="M410 252 H478"/>
-    <path d="M606 252 H674"/>
+    <path d="M226 252 H270"/>
+    <path d="M422 252 H466"/>
+    <path d="M618 252 H662"/>
   </g>
 
   <g filter="url(#shadow)" font-family="Arial, sans-serif">
