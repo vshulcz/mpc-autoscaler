@@ -465,7 +465,14 @@ Contribution scope:
 | 15 minutes | Add one smoke-test command, metric explanation, or docs-site card. |
 | 1 hour | Add a parser test, dashboard panel note, or release verification example. |
 | Deeper | Compare controllers, improve benchmark summaries, or add reproducible figures. |
+## CLI Command Index
 
+| Command | Purpose | Example |
+|---|---|---|
+| `mpc-generate-synthetic-trace` | Generate synthetic traces for testing | `mpc-generate-synthetic-trace --help` |
+| `mpc-validate-trace` | Validate trace files | `mpc-validate-trace trace.json` |
+| `mpc-offline-sim` | Run offline simulation | `mpc-offline-sim config.yaml` |
+| `mpc-summarize-run` | Summarize simulation results | `mpc-summarize-run output/` |
 ## External Contributors
 
 Thanks to contributors whose pull requests have shipped in this repository:
