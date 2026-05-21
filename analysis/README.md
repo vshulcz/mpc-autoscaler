@@ -48,6 +48,7 @@ mpc-summarize-costs --hpa-root <hpa-root> --hybrid-root <hybrid-root> --out-csv 
 mpc-control-loop --log-csv <control-log.csv> --apply [controller options]
 mpc-build-trace --phases-csv <phases.csv> --out <trace.csv>
 mpc-generate-synthetic-trace --scenario step --out <trace.csv>
+mpc-validate-trace --trace-csv <trace.csv>
 mpc-offline-sim --trace-csv <trace.csv> --out-dir <out-dir>
 mpc-grid-search
 mpc-realistic-grid --scenario core
@@ -57,6 +58,7 @@ Without installation, use module form:
 
 ```bash
 PYTHONPATH=analysis python3 -m mpc_autoscaler_analysis.cli.summarize_run --help
+PYTHONPATH=analysis python3 -m mpc_autoscaler_analysis.offline.validate_trace --help
 PYTHONPATH=analysis python3 -m mpc_autoscaler_analysis.offline.simulation --help
 PYTHONPATH=analysis python3 -m mpc_autoscaler_analysis.online.control_loop --help
 ```
@@ -92,6 +94,32 @@ Trace inputs are packaged in `mpc_autoscaler_analysis/data/traces/`:
 - `baseline_step_profile_dt15.csv`
 - `baseline_spike_profile_dt15.csv`
 - `baseline_seasonality_profile_dt15.csv`
+
+Offline trace CSVs use this schema:
+
+| Column | Required | Unit | Validation |
+| --- | --- | --- | --- |
+| `step` | yes | sample index | Integer greater than or equal to `0`. |
+| `timestamp_s` | yes | seconds | Number greater than or equal to `0`. |
+| `rps` | yes | requests/second | Number greater than or equal to `0`. |
+| `phase_idx` | no | phase label | Integer greater than or equal to `0` when present. |
+
+Validate a trace before running simulations:
+
+```bash
+PYTHONPATH=analysis python3 -m mpc_autoscaler_analysis.offline.validate_trace \
+  --trace-csv analysis/mpc_autoscaler_analysis/data/traces/baseline_step_profile_dt15.csv
+```
+
+Invalid examples include:
+
+```csv
+step,rps
+0,20
+```
+
+This is invalid because `timestamp_s` is missing. Malformed values are also
+reported with row numbers, for example `rps=fast` or `timestamp_s=-30`.
 
 Generated grid-search outputs are written under `analysis/out/offline/`:
 

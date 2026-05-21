@@ -119,6 +119,7 @@ These are the scripts and commands you are most likely to use:
 - `bash loadgen/scripts/run_hpa_mpc_batch.sh [N_MPC [N_HPA]]`: run matched HPA and MPC batches.
 - `bash loadgen/scripts/run_mpc_v3_batch.sh [scenario|all]`: run the calibrated MPC-only batch.
 - `mpc-offline-sim ...`: run the offline simulator on a trace after installing `analysis`.
+- `mpc-validate-trace ...`: check an offline trace CSV before simulation.
 - `docs/REPRODUCIBILITY.md`: choose the lightest reproduction path for local checks, offline simulation, saved evidence, or live cluster runs.
 
 ## Local Development
@@ -161,6 +162,9 @@ Example offline run:
 mpc-generate-synthetic-trace \
   --scenario step \
   --out analysis/out/step.csv
+
+mpc-validate-trace \
+  --trace-csv analysis/out/step.csv
 
 mpc-offline-sim \
   --trace-csv analysis/out/step.csv \

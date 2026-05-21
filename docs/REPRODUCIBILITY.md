@@ -48,12 +48,21 @@ mpc-generate-synthetic-trace \
   --scenario spike \
   --out analysis/out/spike.csv
 
+mpc-validate-trace \
+  --trace-csv analysis/out/spike.csv
+
 mpc-offline-sim \
   --trace-csv analysis/out/spike.csv \
   --out-dir analysis/out/offline/spike
 ```
 
 Generated files under `analysis/out/` are ignored by Git.
+
+Offline trace CSVs must include `step`, `timestamp_s`, and `rps`. Units are
+sample index, seconds, and requests/second. Optional `phase_idx` labels can be
+used by grid-search tooling. `mpc-validate-trace` reports missing columns and
+malformed row values such as nonnumeric `rps`, negative `timestamp_s`, or
+noninteger `step` values.
 
 ## Tier 3: Saved Evidence Summaries
 
