@@ -55,6 +55,16 @@ helm template toy-load toy-load/deploy/helm/toy-load \
 kubectl kustomize deploy/monitoring >/dev/null
 ```
 
+## Docs-Only Pull Requests
+
+For changes limited to documentation (no code, workflow, or configuration changes), use this condensed checklist:
+
+- [ ] changes are limited to `docs/`, `README.md`, `CONTRIBUTING.md`, `SUPPORT.md`, `SECURITY.md`, or `site/`;
+- [ ] links are valid (existing anchors, absolute URLs, or relative paths);
+- [ ] no generated artifacts, experiments, or credentials are included.
+
+This keeps docs-only PRs lightweight and fast to review.
+
 ## Pull Request Expectations
 
 - explain what changed and why;
