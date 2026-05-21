@@ -113,6 +113,20 @@ capabilities, probes, resource requests, HPA, and Prometheus scrape annotations.
 Prometheus Operator resources and Grafana dashboard ConfigMap are disabled by
 default because they require cluster-specific CRDs/controllers.
 
+### Helm Values Reference
+
+The chart values schema is kept at
+[`deploy/helm/toy-load/values.schema.json`](deploy/helm/toy-load/values.schema.json).
+
+| Area | Values | Defaults | Change when |
+| --- | --- | --- | --- |
+| Image | `image.repository`, `image.tag`, `image.pullPolicy` | `ghcr.io/vshulcz/toy-load`, `main`, `IfNotPresent` | Pin a release or commit tag, use a forked/private image, or force image refreshes during development. |
+| Service | `service.type`, `service.port`, `service.targetPort` | `ClusterIP`, `80`, `http` | Expose the workload with `NodePort`/`LoadBalancer`, or map traffic through non-default service ports. |
+| Resources | `resources.requests.cpu`, `resources.requests.memory`, `resources.limits.cpu`, `resources.limits.memory` | `100m`, `64Mi`, `500m`, `256Mi` | Match cluster capacity, tune pod scheduling, or adjust the CPU signal used by HPA. |
+| HPA | `autoscaling.enabled`, `autoscaling.minReplicas`, `autoscaling.maxReplicas`, `autoscaling.targetCPUUtilizationPercentage`, `autoscaling.behavior` | `true`, `2`, `12`, `60`, scale up `200%/30s`, scale down `50%/60s` with `300s` stabilization | Disable the chart-managed HPA for external controllers, or tune replica bounds and scaling speed for experiments. |
+| Prometheus Operator | `prometheusOperator.enabled`, `prometheusOperator.serviceMonitor.*`, `prometheusOperator.podMonitor.*` | `false`; ServiceMonitor interval `30s`, scrape timeout `10s`, release namespace; PodMonitor disabled, interval `30s`, release namespace | Install `ServiceMonitor`/`PodMonitor` resources in clusters with Prometheus Operator CRDs instead of relying on scrape annotations. |
+| Dashboard | `dashboard.enabled`, `dashboard.namespace` | `false`, release namespace | Create the Grafana dashboard ConfigMap when a Grafana sidecar watches ConfigMaps labeled `grafana_dashboard=1`. |
+
 Enable Prometheus Operator integration when `ServiceMonitor` CRD is installed:
 
 ```bash
