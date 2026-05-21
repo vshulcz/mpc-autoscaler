@@ -12,4 +12,7 @@ Good reports include:
 
 For security issues, follow `SECURITY.md` instead of opening a public issue.
 
+To see planned work and ongoing development, visit the public roadmap board:
+<https://github.com/users/vshulcz/projects/2>.
+
 This repository is maintained as research software. Production incident response, cluster-specific consulting, and private environment debugging are out of scope.
