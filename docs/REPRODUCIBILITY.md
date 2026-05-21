@@ -104,6 +104,27 @@ bash loadgen/scripts/run_mpc_experiment_incluster.sh step
 
 Set `MPC_APPLY=0` to collect MPC recommendations without scaling the Deployment.
 
+### Cleanup
+
+After live experiments, remove the deployed resources:
+
+```bash
+# Remove Helm release
+helm uninstall toy-load --namespace default
+
+# Remove HPA and any remaining workloads
+kubectl delete hpa --all --namespace default 2>/dev/null || true
+kubectl delete deployment --all --namespace default 2>/dev/null || true
+
+# Remove monitoring resources (if deployed via Kustomize)
+kubectl delete -k deploy/monitoring 2>/dev/null || true
+
+# Remove namespace (if created by Helm --create-namespace)
+kubectl delete namespace default 2>/dev/null || true
+```
+
+See `deploy/monitoring/` and `toy-load/deploy/` for the full resource definitions.
+
 ## Tier 5: Release Reproduction
 
 Release preflight:
