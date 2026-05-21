@@ -10,6 +10,7 @@
 [![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/vshulcz/mpc-autoscaler/badge)](https://securityscorecards.dev/viewer/?uri=github.com/vshulcz/mpc-autoscaler)
 [![Codecov](https://codecov.io/gh/vshulcz/mpc-autoscaler/branch/main/graph/badge.svg)](https://codecov.io/gh/vshulcz/mpc-autoscaler)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/vshulcz/mpc-autoscaler?style=social)](https://github.com/vshulcz/mpc-autoscaler/stargazers)
 ![Go](https://img.shields.io/badge/go-1.25-00ADD8?logo=go&logoColor=white)
 ![Python](https://img.shields.io/badge/python-3.11%2B-3776AB?logo=python&logoColor=white)
 ![Helm](https://img.shields.io/badge/helm-chart-0F1689?logo=helm&logoColor=white)
@@ -19,6 +20,21 @@ Predictive autoscaling playground for Kubernetes: a controllable Go workload, He
 
 The core question: can a small Model Predictive Control loop anticipate demand and scale more smoothly than reactive HPA baselines under step, spike, and seasonal traffic?
 
+![Representative HPA versus Hybrid-SA spike result](site/assets/figures/hpa-vs-mpc-spike.svg)
+
+## Why Watch This Repo
+
+In a tracked 200 rps spike pair, Hybrid-SA MPC held burst p95 latency to `52.483 ms` versus `85.175 ms` for the HPA60 baseline, with both runs at `100%` success. This is a current proof point, not a final benchmark claim; exact run paths and caveats live in [`docs/RESULTS.md`](docs/RESULTS.md).
+
+| What you can inspect | Path |
+| --- | --- |
+| Results snapshot and caveats | [`docs/RESULTS.md`](docs/RESULTS.md) |
+| Static docs site | <https://vshulcz.github.io/mpc-autoscaler/> |
+| Public roadmap | <https://github.com/users/vshulcz/projects/2> |
+| Starter discussion | <https://github.com/vshulcz/mpc-autoscaler/discussions/26> |
+
+If this helps your Kubernetes autoscaling or research-software work, starring or watching the repository helps more contributors find it.
+
 Docs site: <https://vshulcz.github.io/mpc-autoscaler/>.
 
 Roadmap board: <https://github.com/users/vshulcz/projects/2>. Active work is tracked through milestones `v0.2.0`, `thesis-reproducibility`, and `v0.3.0`.
@@ -26,6 +42,17 @@ Roadmap board: <https://github.com/users/vshulcz/projects/2>. Active work is tra
 For lightweight contribution ideas, starter questions, or small PR proposals, use the [Discussions starter thread](https://github.com/vshulcz/mpc-autoscaler/discussions/26). Use Issues for tracked bugs and scoped implementation work.
 
 Contribution guidelines live in `CONTRIBUTING.md`. Support guidance lives in `SUPPORT.md`. Release steps are documented in `docs/RELEASE.md`. Security reporting guidance lives in `SECURITY.md`.
+
+## Results Snapshot
+
+Representative tracked spike runs:
+
+| Controller | Burst throughput | Burst p95 | Burst p99 | Max latency | Success | Max replicas |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| HPA60 baseline | 197.91 rps | 85.175 ms | 128.983 ms | 276.229 ms | 100.00% | 27 |
+| Hybrid-SA MPC | 199.90 rps | 52.483 ms | 71.048 ms | 97.157 ms | 100.00% | 28 |
+
+See [`docs/RESULTS.md`](docs/RESULTS.md) for evidence paths, rebuild commands, and current limitations.
 
 ## Highlights
 
@@ -145,6 +172,33 @@ make toy-load-build
 
 `make check` runs the toy-load checks used in CI: formatting check, `go vet`, tests, Helm lint, and Helm template rendering.
 `make coverage` writes Go and Python coverage reports under ignored `coverage/`.
+
+## Five-Minute Paths
+
+No cluster needed:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -e analysis
+mpc-generate-synthetic-trace --scenario spike --out analysis/out/spike.csv
+mpc-validate-trace --trace-csv analysis/out/spike.csv
+mpc-offline-sim --trace-csv analysis/out/spike.csv --out-dir analysis/out/offline/spike
+```
+
+Service smoke test:
+
+```bash
+make toy-load-run
+```
+
+In another terminal:
+
+```bash
+curl http://localhost:9090/healthz
+curl "http://localhost:9090/work?cpu_ms=10&jitter_ms=5"
+curl http://localhost:9090/metrics
+```
 
 ## Python Environment
 
@@ -373,6 +427,15 @@ See `docs/RELEASE.md` for the full release checklist.
 Useful contribution areas include controller comparators, traffic traces, dashboard panels, artifact parsers, Kubernetes portability, and documentation for reproducible experiments.
 
 See `ROADMAP.md` for project directions and `CONTRIBUTING.md` before opening a pull request.
+
+Contributor ladder:
+
+| Time | Good first contribution |
+| --- | --- |
+| 5 minutes | Fix links, examples, glossary text, or README wording. |
+| 15 minutes | Add one smoke-test command, metric explanation, or docs-site card. |
+| 1 hour | Add a parser test, dashboard panel note, or release verification example. |
+| Deeper | Compare controllers, improve benchmark summaries, or add reproducible figures. |
 
 ## License
 

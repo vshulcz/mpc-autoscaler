@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Representative HPA versus Hybrid-SA spike result</title>
+  <desc id="desc">A proof card comparing HPA60 and Hybrid-SA MPC on a representative 200 rps spike run.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset="0.58" stop-color="#0b1730"/>
+      <stop offset="1" stop-color="#150d28"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#172846"/>
+      <stop offset="1" stop-color="#101827"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#000" flood-opacity="0.36"/>
+    </filter>
+  </defs>
+
+  <rect width="960" height="540" rx="32" fill="url(#bg)"/>
+  <circle cx="118" cy="74" r="190" fill="#5cc8ff" opacity="0.09"/>
+  <circle cx="860" cy="46" r="230" fill="#ff6ea8" opacity="0.08"/>
+
+  <g font-family="Arial, sans-serif">
+    <text x="48" y="62" fill="#ecf3ff" font-size="32" font-weight="850">200 rps spike: HPA waits, MPC predicts</text>
+    <text x="48" y="96" fill="#9fb0cd" font-size="18">Representative tracked runs. Same spike shape, both 100% success.</text>
+  </g>
+
+  <g filter="url(#shadow)" font-family="Arial, sans-serif">
+    <rect x="48" y="126" width="410" height="142" rx="24" fill="url(#card)" stroke="#2b416b"/>
+    <text x="78" y="164" fill="#9fb0cd" font-size="15" font-weight="850" letter-spacing="1.2">HPA60 BASELINE</text>
+    <text x="78" y="214" fill="#ecf3ff" font-size="46" font-weight="900">85.175 ms</text>
+    <text x="78" y="244" fill="#9fb0cd" font-size="17">burst p95 latency, max 276.229 ms</text>
+
+    <rect x="502" y="126" width="410" height="142" rx="24" fill="url(#card)" stroke="#2b416b"/>
+    <text x="532" y="164" fill="#9fb0cd" font-size="15" font-weight="850" letter-spacing="1.2">HYBRID-SA MPC</text>
+    <text x="532" y="214" fill="#60e6a8" font-size="46" font-weight="900">52.483 ms</text>
+    <text x="532" y="244" fill="#9fb0cd" font-size="17">burst p95 latency, max 97.157 ms</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="48" y="304" width="864" height="154" rx="26" fill="#101a2d" stroke="#2b416b"/>
+    <g font-family="Arial, sans-serif">
+      <text x="78" y="346" fill="#ecf3ff" font-size="22" font-weight="850">Latency reduction in tracked spike pair</text>
+      <text x="78" y="376" fill="#9fb0cd" font-size="16">Lower is better. Values are from committed phase summaries.</text>
+    </g>
+
+    <g font-family="Arial, sans-serif">
+      <text x="78" y="420" fill="#9fb0cd" font-size="15">p95</text>
+      <rect x="122" y="404" width="330" height="22" rx="11" fill="#ff6ea8" opacity="0.64"/>
+      <rect x="122" y="432" width="204" height="22" rx="11" fill="#60e6a8" opacity="0.88"/>
+      <text x="468" y="421" fill="#ffd7e7" font-size="15">HPA 85.175 ms</text>
+      <text x="342" y="449" fill="#c8ffe4" font-size="15">MPC 52.483 ms</text>
+
+      <text x="612" y="420" fill="#9fb0cd" font-size="15">p99</text>
+      <rect x="656" y="404" width="208" height="22" rx="11" fill="#ff6ea8" opacity="0.64"/>
+      <rect x="656" y="432" width="114" height="22" rx="11" fill="#60e6a8" opacity="0.88"/>
+      <text x="660" y="392" fill="#ffd7e7" font-size="15">HPA 128.983 ms</text>
+      <text x="780" y="449" fill="#c8ffe4" font-size="15">MPC 71.048 ms</text>
+    </g>
+  </g>
+
+  <g font-family="Arial, sans-serif">
+    <text x="48" y="504" fill="#9fb0cd" font-size="15">See docs/RESULTS.md for exact run paths, caveats, and rebuild commands.</text>
+  </g>
+</svg>
