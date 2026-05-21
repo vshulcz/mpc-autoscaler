@@ -22,18 +22,20 @@ The core question: can a small Model Predictive Control loop anticipate demand a
 
 ![Representative HPA versus Hybrid-SA spike result](site/assets/figures/hpa-vs-mpc-spike.svg)
 
-## Why Watch This Repo
+## Current Status
 
-In a tracked 200 rps spike pair, Hybrid-SA MPC held burst p95 latency to `52.483 ms` versus `85.175 ms` for the HPA60 baseline, with both runs at `100%` success. This is a current proof point, not a final benchmark claim; exact run paths and caveats live in [`docs/RESULTS.md`](docs/RESULTS.md).
+In one tracked 200 rps spike pair, Hybrid-SA MPC showed lower burst p95 latency than the HPA60 baseline while both runs kept `100%` request success. This is a representative snapshot, not a final benchmark claim. Exact paths, caveats, and rebuild commands live in [`docs/RESULTS.md`](docs/RESULTS.md).
 
 | What you can inspect | Path |
 | --- | --- |
 | Results snapshot and caveats | [`docs/RESULTS.md`](docs/RESULTS.md) |
+| Methodology | [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md) |
+| Known limitations | [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md) |
 | Static docs site | <https://vshulcz.github.io/mpc-autoscaler/> |
 | Public roadmap | <https://github.com/users/vshulcz/projects/2> |
 | Q&A for setup and reproducibility | <https://github.com/vshulcz/mpc-autoscaler/discussions/77> |
 
-If this helps your Kubernetes autoscaling or research-software work, starring or watching the repository helps more contributors find it.
+If this helps your Kubernetes autoscaling or research-software work, stars and watches help other contributors find it. Methodology feedback is even more useful.
 
 Docs site: <https://vshulcz.github.io/mpc-autoscaler/>.
 
@@ -45,14 +47,14 @@ Contribution guidelines live in `CONTRIBUTING.md`. Support guidance lives in `SU
 
 ## Results Snapshot
 
-Representative tracked spike runs:
+Representative tracked spike runs, not aggregate benchmark results:
 
 | Controller | Burst throughput | Burst p95 | Burst p99 | Max latency | Success | Max replicas |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | HPA60 baseline | 197.91 rps | 85.175 ms | 128.983 ms | 276.229 ms | 100.00% | 27 |
 | Hybrid-SA MPC | 199.90 rps | 52.483 ms | 71.048 ms | 97.157 ms | 100.00% | 28 |
 
-See [`docs/RESULTS.md`](docs/RESULTS.md) for evidence paths, rebuild commands, and current limitations.
+See [`docs/RESULTS.md`](docs/RESULTS.md), [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md), and [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md) before interpreting the numbers.
 
 ## Highlights
 
@@ -71,7 +73,7 @@ The project combines three parts:
 
 ## Scope
 
-This repository is intended for controlled experiments rather than for production use. The goal is to compare a reactive HPA-style policy against an MPC-based controller under reproducible traffic profiles.
+This repository is intended for controlled experiments rather than production use. The goal is to compare a reactive HPA-style policy against an MPC-based controller under reproducible traffic profiles, while keeping assumptions and limitations visible.
 
 Supported experiment scenarios:
 
