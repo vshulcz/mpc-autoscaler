@@ -428,6 +428,8 @@ Useful contribution areas include controller comparators, traffic traces, dashbo
 
 See `ROADMAP.md` for project directions and `CONTRIBUTING.md` before opening a pull request.
 
+Current small-PR queue: [Contributor sprint discussion](https://github.com/vshulcz/mpc-autoscaler/discussions/94).
+
 Contributor ladder:
 
 | Time | Good first contribution |
@@ -436,6 +438,18 @@ Contributor ladder:
 | 15 minutes | Add one smoke-test command, metric explanation, or docs-site card. |
 | 1 hour | Add a parser test, dashboard panel note, or release verification example. |
 | Deeper | Compare controllers, improve benchmark summaries, or add reproducible figures. |
+
+## External Contributors
+
+Thanks to contributors whose pull requests have shipped in this repository:
+
+| Contributor | Shipped work |
+| --- | --- |
+| [@dicnunz](https://github.com/dicnunz) | Release checksum verification docs in #25. |
+| [@tatakaisun](https://github.com/tatakaisun) | toy-load examples, environment docs, Helm/loadgen references, trace sample docs, and trace CSV validator work in #37-#44. |
+| [@ayushkli86](https://github.com/ayushkli86) | support guide, docs-only checklist, labeler docs, and security footer link in #57-#60. |
+
+Merged external PRs are credited here and in release notes when they affect a release.
 
 ## License
 
