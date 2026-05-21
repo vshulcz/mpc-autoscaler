@@ -36,6 +36,24 @@ Before starting, comment on the issue with your intended approach. This avoids d
 
 The repository uses [`.github/CODEOWNERS`](.github/CODEOWNERS) to route reviews to the maintainer for sensitive changes. Expect extra care for workflow, release, security, and supply-chain paths because those files can affect published artifacts, automation credentials, or contributor trust.
 
+## Automatic PR Labels
+
+When you open a pull request, [`.github/labeler.yml`](.github/labeler.yml) automatically adds labels based on the files you changed:
+
+| Label | Triggered by |
+| --- | --- |
+| `documentation` | changes to README, docs, site |
+| `docs-site` | changes to site/ or Pages workflow |
+| `python` | changes to analysis/ |
+| `go` | changes to toy-load Go code |
+| `helm` | changes to the Helm chart |
+| `observability` | changes to dashboards or monitoring |
+| `experiment-automation` | changes to loadgen or experiments |
+| `release` | changes to release workflows or RELEASE.md |
+| `github-actions` | changes to workflows or labeler config |
+
+These labels help reviewers understand the scope of your change at a glance. If the labeler does not assign a label, your change may span multiple areas or touch paths not yet covered by the configuration.
+
 ## Local Checks
 
 Run the standard repository checks before opening a pull request:
