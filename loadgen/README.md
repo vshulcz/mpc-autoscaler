@@ -44,11 +44,55 @@ controller scaling.
 
 Common environment variables:
 
-- `KUBE_NAMESPACE`: workload namespace, default `default`.
-- `WORKLOAD_NAME`: Service/Deployment/HPA name, default `toy-load-toy-load`.
-- `KUBECTL_OPTS`: extra `kubectl` flags, such as `--context <name>`.
-- `OUT_ROOT`: output root, defaulting to ignored `experiments/_runs/<workflow>`.
-- `WATCH_REPLICAS_INTERVAL`: seconds between replica samples, `0` disables.
+| Variable | Default | Used by | Notes |
+| --- | --- | --- | --- |
+| `KUBE_NAMESPACE` | `default` | local, HPA, MPC, batch | Workload namespace. Also contributes to the default service URL. |
+| `WORKLOAD_NAME` | `toy-load-toy-load` | local, HPA, MPC, batch | Service/Deployment/HPA base name. Also contributes to the default service URL. |
+| `SERVICE_URL` | `http://${WORKLOAD_NAME}.${KUBE_NAMESPACE}.svc.cluster.local/work` | local | Overrides the local Vegeta target URL. |
+| `CPU_MS` | `20` | local, HPA | Adds the `cpu_ms` workload query parameter. |
+| `JITTER_MS` | `5` | local, HPA | Adds the `jitter_ms` workload query parameter. |
+| `CLIENT_TIMEOUT` | `30s` | local, HPA | Vegeta request timeout. |
+| `KUBECTL_OPTS` | empty | HPA, MPC, batch | Extra `kubectl` flags, such as `--context <name>`. |
+| `VEGETA_IMAGE` | `peterevans/vegeta` | HPA | In-cluster load-generator image. |
+| `PYTHON_BIN` | `python3` | HPA, seasonality local | Python executable for seasonality rate generation. |
+| `WATCH_REPLICAS_INTERVAL` | `0` | HPA | Seconds between replica samples; `0` disables replica watch output. |
+| `MPC_PYTHON` | `<repo>/.venv/bin/python` | MPC, MPC batch | Python executable for the online controller. |
+| `MPC_APPLY` | `1` | MPC | Passes `--apply` to the controller; set `0` for recommendations only. |
+| `MPC_STEP_SECONDS` | `15` | MPC | Controller loop interval; some scenarios override this when unset. |
+| `MPC_MIN_REPLICAS` | `2` | MPC, MPC batch | Lower replica bound; some scenarios override this when unset. |
+| `MPC_MAX_REPLICAS` | `70` | MPC, MPC batch | Upper replica bound. |
+| `MPC_HORIZON` | `8` | MPC, MPC batch | Prediction horizon. |
+| `MPC_RATE_WINDOW` | `1m` | MPC | Prometheus rate window; some scenarios override this when unset. |
+| `RESULT_DIR` | `loadgen/results` | local | Artifact path for local `.bin` and `.txt` Vegeta results. |
+| `OUT_ROOT` | `experiments/_runs/baseline` for HPA, `experiments/_runs/mpc-online` for MPC, script-specific for batches | HPA, MPC, batch | Artifact path root for run directories. |
+
+Artifact paths are affected by `RESULT_DIR` for local profile scripts and by
+`OUT_ROOT` plus the optional second run-id argument for in-cluster HPA/MPC
+scripts. Batch scripts also write progress logs under
+`experiments/_runs/progress/`. The normalized night pipeline also accepts
+`ROOT` to move its `experiments/_runs/mpc-normalized-night` artifact tree. Use
+each script's `--help` output for the full list of MPC tuning variables.
+
+HPA example:
+
+```bash
+KUBE_NAMESPACE=default \
+WORKLOAD_NAME=toy-load-toy-load \
+OUT_ROOT="$PWD/experiments/_runs/baseline" \
+WATCH_REPLICAS_INTERVAL=5 \
+bash loadgen/scripts/run_hpa_experiment_incluster.sh spike hpa-spike-smoke
+```
+
+MPC example:
+
+```bash
+KUBE_NAMESPACE=default \
+WORKLOAD_NAME=toy-load-toy-load \
+MPC_APPLY=0 \
+MPC_MIN_REPLICAS=4 \
+OUT_ROOT="$PWD/experiments/_runs/mpc-online" \
+bash loadgen/scripts/run_mpc_experiment_incluster.sh step mpc-step-dry-run
+```
 
 ## Batch Scripts
 
