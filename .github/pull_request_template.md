@@ -18,6 +18,7 @@
 - [ ] Helm and monitoring manifests render when touched
 - [ ] Experiment artifacts kept out of Git unless intentionally indexed
 - [ ] Documentation updated when commands, paths, or behavior changed
+- [ ] Optional: setup or reproducibility questions that shaped this PR are linked from Discussion #77, with accepted answers marked when they solved the issue
 
 ## Release Notes
 
