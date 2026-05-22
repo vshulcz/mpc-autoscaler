@@ -89,6 +89,24 @@
       </section>
 
       <section class="section panel">
+        <h2>Dashboard Panel Metrics</h2>
+        <p>Grafana panels are backed by the committed dashboard sources in <a href="https://github.com/vshulcz/mpc-autoscaler/tree/main/dashboards">dashboards/</a> and the toy-load metrics documented in <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/toy-load/README.md#metrics">toy-load/README.md#metrics</a>.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Panel</th><th>Metric source</th><th>Use</th></tr></thead>
+            <tbody>
+              <tr><td data-label="Panel">Request rate</td><td data-label="Metric source"><code>rate(toy_http_requests_total{path="/work"}[1m])</code></td><td data-label="Use">Tracks workload throughput during step, spike, and seasonality runs.</td></tr>
+              <tr><td data-label="Panel">Errors</td><td data-label="Metric source"><code>toy_errors_total</code> and non-2xx <code>toy_http_requests_total</code></td><td data-label="Use">Shows injected application failures and failed request responses.</td></tr>
+              <tr><td data-label="Panel">Latency quantiles</td><td data-label="Metric source"><code>histogram_quantile(... toy_http_request_duration_seconds_bucket)</code></td><td data-label="Use">Compares p95 and p99 response latency across controller policies.</td></tr>
+              <tr><td data-label="Panel">In-flight requests</td><td data-label="Metric source"><code>toy_in_flight_requests</code></td><td data-label="Use">Highlights queueing pressure while demand changes.</td></tr>
+              <tr><td data-label="Panel">CPU</td><td data-label="Metric source"><code>container_cpu_usage_seconds_total</code> and HPA CPU utilization</td><td data-label="Use">Explains the reactive signal that drives the CPU HPA baseline.</td></tr>
+              <tr><td data-label="Panel">Memory</td><td data-label="Metric source"><code>container_memory_working_set_bytes</code></td><td data-label="Use">Checks pod resource behavior during load-generator scenarios.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section panel">
         <h2>Evidence Roots</h2>
         <div class="table-wrap">
           <table>
