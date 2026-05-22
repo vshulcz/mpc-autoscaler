@@ -162,6 +162,20 @@ The chart values schema is kept at
 | Prometheus Operator | `prometheusOperator.enabled`, `prometheusOperator.serviceMonitor.*`, `prometheusOperator.podMonitor.*` | `false`; ServiceMonitor interval `30s`, scrape timeout `10s`, release namespace; PodMonitor disabled, interval `30s`, release namespace | Install `ServiceMonitor`/`PodMonitor` resources in clusters with Prometheus Operator CRDs instead of relying on scrape annotations. |
 | Dashboard | `dashboard.enabled`, `dashboard.namespace` | `false`, release namespace | Create the Grafana dashboard ConfigMap when a Grafana sidecar watches ConfigMaps labeled `grafana_dashboard=1`. |
 
+Override resource requests for a single experiment with `--set`:
+
+```bash
+helm upgrade --install toy-load deploy/helm/toy-load \
+  --namespace default \
+  --create-namespace \
+  --set resources.requests.cpu=250m \
+  --set resources.requests.memory=128Mi
+```
+
+The HPA CPU target is calculated against the requested CPU. Raising
+`resources.requests.cpu` can lower reported utilization for the same load and
+delay scale-up; lowering it can make the HPA more sensitive.
+
 Enable Prometheus Operator integration when `ServiceMonitor` CRD is installed:
 
 ```bash
