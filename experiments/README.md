@@ -26,6 +26,19 @@ IDs because those names appear in logs and metadata. Use canonical aliases from
 `EVIDENCE_MAP.csv` when referring to artifacts in text, tables, archives, or
 handoff notes.
 
+## Evidence Alias Glossary
+
+These short aliases come from `EVIDENCE_MAP.csv` and keep thesis notes,
+figures, and handoff text stable even when raw run directories are long.
+
+| Alias | Meaning |
+| --- | --- |
+| `thesis/main/hpa60_cpu_hpa_max70` | Primary CPU-HPA60 baseline under the max70 comparison setup. |
+| `thesis/main/hybrid_sa_max70_tuned` | Primary tuned Hybrid-SA evidence root used for corrected thesis results. |
+| `thesis/comparator/proxy_hpa_safety_max70` | Reactive proxy-HPA plus safety comparator for step, spike, and seasonality scenarios. |
+| `thesis/comparator/no_qp_reactive_max70` | No-QP reactive comparator for step, spike, and seasonality scenarios. |
+| `thesis/comparator/vanilla_hpa80_max70` | Vanilla HPA80 comparator for step, spike, and seasonality scenarios. |
+
 ## Current Runners
 
 Run these from repository root only when you intend to change a live Kubernetes
