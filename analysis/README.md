@@ -38,6 +38,23 @@ PYTHONPATH=analysis python3 -m unittest discover -s analysis/tests
 python3 -m compileall -q analysis
 ```
 
+## Troubleshooting Dependencies
+
+If imports fail, first confirm the virtual environment is active. On Unix shells
+run `. .venv/bin/activate`; on Windows PowerShell run
+`.venv\Scripts\Activate.ps1`. Then reinstall the package from the repository
+root:
+
+```bash
+python3 -m pip install -e analysis
+```
+
+If your Python reports that the environment is externally managed, create and
+activate the virtual environment above instead of installing into the system
+Python. Dependency-light tests can still use `PYTHONPATH=analysis`; offline grid
+searches and live controller runs need the full scientific stack from
+`analysis/pyproject.toml`.
+
 ## CLI Commands
 
 Installed entry points:
