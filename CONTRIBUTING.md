@@ -89,6 +89,15 @@ For changes limited to documentation (no code, workflow, or configuration change
 
 This keeps docs-only PRs lightweight and fast to review.
 
+## Pull Request Title Examples
+
+Use a short conventional title that names the affected area:
+
+- `docs: add loadgen output directory reference`
+- `test: cover trace validator missing timestamp`
+- `release: document GHCR image digest verification`
+- `dashboard: map HPA panels to Prometheus metrics`
+
 ## Pull Request Expectations
 
 - explain what changed and why;
