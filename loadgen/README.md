@@ -73,6 +73,14 @@ scripts. Batch scripts also write progress logs under
 `ROOT` to move its `experiments/_runs/mpc-normalized-night` artifact tree. Use
 each script's `--help` output for the full list of MPC tuning variables.
 
+## Output Directories
+
+Local Vegeta scripts write `.bin` and `.txt` artifacts under `RESULT_DIR`, which
+defaults to `loadgen/results`. In-cluster and batch scripts write run roots
+under `experiments/_runs/`, including `experiments/_runs/progress/` for progress
+logs. These generated directories are ignored by Git; copy only curated
+experiment evidence into `experiments/thesis-evidence/`.
+
 HPA example:
 
 ```bash
