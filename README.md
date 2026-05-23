@@ -476,7 +476,7 @@ Thanks to contributors whose pull requests have shipped in this repository:
 | [@tatakaisun](https://github.com/tatakaisun) | toy-load examples, environment docs, Helm/loadgen references, trace sample docs, and trace CSV validator work in #37-#44. |
 | [@ayushkli86](https://github.com/ayushkli86) | support guide, docs-only checklist, labeler docs, and security footer link in #57-#60. |
 | [@msaqibatifj](https://github.com/msaqibatifj) | toy-load HTTP status code reference in #95. |
-| [@kunal-9090](https://github.com/kunal-9090) | loadgen, analysis setup, Helm resource, evidence alias, dashboard metric, docs-site results, PR template, and contributing docs in #98-#102, #104-#105, and #107. |
+| [@kunal-9090](https://github.com/kunal-9090) | loadgen, analysis setup, Helm resource, evidence alias, dashboard metric, trace examples, results source links, PR template, and contributing docs in #98-#107. |
 
 Merged external PRs are credited here and in release notes when they affect a release.
 
