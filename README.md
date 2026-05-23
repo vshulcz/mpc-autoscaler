@@ -176,6 +176,32 @@ These are the scripts and commands you are most likely to use:
 - `mpc-validate-trace ...`: check an offline trace CSV before simulation.
 - `docs/REPRODUCIBILITY.md`: choose the lightest reproduction path for local checks, offline simulation, saved evidence, or live cluster runs.
 
+## Docker Usage
+
+Run the released container image without building from source:
+
+```bash
+# Pull and run the service
+docker run --rm -p 9090:9090 ghcr.io/vshulcz/toy-load:v0.1.0
+
+# In another terminal, send a test request
+curl "http://localhost:9090/work?cpu_ms=10&jitter_ms=5"
+
+# Check metrics
+curl http://localhost:9090/metrics
+```
+
+Quick smoke test:
+
+```bash
+docker run --rm -p 9090:9090 -d ghcr.io/vshulcz/toy-load:v0.1.0
+sleep 2
+curl -s -o /dev/null -w "%{http_code}" "http://localhost:9090/work?cpu_ms=10" || echo "FAIL"
+docker stop $(docker ps -q --filter ancestor=ghcr.io/vshulcz/toy-load:v0.1.0)
+```
+
+The container image is published to `ghcr.io/vshulcz/toy-load` on every main push and release. Available tags include `main`, `sha-<commit>`, and semver release tags.
+
 ## Local Development
 
 Run the service:
