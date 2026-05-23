@@ -36,7 +36,7 @@
       <section class="section panel">
         <div class="timeline">
           <div class="step"><div class="step-num">1</div><div><h3>Local quality gates</h3><p>Run Go tests, Helm checks, Python unit tests, shell syntax checks, dashboard JSON validation.</p><pre><code>make check</code></pre></div></div>
-          <div class="step"><div class="step-num">2</div><div><h3>Offline MPC simulation</h3><p>Generate a synthetic trace, simulate the controller, inspect outputs under ignored analysis paths.</p><pre><code>python3 -m pip install -e analysis
+          <div class="step"><div class="step-num">2</div><div><h3>Offline MPC simulation</h3><p>Generate a synthetic trace or start from the bundled <a href="https://github.com/vshulcz/mpc-autoscaler/tree/main/analysis/mpc_autoscaler_analysis/data/traces">trace examples</a>, simulate the controller, inspect outputs under ignored analysis paths.</p><pre><code>python3 -m pip install -e analysis
 mpc-generate-synthetic-trace --scenario spike --out analysis/out/spike.csv
 mpc-offline-sim --trace-csv analysis/out/spike.csv --out-dir analysis/out/offline/spike</code></pre></div></div>
           <div class="step"><div class="step-num">3</div><div><h3>Saved evidence summaries</h3><p>Use curated evidence roots when local raw artifacts are present.</p><pre><code>PYTHONPATH=analysis python3 -m mpc_autoscaler_analysis.cli.summarize_costs \
@@ -48,6 +48,26 @@ mpc-offline-sim --trace-csv analysis/out/spike.csv --out-dir analysis/out/offlin
 bash loadgen/scripts/run_hpa_experiment_incluster.sh spike
 bash loadgen/scripts/run_mpc_experiment_incluster.sh spike</code></pre></div></div>
         </div>
+      </section>
+
+      <section class="section grid grid-2">
+        <article class="card">
+          <span class="card-tag">traces</span>
+          <h2>Offline trace examples</h2>
+          <p>The repository ships baseline step, spike, and seasonality CSV traces for local validation and offline simulation.</p>
+          <p>Use them with <code>mpc-validate-trace</code> before running <code>mpc-offline-sim</code> to check schema and timing assumptions.</p>
+          <p><a href="https://github.com/vshulcz/mpc-autoscaler/tree/main/analysis/mpc_autoscaler_analysis/data/traces">Open trace examples</a></p>
+        </article>
+        <article class="card">
+          <span class="card-tag">commands</span>
+          <h2>Validate, then simulate</h2>
+          <pre><code>mpc-validate-trace \
+  --trace-csv analysis/mpc_autoscaler_analysis/data/traces/baseline_spike_profile_dt15.csv
+
+mpc-offline-sim \
+  --trace-csv analysis/mpc_autoscaler_analysis/data/traces/baseline_spike_profile_dt15.csv \
+  --out-dir analysis/out/offline/spike</code></pre>
+        </article>
       </section>
     </main>
 
