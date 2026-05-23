@@ -62,7 +62,7 @@ bash loadgen/scripts/run_mpc_experiment_incluster.sh spike</code></pre></div></d
           <span class="card-tag">commands</span>
           <h2>Validate, then simulate</h2>
           <pre><code>mpc-validate-trace \
-  analysis/mpc_autoscaler_analysis/data/traces/baseline_spike_profile_dt15.csv
+  --trace-csv analysis/mpc_autoscaler_analysis/data/traces/baseline_spike_profile_dt15.csv
 
 mpc-offline-sim \
   --trace-csv analysis/mpc_autoscaler_analysis/data/traces/baseline_spike_profile_dt15.csv \
