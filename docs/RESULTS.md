@@ -4,12 +4,12 @@ This page is the public entry point for current experiment evidence. It is inten
 
 ## Current Observation
 
-Under a representative 200 rps spike trace, the predictive controller showed lower latency than the reactive HPA baseline while preserving 100% request success. This is a current snapshot, not a final benchmark suite.
+Under a representative 200 rps spike trace, the predictive controller showed lower latency than the reactive HPA baseline while preserving 100% request success. This is a current snapshot, not a final benchmark suite or aggregate table.
 
-| Scenario | Controller | Burst throughput | Burst p95 latency | Burst p99 latency | Max latency | Success | Max replicas | Evidence |
-| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- |
-| spike | HPA60 baseline | 197.91 rps | 85.175 ms | 128.983 ms | 276.229 ms | 100.00% | 27 | `experiments/thesis-evidence/main/hpa60-cpu-hpa-max70/target_60/spike/20260514T095402Z-hpa-t60-spike-04-0d577/` |
-| spike | Hybrid-SA MPC | 199.90 rps | 52.483 ms | 71.048 ms | 97.157 ms | 100.00% | 28 | `experiments/archive/supporting/hybrid-common-max70/spike/20260514T220058Z-es_safety-spike-07-fcede/` |
+| Scenario | Controller | Burst throughput | Burst p95 latency | Burst p99 latency | Max latency | Success | Max replicas | Evidence | Source |
+| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |
+| spike | HPA60 baseline | 197.91 rps | 85.175 ms | 128.983 ms | 276.229 ms | 100.00% | 27 | `experiments/thesis-evidence/main/hpa60-cpu-hpa-max70/target_60/spike/20260514T095402Z-hpa-t60-spike-04-0d577/` | [`experiments/EVIDENCE_MAP.csv`](../experiments/EVIDENCE_MAP.csv) |
+| spike | Hybrid-SA MPC | 199.90 rps | 52.483 ms | 71.048 ms | 97.157 ms | 100.00% | 28 | `experiments/archive/supporting/hybrid-common-max70/spike/20260514T220058Z-es_safety-spike-07-fcede/` | [`experiments/EVIDENCE_MAP.csv`](../experiments/EVIDENCE_MAP.csv) |
 
 For this tracked pair, Hybrid-SA MPC lowers burst p95 latency by about 38%, p99 latency by about 45%, and max latency by about 65% versus the HPA60 baseline. Both runs report 100% success. See `docs/METHODOLOGY.md` and `docs/LIMITATIONS.md` before generalizing from this pair.
 
