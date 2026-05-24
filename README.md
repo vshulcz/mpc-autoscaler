@@ -498,7 +498,6 @@ Contribution scope:
 | 15 minutes | Add one smoke-test command, metric explanation, or docs-site card. |
 | 1 hour | Add a parser test, dashboard panel note, or release verification example. |
 | Deeper | Compare controllers, improve benchmark summaries, or add reproducible figures. |
-
 ## External Contributors
 
 Thanks to contributors whose pull requests have shipped in this repository:
