@@ -11,6 +11,51 @@ These drafts are for external traffic without overclaiming. Do not post all at o
 - Ask for feedback on experiment design, not stars.
 - Avoid arguing with dismissive replies; answer technical criticism only.
 
+## Primary Link
+
+Use this as the main landing page for external technical traffic:
+
+- 60-second walkthrough: <https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/MPC_VS_HPA_60_SECONDS.md>
+
+Do not send people first to the repository root when asking for methodology feedback. Send them to the walkthrough, then let them choose results, methodology, limitations, or reproduction paths.
+
+## Technical Post Draft
+
+Title:
+
+```text
+MPC vs HPA on Kubernetes: a small reproducible autoscaling lab, not a production autoscaler
+```
+
+Body:
+
+```markdown
+I have been building a small research repository around one question: when traffic jumps, can a short-horizon Model Predictive Control loop scale earlier than a reactive HPA baseline on a controlled Kubernetes workload?
+
+This is not a production autoscaler and not a claim that MPC generally beats HPA. The repo is a lab: controllable Go workload, Helm deployment, Prometheus metrics, HPA runners, MPC controller, offline simulator, and evidence docs.
+
+Current public snapshot: one tracked 200 rps spike pair. Hybrid-SA MPC showed lower p95/p99/max latency than an HPA60 baseline while both runs kept 100% request success. This is representative, not aggregate.
+
+The fast reader path is here:
+https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/MPC_VS_HPA_60_SECONDS.md
+
+I am looking for specific feedback, not stars:
+
+- Which HPA target, metric, or stabilization setting would make the baseline fairer?
+- Which production-like trace shape should be tested next?
+- Which failure case should be prioritized: missing metrics, solver fallback, cold starts, noisy forecasts, or rate limits?
+- Which comparator belongs next: KEDA, predictive HPA, queue-aware reactive policy, or a no-QP reactive policy?
+
+If you have 15 minutes, the most useful thing is to run the bundled trace validation path and tell me where setup or assumptions are unclear.
+```
+
+Useful channels, only where self-posting is allowed:
+
+- Kubernetes/autoscaling discussion spaces for baseline criticism.
+- ML systems or control communities for modeling criticism.
+- Habr for a longer Russian-language research write-up.
+- Personal LinkedIn only after the technical post is stable.
+
 ## Short Reddit Draft
 
 Title:
@@ -28,6 +73,7 @@ This is not a production autoscaler and not a claim that MPC is generally better
 
 Current snapshot: on one representative 200 rps spike pair, Hybrid-SA MPC showed lower p95/p99 latency than an HPA60 baseline while both kept 100% success. Details, caveats, and exact paths are documented here:
 
+- 60-second walkthrough: https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/MPC_VS_HPA_60_SECONDS.md
 - Results: https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/RESULTS.md
 - Benchmark matrix: https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/BENCHMARK_MATRIX.md
 - Ten-second demo: https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/DEMO.md

@@ -15,9 +15,28 @@
 ![Helm](https://img.shields.io/badge/helm-chart-0F1689?logo=helm&logoColor=white)
 ![Container](https://img.shields.io/badge/GHCR-toy--load-181717?logo=github&logoColor=white)
 
-Research repository for controlled Kubernetes autoscaling experiments: a controllable Go workload, Helm deployment, HPA baseline, MPC controller, offline simulator, and reproducibility tooling.
+Research lab for one question: when traffic jumps, can a small Model Predictive Control loop scale earlier than a reactive HPA baseline on a controlled Kubernetes workload?
 
-The core question: can a small Model Predictive Control loop anticipate demand and scale more smoothly than reactive HPA baselines under step, spike, and seasonal traffic?
+This is not a production autoscaler. It is a runnable experiment system: a controllable Go workload, Helm deployment, Prometheus metrics, HPA baseline, MPC controller, offline simulator, and evidence docs.
+
+## MPC vs HPA In 60 Seconds
+
+| Start here | Why it matters |
+| --- | --- |
+| [`docs/MPC_VS_HPA_60_SECONDS.md`](docs/MPC_VS_HPA_60_SECONDS.md) | Fast technical walkthrough: problem, current spike result, trust boundary, and feedback asks. |
+| [`docs/RESULTS.md`](docs/RESULTS.md) | Exact current numbers, evidence paths, caveats, and rebuild commands. |
+| [`docs/BENCHMARK_MATRIX.md`](docs/BENCHMARK_MATRIX.md) | Shows which cells have public numbers and which are only indexed evidence roots. |
+| [`docs/DEMO.md`](docs/DEMO.md) | Ten-second visual loop from traffic spike to evidence. |
+
+The shortest local check uses the bundled spike trace:
+
+```bash
+python3 -m pip install -e analysis
+mpc-validate-trace --trace-csv analysis/mpc_autoscaler_analysis/data/traces/baseline_spike_profile_dt15.csv
+mpc-offline-sim \
+  --trace-csv analysis/mpc_autoscaler_analysis/data/traces/baseline_spike_profile_dt15.csv \
+  --out-dir analysis/out/offline/spike
+```
 
 ## Current Status
 
@@ -27,6 +46,7 @@ In one tracked 200 rps spike pair, Hybrid-SA MPC showed lower burst p95 latency 
 | --- | --- |
 | Results snapshot and caveats | [`docs/RESULTS.md`](docs/RESULTS.md) |
 | Benchmark matrix | [`docs/BENCHMARK_MATRIX.md`](docs/BENCHMARK_MATRIX.md) |
+| 60-second technical walkthrough | [`docs/MPC_VS_HPA_60_SECONDS.md`](docs/MPC_VS_HPA_60_SECONDS.md) |
 | Ten-second demo narrative | [`docs/DEMO.md`](docs/DEMO.md) |
 | Public interface | [`docs/API.md`](docs/API.md) |
 | Methodology | [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md) |
@@ -35,13 +55,24 @@ In one tracked 200 rps spike pair, Hybrid-SA MPC showed lower burst p95 latency 
 | Public roadmap | <https://github.com/users/vshulcz/projects/2> |
 | Q&A for setup and reproducibility | <https://github.com/vshulcz/mpc-autoscaler/discussions/77> |
 
-Methodology feedback, baseline suggestions, and reproduction reports are welcome.
+Methodology feedback, baseline suggestions, and reproduction reports are more useful than broad drive-by docs edits.
+
+## Feedback That Helps
+
+| Time | Best contribution |
+| --- | --- |
+| 5 minutes | Read the 60-second walkthrough and say which assumption makes the comparison least convincing. |
+| 15 minutes | Run the bundled trace validation command and report whether setup instructions were enough. |
+| 1 hour | Run one offline simulation, paste the output paths, and suggest one chart or table that would make results easier to judge. |
+| Deeper | Propose a stronger baseline, comparator, trace, or failure case with enough detail to turn it into an experiment issue. |
+
+Open feedback through the [Q&A thread](https://github.com/vshulcz/mpc-autoscaler/discussions/77) or the [reproduction feedback issue template](https://github.com/vshulcz/mpc-autoscaler/issues/new?template=reproduction_feedback.yml). Use Issues for tracked bugs and scoped implementation work.
 
 Docs site: <https://vshulcz.github.io/mpc-autoscaler/>.
 
 Roadmap board: <https://github.com/users/vshulcz/projects/2>. Active work is tracked through milestones `v0.2.0`, `thesis-reproducibility`, and `v0.3.0`.
 
-For setup questions, reproduction help, and "which path should I use?" questions, use the [Q&A entry thread](https://github.com/vshulcz/mpc-autoscaler/discussions/77). If an answer solves your question, mark it as accepted so the next reader can find it quickly. For lightweight contribution ideas or small PR proposals, use the [Discussions starter thread](https://github.com/vshulcz/mpc-autoscaler/discussions/26). Use Issues for tracked bugs and scoped implementation work.
+For setup questions, reproduction help, and "which path should I use?" questions, use the [Q&A entry thread](https://github.com/vshulcz/mpc-autoscaler/discussions/77). If an answer solves your question, mark it as accepted so the next reader can find it quickly. For lightweight contribution ideas or small PR proposals, use the [Discussions starter thread](https://github.com/vshulcz/mpc-autoscaler/discussions/26).
 
 Contribution guidelines live in `CONTRIBUTING.md`. Support guidance lives in `SUPPORT.md`. Release steps are documented in `docs/RELEASE.md`. Security reporting guidance lives in `SECURITY.md`.
 

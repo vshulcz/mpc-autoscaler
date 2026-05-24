@@ -6,7 +6,25 @@ This repository combines three kinds of work:
 - `analysis/`: offline and online MPC tooling.
 - `deploy/`, `dashboards/`, and `loadgen/`: experiment infrastructure and repeatable runners.
 
-Small, focused pull requests are easier to review than broad mixed changes.
+Small, focused pull requests are easier to review than broad mixed changes. The most useful contributions are reproducible feedback, stronger baselines, trace examples, parser tests, and evidence-backed chart/table improvements. Broad wording-only documentation rewrites are lower priority unless they fix a concrete setup or interpretation problem.
+
+## Best First Feedback
+
+If you are new to the project, the best contribution is usually not a pull request. Start with one reproducible check:
+
+```bash
+python3 -m pip install -e analysis
+mpc-validate-trace --trace-csv analysis/mpc_autoscaler_analysis/data/traces/baseline_spike_profile_dt15.csv
+mpc-offline-sim \
+  --trace-csv analysis/mpc_autoscaler_analysis/data/traces/baseline_spike_profile_dt15.csv \
+  --out-dir analysis/out/offline/spike
+```
+
+Then open a reproduction feedback issue or Q&A comment with:
+
+- the command you ran;
+- the output path or error;
+- one concrete thing that would make the result easier to trust, reproduce, or compare.
 
 ## Good First Issues
 
@@ -18,11 +36,11 @@ External contributions are welcome. The fastest path is to pick an issue labeled
 
 Good starter pull requests usually touch one of these areas:
 
-- documentation tables and examples;
-- Pages site copy or experiment-gallery links;
-- small Grafana dashboard improvements;
-- lightweight tests around parsers and CLI help;
-- release verification and reproducibility checklist improvements.
+- one runnable command or example that was unclear;
+- one benchmark table cell backed by a committed summary or exact evidence alias;
+- one Grafana/dashboard explanation tied to a Prometheus metric;
+- one lightweight parser or CLI-help test;
+- one reproduction checklist improvement tied to a command you ran.
 
 Before starting, comment on the issue with your intended approach. This avoids duplicated work and makes review faster.
 

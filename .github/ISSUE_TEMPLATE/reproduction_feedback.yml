@@ -1,0 +1,51 @@
+name: Reproduction feedback
+description: Share results from one documented path and suggest a concrete credibility or usability improvement.
+title: "feedback: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this when you ran one documented command path or reviewed one evidence claim and can provide specific feedback. For general setup questions, use Q&A Discussions instead.
+  - type: dropdown
+    id: path
+    attributes:
+      label: Path checked
+      options:
+        - 60-second walkthrough
+        - bundled trace validation
+        - offline simulation
+        - results snapshot or benchmark matrix
+        - dashboard or Prometheus metric mapping
+        - methodology or limitations review
+    validations:
+      required: true
+  - type: textarea
+    id: commands
+    attributes:
+      label: Commands or pages checked
+      description: Paste the exact commands you ran or the docs pages you reviewed.
+      placeholder: |
+        mpc-validate-trace --trace-csv analysis/mpc_autoscaler_analysis/data/traces/baseline_spike_profile_dt15.csv
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Result or blocker
+      description: What happened? Include output paths, errors, unclear assumptions, or the specific result claim you inspected.
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested improvement
+      description: What concrete change would make the project easier to trust, reproduce, or compare?
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Environment or reviewer context
+      description: Optional. Mention OS, Python version, cluster type, autoscaling background, or production workload assumptions.

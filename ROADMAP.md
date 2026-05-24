@@ -4,11 +4,22 @@ This project is useful for people interested in Kubernetes autoscaling, predicti
 
 ## Near-Term Directions
 
+- Keep the public entrypoint focused on the 60-second MPC-vs-HPA walkthrough instead of scattered docs links.
 - Expand the benchmark matrix from indexed evidence roots into published numeric cells where summaries can be rebuilt.
 - Add more offline policy comparators beside HPA and the current MPC variants.
 - Add a minimal local demo that exercises the service, metrics, and offline analysis without a cluster.
 - Improve dashboard panels for controller decisions, replica lag, and saturation signals.
 - Add stricter static checks for Python once the dependency footprint is stable.
+
+## Feedback Requests
+
+The project needs methodology criticism more than generic docs cleanup. High-leverage feedback includes:
+
+- HPA baseline settings that would make the comparison more credible.
+- Production-like trace shapes that can be reduced to small public CSV examples.
+- Failure cases for missing metrics, solver fallback, cold starts, noisy forecasts, and rate limits.
+- Comparator proposals with enough detail to implement or simulate.
+- Evidence-table or dashboard changes tied to exact paths, metrics, or commands.
 
 ## Practitioner Roadmap
 
@@ -20,11 +31,12 @@ This project is useful for people interested in Kubernetes autoscaling, predicti
 
 ## Good First Contributions
 
+- Run the bundled spike trace validation path and report unclear setup assumptions.
 - Add a small synthetic traffic trace and a matching offline simulation example.
-- Improve `toy-load/README.md` examples for one Kubernetes distribution.
-- Add dashboard screenshots or panel documentation.
+- Improve one `toy-load/README.md` example after testing it on a named Kubernetes distribution.
+- Add one dashboard panel note that maps the panel to an exact Prometheus metric.
 - Add tests around an uncovered artifact parser edge case.
-- Improve error messages in load-generation scripts without changing experiment semantics.
+- Improve one load-generation script error message without changing experiment semantics.
 
 ## Research Directions
 

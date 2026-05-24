@@ -1,5 +1,8 @@
 blank_issues_enabled: false
 contact_links:
+  - name: 60-second walkthrough
+    url: https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/MPC_VS_HPA_60_SECONDS.md
+    about: Start here before opening methodology or reproduction feedback.
   - name: Release process
     url: https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/RELEASE.md
     about: Read the release checklist and tag workflow before opening a release-related issue.

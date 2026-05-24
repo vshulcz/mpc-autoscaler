@@ -2,6 +2,8 @@
 
 This demo is the fast reader path: show why the repository exists without making a production claim.
 
+For a slightly longer technical walkthrough, start with [`docs/MPC_VS_HPA_60_SECONDS.md`](MPC_VS_HPA_60_SECONDS.md).
+
 ![Ten-second autoscaling loop](../site/assets/figures/ten-second-demo.gif)
 
 ## Storyboard

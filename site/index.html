@@ -23,13 +23,14 @@
       <section class="shell hero hero-split hero-studio">
         <div class="hero-copy">
           <div class="kicker-row">
-            <div class="eyebrow">Kubernetes Autoscaling Research</div>
+            <div class="eyebrow">MPC vs HPA</div>
             <span class="release-pill">research software</span>
           </div>
-          <h1>Controlled experiments for reactive and predictive scaling.</h1>
-          <p class="lead">A Go workload, Helm deployment, Prometheus metrics, HPA baseline, MPC controller, offline simulator, methodology notes, and limitations.</p>
+          <h1>Understand the autoscaling experiment in 60 seconds.</h1>
+          <p class="lead">A controlled Kubernetes lab for comparing reactive HPA baselines with a short-horizon MPC controller, with current numbers, caveats, and reproduction paths up front.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="experiments.html">Evidence</a>
+            <a class="button button-primary" href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/MPC_VS_HPA_60_SECONDS.md">60-second walkthrough</a>
+            <a class="button" href="experiments.html">Evidence</a>
             <a class="button" href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/BENCHMARK_MATRIX.md">Benchmark matrix</a>
             <a class="button" href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/RESULTS.md">Results</a>
             <a class="button" href="https://github.com/vshulcz/mpc-autoscaler/discussions/categories/q-a">Q&amp;A</a>
@@ -42,21 +43,21 @@
             <span class="chip">Apache-2.0</span>
           </div>
           <div class="proof-grid" aria-label="Project notes">
-            <span><strong>One repository</strong> service, runners, analysis, release automation.</span>
-            <span><strong>Curated evidence</strong> figures link back to source paths.</span>
-            <span><strong>Public caveats</strong> methodology and limitations are documented.</span>
+            <span><strong>Fast path</strong> one walkthrough before the full repository.</span>
+            <span><strong>Curated evidence</strong> claims link back to source paths.</span>
+            <span><strong>Feedback wanted</strong> baselines, traces, failure cases.</span>
           </div>
         </div>
         <aside class="hero-panel control-console" aria-label="Project status summary">
           <div class="panel-topline console-topline">
             <span class="console-dots"><i></i><i></i><i></i></span>
-            <span>hybrid-sa spike / max70</span>
-            <span class="status-dot">optimal</span>
+            <span>tracked 200 rps spike pair</span>
+            <span class="status-dot">snapshot</span>
           </div>
           <div class="hero-metrics">
-            <div><strong>201.5</strong><span>burst rps</span></div>
-            <div><strong>100%</strong><span>success</span></div>
-            <div><strong>42</strong><span>max replicas</span></div>
+            <div><strong>38%</strong><span>lower p95</span></div>
+            <div><strong>100%</strong><span>success both</span></div>
+            <div><strong>1</strong><span>public pair</span></div>
           </div>
           <div class="trace-stage">
             <svg class="hero-chart" viewBox="0 0 520 260" role="img" aria-label="Demand and replica response curves">
@@ -180,9 +181,9 @@
           </article>
           <article class="card feature-card">
             <span class="card-tag">05</span>
-            <h3>External contributions</h3>
-            <p>External PRs have shipped release verification docs, toy-load examples, Helm/loadgen references, trace validation, and support docs.</p>
-            <p><a href="https://github.com/vshulcz/mpc-autoscaler#external-contributors">See contributors</a></p>
+            <h3>Feedback wanted</h3>
+            <p>The highest-value input is specific methodology criticism: better baselines, traces, comparators, failure cases, and evidence tables.</p>
+            <p><a href="https://github.com/vshulcz/mpc-autoscaler/issues/new?template=reproduction_feedback.yml">Share reproduction feedback</a></p>
           </article>
         </div>
       </section>
@@ -217,7 +218,7 @@
     </main>
 
     <footer class="shell footer">
-      Built from repository sources. Main docs: <a href="https://github.com/vshulcz/mpc-autoscaler/tree/main/docs">docs/</a>. Matrix: <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/BENCHMARK_MATRIX.md">benchmark</a>. API: <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/API.md">public interface</a>. Release: <a href="https://github.com/vshulcz/mpc-autoscaler/releases/tag/v0.1.0">v0.1.0</a>. <a href="https://github.com/vshulcz/mpc-autoscaler/discussions/categories/q-a">Q&amp;A</a>. <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/SECURITY.md">Security</a>.
+      Built from repository sources. Start: <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/MPC_VS_HPA_60_SECONDS.md">60-second walkthrough</a>. Main docs: <a href="https://github.com/vshulcz/mpc-autoscaler/tree/main/docs">docs/</a>. Matrix: <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/BENCHMARK_MATRIX.md">benchmark</a>. API: <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/API.md">public interface</a>. Release: <a href="https://github.com/vshulcz/mpc-autoscaler/releases/tag/v0.1.0">v0.1.0</a>. <a href="https://github.com/vshulcz/mpc-autoscaler/discussions/categories/q-a">Q&amp;A</a>. <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/SECURITY.md">Security</a>.
     </footer>
   </body>
 </html>
