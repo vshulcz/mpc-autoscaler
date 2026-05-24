@@ -6,7 +6,7 @@ This repository combines three kinds of work:
 - `analysis/`: offline and online MPC tooling.
 - `deploy/`, `dashboards/`, and `loadgen/`: experiment infrastructure and repeatable runners.
 
-Small, focused pull requests are easier to review than broad mixed changes. The most useful contributions are reproducible feedback, stronger baselines, trace examples, parser tests, and evidence-backed chart/table improvements. Broad wording-only documentation rewrites are lower priority unless they fix a concrete setup or interpretation problem.
+Small, focused pull requests are easier to review than broad mixed changes. The project has two useful contribution lanes: research feedback for baselines, traces, and failure cases; and micro PRs for small verified docs, examples, links, and metric explanations. Broad wording-only rewrites are lower priority, but narrow AI-assisted fixes are welcome when they are checked against real files or commands.
 
 ## Best First Feedback
 
@@ -26,6 +26,23 @@ Then open a reproduction feedback issue or Q&A comment with:
 - the output path or error;
 - one concrete thing that would make the result easier to trust, reproduce, or compare.
 
+## AI-Assisted Micro PRs
+
+AI-assisted pull requests are welcome when they stay small and verifiable. Good micro PRs fix one command, one link, one metric explanation, one setup note, or one example that can be checked quickly.
+
+Start here:
+
+- Micro contribution guide: [`docs/MICRO_CONTRIBUTIONS.md`](docs/MICRO_CONTRIBUTIONS.md)
+- Micro contribution issue form: <https://github.com/vshulcz/mpc-autoscaler/issues/new?template=micro_contribution.yml>
+
+Before opening a micro PR, make sure it:
+
+- touches one topic only;
+- cites exact file paths, commands, metrics, or issue numbers;
+- avoids invented benchmark claims, result paths, releases, and contributors;
+- keeps generated experiment artifacts out of Git;
+- runs `git diff --check`.
+
 ## Good First Issues
 
 External contributions are welcome. The fastest path is to pick an issue labeled `good first issue` or `help wanted` from the public roadmap board:
@@ -37,6 +54,7 @@ External contributions are welcome. The fastest path is to pick an issue labeled
 Good starter pull requests usually touch one of these areas:
 
 - one runnable command or example that was unclear;
+- one link or cross-reference verified against a committed file;
 - one benchmark table cell backed by a committed summary or exact evidence alias;
 - one Grafana/dashboard explanation tied to a Prometheus metric;
 - one lightweight parser or CLI-help test;

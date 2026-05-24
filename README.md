@@ -68,6 +68,8 @@ Methodology feedback, baseline suggestions, and reproduction reports are more us
 
 Open feedback through the [Q&A thread](https://github.com/vshulcz/mpc-autoscaler/discussions/77) or the [reproduction feedback issue template](https://github.com/vshulcz/mpc-autoscaler/issues/new?template=reproduction_feedback.yml). Use Issues for tracked bugs and scoped implementation work.
 
+AI-assisted micro PRs are also welcome when they are small and verified. Start with [`docs/MICRO_CONTRIBUTIONS.md`](docs/MICRO_CONTRIBUTIONS.md) or open the [micro contribution issue form](https://github.com/vshulcz/mpc-autoscaler/issues/new?template=micro_contribution.yml).
+
 Docs site: <https://vshulcz.github.io/mpc-autoscaler/>.
 
 Roadmap board: <https://github.com/users/vshulcz/projects/2>. Active work is tracked through milestones `v0.2.0`, `thesis-reproducibility`, and `v0.3.0`.

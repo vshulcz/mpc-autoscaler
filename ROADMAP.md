@@ -21,6 +21,10 @@ The project needs methodology criticism more than generic docs cleanup. High-lev
 - Comparator proposals with enough detail to implement or simulate.
 - Evidence-table or dashboard changes tied to exact paths, metrics, or commands.
 
+## Micro Contribution Lane
+
+AI-assisted micro PRs are useful when they are narrow and verified. Good candidates are one-command fixes, one-link repairs, one dashboard metric note, one toy-load example, or one setup note tied to an observed command. See [`docs/MICRO_CONTRIBUTIONS.md`](docs/MICRO_CONTRIBUTIONS.md).
+
 ## Practitioner Roadmap
 
 | Milestone | Outcome | Why it matters |
@@ -32,6 +36,7 @@ The project needs methodology criticism more than generic docs cleanup. High-lev
 ## Good First Contributions
 
 - Run the bundled spike trace validation path and report unclear setup assumptions.
+- Pick one AI-assisted microtask from `docs/MICRO_CONTRIBUTIONS.md` and verify it with `git diff --check`.
 - Add a small synthetic traffic trace and a matching offline simulation example.
 - Improve one `toy-load/README.md` example after testing it on a named Kubernetes distribution.
 - Add one dashboard panel note that maps the panel to an exact Prometheus metric.

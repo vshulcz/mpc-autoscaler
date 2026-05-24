@@ -1,0 +1,63 @@
+name: Micro contribution
+description: Propose a small AI-assisted or manual PR with a narrow, verifiable scope.
+title: "micro: "
+labels:
+  - good first issue
+  - documentation
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for small docs, examples, links, metric explanations, or CLI snippets. AI-assisted drafts are welcome when the proposed change is manually verified.
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Microtask type
+      options:
+        - command or CLI example
+        - link or cross-reference
+        - dashboard or metric explanation
+        - toy-load usage example
+        - trace or offline simulation example
+        - setup note or common error
+    validations:
+      required: true
+  - type: input
+    id: files
+    attributes:
+      label: Exact file or page
+      description: Name the one file or page you plan to change.
+      placeholder: docs/REPRODUCIBILITY.md
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: Proposed small change
+      description: Describe the narrow change in one or two sentences.
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification plan
+      description: What command, link target, metric name, or file path will you check before opening the PR?
+      placeholder: git diff --check
+    validations:
+      required: true
+  - type: checkboxes
+    id: boundaries
+    attributes:
+      label: Boundaries
+      options:
+        - label: I will not add generated experiment artifacts or raw run outputs.
+          required: true
+        - label: I will not invent benchmark claims, paths, releases, or contributors.
+          required: true
+        - label: I will keep the PR focused on one small topic.
+          required: true
+  - type: textarea
+    id: ai
+    attributes:
+      label: AI assistance, if any
+      description: Optional. If AI helped draft the change, say what you manually verified.
