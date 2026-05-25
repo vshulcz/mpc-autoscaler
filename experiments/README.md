@@ -26,6 +26,12 @@ IDs because those names appear in logs and metadata. Use canonical aliases from
 `EVIDENCE_MAP.csv` when referring to artifacts in text, tables, archives, or
 handoff notes.
 
+## Evidence Aliases
+
+Committed evidence aliases in [`experiments/EVIDENCE_MAP.csv`](EVIDENCE_MAP.csv) map to
+local or archived run roots. Bulky raw run directories may stay outside
+Git and are tracked separately via [`experiments/MANIFEST.md`](MANIFEST.md).
+
 ## Evidence Alias Glossary
 
 These short aliases come from `EVIDENCE_MAP.csv` and keep thesis notes,
