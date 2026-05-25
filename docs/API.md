@@ -13,6 +13,7 @@ This document lists the repository surfaces that are stable enough for examples,
 | Trace CSV schema | Required columns: `step`, `timestamp_s`, `rps`; optional `phase_idx`. | [`docs/REPRODUCIBILITY.md#tier-2-offline-mpc-simulation`](REPRODUCIBILITY.md#tier-2-offline-mpc-simulation) |
 | Analysis CLIs | Entry points under `analysis/pyproject.toml`, including `mpc-validate-trace`, `mpc-offline-sim`, `mpc-summarize-run`, and `mpc-control-loop`. | [`analysis/README.md#cli-commands`](../analysis/README.md#cli-commands) |
 | Evidence aliases | Canonical names map to raw local paths through `experiments/EVIDENCE_MAP.csv`. | [`experiments/EVIDENCE_MAP.csv`](../experiments/EVIDENCE_MAP.csv) |
+| Control Loop Safety flags | Stable: `--dry-run` (demo/safe mode), omit `--apply` for recommendations only. Unstable: `--apply` (live-cluster mode, requires namespace, deployment, Prometheus, and RBAC review). | docs/API.md#control-loop-safety-contract |
 
 ## Control Loop Safety Contract
 
