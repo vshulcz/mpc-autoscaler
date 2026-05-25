@@ -1,5 +1,7 @@
 # mpc-autoscaler
 
+Reproducible Kubernetes autoscaling lab comparing reactive HPA baselines with a small MPC controller, backed by Prometheus/Grafana evidence, local simulation paths, and scoped good-first issues.
+
 [![CI](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/ci.yaml/badge.svg)](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/ci.yaml)
 [![Release](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/release.yaml/badge.svg)](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/release.yaml)
 [![Tag Release](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/tag-release.yaml/badge.svg)](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/tag-release.yaml)
@@ -18,6 +20,22 @@
 Research lab for one question: when traffic jumps, can a small Model Predictive Control loop scale earlier than a reactive HPA baseline on a controlled Kubernetes workload?
 
 This is not a production autoscaler. It is a runnable experiment system: a controllable Go workload, Helm deployment, Prometheus metrics, HPA baseline, MPC controller, offline simulator, and evidence docs.
+
+## Follow The Experiments
+
+Star or watch this repository if you want to follow reproducible autoscaling experiments: HPA settings, MPC variants, future KEDA/predictive baselines, trace shapes, failure cases, dashboards, and evidence packaging. The goal is not to claim MPC always wins; it is to make each comparison inspectable.
+
+## Want To Contribute In 10 Minutes?
+
+You do not need a Kubernetes cluster for many useful first contributions.
+
+| If you want to help with... | Start here |
+| --- | --- |
+| a small verified PR | Pick a [`good first issue`](https://github.com/vshulcz/mpc-autoscaler/labels/good%20first%20issue) or read [`docs/MICRO_CONTRIBUTIONS.md`](docs/MICRO_CONTRIBUTIONS.md). |
+| reproducibility feedback | Run the bundled trace validation path below and open the [reproduction feedback form](https://github.com/vshulcz/mpc-autoscaler/issues/new?template=reproduction_feedback.yml). |
+| methodology critique | Read the [60-second walkthrough](docs/MPC_VS_HPA_60_SECONDS.md), then challenge baselines, traces, or failure cases. |
+
+Good first PRs usually improve one command, one link, one metric explanation, one setup note, or one docs example, then show the exact check used.
 
 ## MPC vs HPA In 60 Seconds
 
@@ -55,7 +73,7 @@ In one tracked 200 rps spike pair, Hybrid-SA MPC showed lower burst p95 latency 
 | Public roadmap | <https://github.com/users/vshulcz/projects/2> |
 | Q&A for setup and reproducibility | <https://github.com/vshulcz/mpc-autoscaler/discussions/77> |
 
-Methodology feedback, baseline suggestions, and reproduction reports are more useful than broad drive-by docs edits.
+Methodology feedback, baseline suggestions, reproduction reports, and verified small PRs are more useful than broad wording-only rewrites.
 
 ## Feedback That Helps
 

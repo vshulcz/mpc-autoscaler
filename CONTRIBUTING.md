@@ -30,6 +30,13 @@ Then open a reproduction feedback issue or Q&A comment with:
 
 AI-assisted pull requests are welcome when they stay small and verifiable. Good micro PRs fix one command, one link, one metric explanation, one setup note, or one example that can be checked quickly.
 
+Fast path:
+
+1. Pick one issue labeled [`good first issue`](https://github.com/vshulcz/mpc-autoscaler/labels/good%20first%20issue) or open the micro contribution form.
+2. Touch one topic, preferably one file.
+3. Verify one concrete thing: a command, link target, metric name, file path, or rendered docs page.
+4. Open the PR with the issue number and the exact verification you ran.
+
 Start here:
 
 - Micro contribution guide: [`docs/MICRO_CONTRIBUTIONS.md`](docs/MICRO_CONTRIBUTIONS.md)
@@ -60,7 +67,7 @@ Good starter pull requests usually touch one of these areas:
 - one lightweight parser or CLI-help test;
 - one reproduction checklist improvement tied to a command you ran.
 
-Before starting, comment on the issue with your intended approach. This avoids duplicated work and makes review faster.
+Before starting, comment on the issue if you want to avoid duplicated work. Draft PRs are fine for small docs-only fixes when the scope and verification are clear.
 
 ## Questions Before Code
 

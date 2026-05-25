@@ -1,6 +1,6 @@
 # Micro Contributions
 
-This lane is for small, reviewable pull requests, including AI-assisted work. The goal is to make useful contribution statistics possible without accepting vague, fabricated, or risky changes.
+This lane is for small, reviewable pull requests, including AI-assisted work. The goal is to turn small contributor effort into verified improvements without accepting vague, fabricated, or risky changes.
 
 ## Good Micro PRs
 
@@ -46,3 +46,10 @@ Start with one of these if you want a quick, useful contribution:
 - add one toy-load HTTP example using an endpoint from `toy-load/README.md`.
 
 If unsure, open a micro contribution issue first and describe the exact file you want to touch.
+
+## Example PR Path
+
+1. Pick one issue labeled `good first issue`.
+2. Change one file or one tightly related docs section.
+3. Verify one concrete target: command, link, metric, path, or rendered page.
+4. Open the PR with the issue number and the verification result.

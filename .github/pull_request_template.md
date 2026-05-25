@@ -20,6 +20,15 @@
 - [ ] Documentation updated when commands, paths, or behavior changed
 - [ ] Optional: setup or reproducibility questions that shaped this PR are linked from Discussion #77, with accepted answers marked when they solved the issue
 
+## Micro PR Details, If Applicable
+
+- Issue:
+- Exact file or page touched:
+- One thing verified: command, link target, metric name, file path, or rendered page
+- AI-assisted draft? If yes, what did you manually verify?
+- [ ] Scope is one topic and preferably one file
+- [ ] No generated artifacts, raw experiment outputs, fabricated paths, or unbacked benchmark claims
+
 ## Release Notes
 
 - User-visible changes, or `None`.
