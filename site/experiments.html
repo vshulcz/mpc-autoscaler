@@ -3,8 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Evidence | MPC Autoscaler</title>
-    <meta name="description" content="Evidence page for mpc-autoscaler run summaries, dashboard assets, and release artifacts.">
+    <title>Evidence | Kubernetes HPA vs MPC Autoscaling Results</title>
+    <meta name="description" content="Evidence for Kubernetes HPA vs MPC autoscaling experiments: representative spike results, benchmark matrix, Grafana dashboard metrics, release artifacts, and caveats.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://vshulcz.github.io/mpc-autoscaler/experiments.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="mpc-autoscaler">
+    <meta property="og:title" content="Evidence for Kubernetes HPA vs MPC Autoscaling">
+    <meta property="og:description" content="Representative spike results, benchmark matrix, Grafana dashboard metrics, release artifacts, and evidence aliases for autoscaling experiments.">
+    <meta property="og:url" content="https://vshulcz.github.io/mpc-autoscaler/experiments.html">
+    <meta property="og:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/figures/ten-second-demo.gif">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Evidence for HPA vs MPC Autoscaling">
+    <meta name="twitter:description" content="Representative spike results, benchmark matrix, Grafana metrics, and caveats for Kubernetes autoscaling experiments.">
+    <meta name="twitter:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/figures/ten-second-demo.gif">
     <link rel="stylesheet" href="assets/style.css">
   </head>
   <body>
@@ -43,7 +55,7 @@
         </div>
         <figure class="figure gallery-card gallery-primary">
           <img src="assets/figures/spike-comparison.svg" alt="Hybrid-SA spike control trace">
-          <figcaption class="figure-caption">Hybrid-SA spike trace from curated evidence: 201.5 rps burst throughput, 100% success, optimal solver status, six safety scale-up events, and a 6-to-42 replica response.</figcaption>
+          <figcaption class="figure-caption">Hybrid-SA spike trace from curated evidence: burst detection, solver status, safety scale-up behavior, and controlled downscale from one tracked run. Treat this preview as evidence context, not an aggregate result claim.</figcaption>
         </figure>
         <figure class="figure gallery-card">
           <img src="assets/figures/grafana-dashboard.svg" alt="Grafana dashboard preview">
