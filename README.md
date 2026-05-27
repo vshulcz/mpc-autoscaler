@@ -1,6 +1,6 @@
 # mpc-autoscaler
 
-Reproducible Kubernetes autoscaling lab comparing reactive HPA baselines with a small MPC controller, backed by Prometheus/Grafana evidence, local simulation paths, and scoped good-first issues.
+Model Predictive Control Kubernetes autoscaling lab comparing reactive HPA baselines with a small MPC controller, backed by Prometheus/Grafana evidence, local simulation paths, and scoped good-first issues.
 
 [![CI](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/ci.yaml/badge.svg)](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/ci.yaml)
 [![Release](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/release.yaml/badge.svg)](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/release.yaml)

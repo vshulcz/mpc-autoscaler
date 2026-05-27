@@ -3,20 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MPC Autoscaler | Kubernetes HPA vs MPC Autoscaling Lab</title>
-    <meta name="description" content="Reproducible Kubernetes autoscaling lab comparing reactive HPA baselines with a short-horizon MPC controller, Prometheus metrics, Grafana evidence, and good first issues.">
+    <title>Model Predictive Control Kubernetes Autoscaling | HPA vs MPC Lab</title>
+    <meta name="description" content="Model Predictive Control Kubernetes autoscaling lab comparing reactive HPA baselines with a short-horizon MPC controller, Prometheus metrics, Grafana evidence, and good first issues.">
     <meta name="robots" content="index,follow">
     <meta name="google-site-verification" content="FiO9iElaYNmGO-TNwAAKNSG3QcGYCET2BD0c-ECpHAo">
     <link rel="canonical" href="https://vshulcz.github.io/mpc-autoscaler/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="mpc-autoscaler">
-    <meta property="og:title" content="MPC Autoscaler: Kubernetes HPA vs MPC Autoscaling Lab">
-    <meta property="og:description" content="Compare Kubernetes HPA and Model Predictive Control on a reproducible autoscaling lab with Prometheus/Grafana evidence and scoped starter tasks.">
+    <meta property="og:title" content="Model Predictive Control Kubernetes Autoscaling Lab">
+    <meta property="og:description" content="Compare Kubernetes HPA and Model Predictive Control in a reproducible autoscaling lab with Prometheus/Grafana evidence and scoped starter tasks.">
     <meta property="og:url" content="https://vshulcz.github.io/mpc-autoscaler/">
     <meta property="og:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/figures/ten-second-demo.gif">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="MPC Autoscaler: Kubernetes HPA vs MPC Lab">
-    <meta name="twitter:description" content="Reproducible autoscaling experiments with HPA baselines, MPC control, Prometheus metrics, Grafana evidence, and good first issues.">
+    <meta name="twitter:title" content="Model Predictive Control Kubernetes Autoscaling Lab">
+    <meta name="twitter:description" content="Reproducible HPA vs MPC autoscaling experiments with Prometheus metrics, Grafana evidence, and good first issues.">
     <meta name="twitter:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/figures/ten-second-demo.gif">
     <link rel="stylesheet" href="assets/style.css">
     <script type="application/ld+json">
@@ -24,12 +24,12 @@
         "@context": "https://schema.org",
         "@type": "SoftwareSourceCode",
         "name": "mpc-autoscaler",
-        "description": "Reproducible Kubernetes autoscaling lab comparing reactive HPA baselines with a short-horizon Model Predictive Control controller.",
+        "description": "Model Predictive Control Kubernetes autoscaling lab comparing reactive HPA baselines with a short-horizon MPC controller.",
         "codeRepository": "https://github.com/vshulcz/mpc-autoscaler",
         "url": "https://vshulcz.github.io/mpc-autoscaler/",
         "license": "https://www.apache.org/licenses/LICENSE-2.0",
         "programmingLanguage": ["Go", "Python", "Helm"],
-        "keywords": "Kubernetes autoscaling, HPA, Model Predictive Control, MPC, Prometheus, Grafana, reproducibility, good first issue",
+        "keywords": "Model Predictive Control Kubernetes autoscaling, Kubernetes autoscaling, HPA vs MPC, HPA, MPC, Prometheus, Grafana, reproducibility, good first issue",
         "applicationCategory": "Research software",
         "isAccessibleForFree": true
       }
@@ -54,7 +54,7 @@
             <div class="eyebrow">MPC vs HPA</div>
             <span class="release-pill">research software</span>
           </div>
-          <h1>Understand the autoscaling experiment in 60 seconds.</h1>
+          <h1>Model Predictive Control for Kubernetes autoscaling, compared with HPA.</h1>
           <p class="lead">A controlled Kubernetes lab for comparing reactive HPA baselines with a short-horizon MPC controller, with current numbers, caveats, and reproduction paths up front.</p>
           <div class="hero-actions">
             <a class="button button-primary" href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/MPC_VS_HPA_60_SECONDS.md">60-second walkthrough</a>
@@ -62,7 +62,7 @@
             <a class="button" href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/BENCHMARK_MATRIX.md">Benchmark matrix</a>
             <a class="button" href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/RESULTS.md">Results</a>
             <a class="button" href="https://github.com/vshulcz/mpc-autoscaler/discussions/categories/q-a">Q&amp;A</a>
-            <a class="button" href="https://github.com/vshulcz/mpc-autoscaler"><svg class="github-mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.62 7.62 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg><span>View / watch</span></a>
+            <a class="button" href="https://github.com/vshulcz/mpc-autoscaler"><svg class="github-mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.62 7.62 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg><span>Star / watch on GitHub</span></a>
             <a class="button" href="https://github.com/vshulcz/mpc-autoscaler/labels/good%20first%20issue">Good first issues</a>
           </div>
           <div class="chips" aria-label="Project badges">
@@ -121,6 +121,12 @@
         <div class="runway-item"><span>03</span><strong>Metrics</strong><small>Prometheus</small></div>
         <div class="runway-item"><span>04</span><strong>Policy</strong><small>HPA / MPC</small></div>
         <div class="runway-item"><span>05</span><strong>Evidence</strong><small>figures / docs</small></div>
+      </section>
+
+      <section class="shell section panel">
+        <h2>Why follow this Model Predictive Control Kubernetes autoscaling project?</h2>
+        <p>Star or watch the GitHub repository if you want updates on reproducible HPA vs MPC experiments, future KEDA or predictive baselines, production-like traces, failure cases, and Grafana/Prometheus evidence. The project is useful when you want an inspectable autoscaling lab, not a black-box benchmark claim.</p>
+        <p><a href="https://github.com/vshulcz/mpc-autoscaler">Open the GitHub repository</a> or browse <a href="https://github.com/vshulcz/mpc-autoscaler/labels/good%20first%20issue">good first issues</a>.</p>
       </section>
 
       <section class="shell section">
