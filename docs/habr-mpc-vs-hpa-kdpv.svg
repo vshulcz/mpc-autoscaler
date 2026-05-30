@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Predictive autoscaling in Kubernetes cover</title>
+  <desc id="desc">Cover image about predictive autoscaling meeting Kubernetes readiness delay.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111f"/>
+      <stop offset="0.58" stop-color="#0d1a2e"/>
+      <stop offset="1" stop-color="#121826"/>
+    </linearGradient>
+    <linearGradient id="plan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#58c7ff"/>
+      <stop offset="1" stop-color="#7cf7d4"/>
+    </linearGradient>
+    <linearGradient id="lag" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffb86b"/>
+      <stop offset="1" stop-color="#ff4f8b"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <g opacity="0.12" stroke="#ffffff" stroke-width="1">
+    <path d="M0 180H1600M0 360H1600M0 540H1600M0 720H1600"/>
+    <path d="M200 0V900M400 0V900M600 0V900M800 0V900M1000 0V900M1200 0V900M1400 0V900"/>
+  </g>
+
+  <text x="96" y="122" fill="#f5f7fb" font-family="Inter,Arial,sans-serif" font-size="58" font-weight="800">Когда прогноз встречает Kubernetes</text>
+  <text x="100" y="188" fill="#aebfdd" font-family="Inter,Arial,sans-serif" font-size="30" font-weight="500">меньше реплик — не всегда ниже p95/p99</text>
+
+  <g transform="translate(110 230)">
+    <rect x="0" y="0" width="1380" height="560" rx="38" fill="#0b1527" stroke="#2a3b5c" stroke-width="2"/>
+
+    <g opacity="0.012" stroke="#9fb4d8" stroke-width="1">
+      <path d="M80 420H1300M80 315H1300M80 210H1300M80 105H1300"/>
+      <path d="M260 58V485M440 58V485M620 58V485M800 58V485M980 58V485M1160 58V485"/>
+    </g>
+
+    <g font-family="Inter,Arial,sans-serif" font-size="21" font-weight="700" opacity="0.88">
+      <circle cx="98" cy="70" r="7" fill="#ff9f6e"/>
+      <text x="120" y="77" fill="#ffd2df">нагрузка</text>
+      <circle cx="248" cy="70" r="7" fill="#7cf7d4"/>
+      <text x="270" y="77" fill="#d8fff6">готовая ёмкость</text>
+    </g>
+
+    <rect x="410" y="130" width="210" height="280" rx="24" fill="#ff4f8b" opacity="0.085" stroke="#ff6e91" stroke-width="1.3"/>
+    <line x1="620" y1="114" x2="620" y2="456" stroke="#ff6e91" stroke-width="1.5" stroke-dasharray="9 14" opacity="0.26"/>
+    <text x="515" y="140" text-anchor="middle" fill="#ffb6c8" font-family="Inter,Arial,sans-serif" font-size="32" font-weight="800">пик 30 с</text>
+
+    <path d="M95 398 C250 396 335 386 405 270 C462 170 540 162 620 270 C720 386 850 396 1285 398" fill="none" stroke="#ff9f6e" stroke-width="9" stroke-linecap="round" filter="url(#glow)"/>
+
+    <path d="M95 412 H700 V374 H800 V328 H905 V276 H1015 V210 H1285" fill="none" stroke="#7cf7d4" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity="0.92"/>
+
+    <path d="M620 486H1015" stroke="#ff6e91" stroke-width="4" stroke-linecap="round" opacity="0.72"/>
+    <path d="M620 476V496M1015 476V496" stroke="#ff6e91" stroke-width="4" stroke-linecap="round" opacity="0.72"/>
+    <text x="818" y="526" text-anchor="middle" fill="#d6dfef" font-family="Inter,Arial,sans-serif" font-size="25" font-weight="700">ёмкость появляется позже</text>
+  </g>
+</svg>

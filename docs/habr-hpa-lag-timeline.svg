@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="620" viewBox="0 0 1600 620" role="img" aria-labelledby="title desc">
+  <title id="title">Пик прошёл — Pod ещё не Ready</title>
+  <desc id="desc">Временная шкала: пик длится 30 секунд, а новые Pod становятся Ready только через 40 секунд. Возникает зона риска.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07111F"/>
+      <stop offset="1" stop-color="#0D1726"/>
+    </linearGradient>
+    <pattern id="stripes" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="20" stroke="#FF4F8B" stroke-width="4" opacity="0.3"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="620" fill="url(#bg)"/>
+
+  <g opacity="0.03" stroke="#ffffff" stroke-width="1">
+    <path d="M0 155H1600M0 310H1600M0 465H1600"/>
+    <path d="M200 0V620M400 0V620M600 0V620M800 0V620M1000 0V620M1200 0V620M1400 0V620"/>
+  </g>
+
+  <text x="200" y="80" fill="#F5F7FB" font-family="Inter,Arial,sans-serif" font-size="58" font-weight="800">Пик прошёл — Pod ещё не Ready</text>
+  <text x="200" y="130" fill="#A8B6CF" font-family="Inter,Arial,sans-serif" font-size="26" font-weight="500">Решение уже принято, но новые Pod физически не могут принимать трафик</text>
+
+  <g font-family="Inter,Arial,sans-serif">
+
+    <path d="M200 190H920" stroke="#FFB86B" stroke-width="3" opacity="0.95"/>
+    <path d="M200 180V200M920 180V200" stroke="#FFB86B" stroke-width="3" opacity="0.95"/>
+    <text x="560" y="175" text-anchor="middle" fill="#FFD0A3" font-size="22" font-weight="800">пик трафика: 30 с</text>
+
+    <path d="M200 240H1160" stroke="#7CF7D4" stroke-width="3" opacity="0.75"/>
+    <path d="M200 230V250M1160 230V250" stroke="#7CF7D4" stroke-width="3" opacity="0.75"/>
+    <text x="575" y="225" text-anchor="middle" fill="#C9FFF3" font-size="22" font-weight="800">Actuation Delay (запуск Pod): ≈40 с</text>
+
+    <rect x="920" y="250" width="240" height="200" rx="16" fill="url(#stripes)" opacity="0.8"/>
+    <rect x="920" y="250" width="240" height="200" rx="16" fill="#FF4F8B" opacity="0.1"/>
+    <rect x="920" y="250" width="240" height="200" rx="16" fill="none" stroke="#FF4F8B" stroke-width="2" stroke-dasharray="8 4"/>
+
+    <text x="1040" y="235" text-anchor="middle" fill="#FF4F8B" font-size="20" font-weight="800">ОПАСНАЯ ЗОНА</text>
+    <text x="1040" y="410" text-anchor="middle" fill="#FFD0DB" font-size="18" font-weight="600">накопление</text>
+    <text x="1040" y="435" text-anchor="middle" fill="#FFD0DB" font-size="18" font-weight="600">перегрузки</text>
+
+    <rect x="200" y="340" width="1200" height="30" rx="15" fill="#2B3A55"/>
+
+    <rect x="200" y="340" width="720" height="30" rx="15" fill="#FFB86B"/>
+
+    <rect x="1160" y="340" width="240" height="30" rx="15" fill="#7CF7D4"/>
+    <text x="1280" y="325" text-anchor="middle" fill="#7CF7D4" font-size="20" font-weight="800">Ёмкость доступна</text>
+
+
+    <line x1="200" y1="190" x2="200" y2="470" stroke="#FFB86B" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="200" cy="355" r="8" fill="#07111F" stroke="#FFB86B" stroke-width="4"/>
+    <text x="200" y="500" text-anchor="middle" fill="#FFB86B" font-size="22" font-weight="800">начало пика</text>
+    <text x="200" y="525" text-anchor="middle" fill="#A8B6CF" font-size="18" font-weight="500">t = 0</text>
+
+    <line x1="920" y1="190" x2="920" y2="470" stroke="#FFB86B" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="920" cy="355" r="8" fill="#07111F" stroke="#FFB86B" stroke-width="4"/>
+    <text x="920" y="500" text-anchor="middle" fill="#FFB86B" font-size="22" font-weight="800">пик завершён</text>
+    <text x="920" y="525" text-anchor="middle" fill="#A8B6CF" font-size="18" font-weight="500">t = 30 с</text>
+
+    <line x1="1160" y1="240" x2="1160" y2="470" stroke="#7CF7D4" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="1160" cy="355" r="8" fill="#07111F" stroke="#7CF7D4" stroke-width="4"/>
+    <text x="1160" y="500" text-anchor="middle" fill="#7CF7D4" font-size="22" font-weight="800">Pod Ready</text>
+    <text x="1160" y="525" text-anchor="middle" fill="#A8B6CF" font-size="18" font-weight="500">t ≈ 40 с</text>
+
+    <text x="800" y="585" text-anchor="middle" fill="#C9D7F2" font-size="26" font-weight="800">Вывод: предиктивная модель бессильна перед физическим запаздыванием кластера</text>
+  </g>
+</svg>

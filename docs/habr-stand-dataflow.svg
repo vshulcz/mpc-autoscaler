@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="860" viewBox="0 0 1600 860" role="img" aria-labelledby="title desc">
+  <title id="title">Стенд: HPA и Hybrid параллельно</title>
+  <desc id="desc">Блок-схема потока данных: генератор нагрузки, приложение, мониторинг и два независимых контура управления.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#08111F"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#9FB4D8"/>
+    </marker>
+    <marker id="arrow-dashed" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 Z" fill="#7CF7D4"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="860" fill="url(#bg)"/>
+
+  <g opacity="0.03" stroke="#ffffff" stroke-width="1">
+    <path d="M0 215H1600M0 430H1600M0 645H1600"/>
+    <path d="M200 0V860M400 0V860M600 0V860M800 0V860M1000 0V860M1200 0V860M1400 0V860"/>
+  </g>
+
+  <text x="80" y="95" fill="#F5F7FB" font-family="Inter,Arial,sans-serif" font-size="52" font-weight="800">Стенд: HPA и Hybrid параллельно</text>
+  <text x="80" y="145" fill="#9FB4D8" font-family="Inter,Arial,sans-serif" font-size="28" font-weight="500">HPA использует CPU-метрики, Hybrid читает Prometheus и меняет число реплик через Kubernetes API</text>
+
+  <g font-family="Inter,Arial,sans-serif">
+
+    <rect x="80" y="345" width="200" height="110" rx="20" fill="#122036" stroke="#58C7FF" stroke-width="2"/>
+    <text x="180" y="395" text-anchor="middle" fill="#D9F5FF" font-size="26" font-weight="700">vegeta</text>
+    <text x="180" y="425" text-anchor="middle" fill="#9FB4D8" font-size="18" font-weight="500">профиль нагрузки</text>
+
+    <rect x="360" y="345" width="220" height="110" rx="20" fill="#122036" stroke="#58C7FF" stroke-width="2"/>
+    <text x="470" y="395" text-anchor="middle" fill="#D9F5FF" font-size="26" font-weight="700">toy-load</text>
+    <text x="470" y="425" text-anchor="middle" fill="#9FB4D8" font-size="18" font-weight="500">Go-сервис</text>
+
+    <rect x="660" y="345" width="240" height="110" rx="20" fill="#122036" stroke="#7CF7D4" stroke-width="2"/>
+    <text x="780" y="395" text-anchor="middle" fill="#D8FFF6" font-size="26" font-weight="700">Prometheus</text>
+    <text x="780" y="425" text-anchor="middle" fill="#9FB4D8" font-size="18" font-weight="500">метрики сервиса</text>
+
+    <rect x="660" y="200" width="240" height="100" rx="20" fill="#101B2C" stroke="#C8D7F4" stroke-width="2"/>
+    <text x="780" y="245" text-anchor="middle" fill="#EDF3FF" font-size="24" font-weight="700">metrics-server</text>
+    <text x="780" y="275" text-anchor="middle" fill="#9FB4D8" font-size="18" font-weight="500">CPU-метрики</text>
+
+    <rect x="1080" y="195" width="340" height="110" rx="20" fill="#241827" stroke="#FFB86B" stroke-width="2"/>
+    <text x="1250" y="245" text-anchor="middle" fill="#FFE3BD" font-size="26" font-weight="700">CPU-HPA</text>
+    <text x="1250" y="275" text-anchor="middle" fill="#9FB4D8" font-size="18" font-weight="500">реактивный контур</text>
+
+    <rect x="1080" y="330" width="340" height="140" rx="20" fill="#241827" stroke="#FF6E91" stroke-width="2"/>
+    <text x="1250" y="380" text-anchor="middle" fill="#FFD2DF" font-size="26" font-weight="700">Hybrid-контроллер</text>
+    <text x="1250" y="410" text-anchor="middle" fill="#9FB4D8" font-size="18" font-weight="500">прогноз + QP + защита</text>
+    <text x="1250" y="440" text-anchor="middle" fill="#9FB4D8" font-size="18" font-weight="500">CVXPY / OSQP</text>
+
+    <rect x="1080" y="650" width="340" height="110" rx="20" fill="#101B2C" stroke="#C8D7F4" stroke-width="2"/>
+    <text x="1250" y="695" text-anchor="middle" fill="#EDF3FF" font-size="26" font-weight="700">Kube API</text>
+    <text x="1250" y="725" text-anchor="middle" fill="#9FB4D8" font-size="18" font-weight="500">число реплик</text>
+  </g>
+
+  <g stroke="#9FB4D8" stroke-width="4" fill="none" marker-end="url(#arrow)" opacity="0.9">
+
+    <path d="M 280 400 L 360 400"/> <path d="M 580 400 L 660 400"/> <path d="M 900 250 L 1080 250"/> <path d="M 900 400 L 1080 400"/> <path d="M 1250 470 L 1250 650"/> <path d="M 1420 250 h 40 q 20 0 20 20 v 415 q 0 20 -20 20 L 1420 705"/>
+  </g>
+
+  <g stroke="#7CF7D4" stroke-width="4" stroke-dasharray="8 6" fill="none" marker-end="url(#arrow-dashed)" opacity="0.9">
+    <path d="M 1250 760 v 40 q 0 20 -20 20 H 490 q -20 0 -20 -20 L 470 455"/>
+  </g>
+
+  <g font-family="Inter,Arial,sans-serif" font-size="18" font-weight="500" fill="#C8D7F4">
+    <text x="975" y="235" text-anchor="middle">CPU-метрики</text>
+    <text x="990" y="374" text-anchor="middle">
+      <tspan x="975" dy="0">метрики</tspan>
+      <tspan x="975" dy="20">Prometheus</tspan>
+    </text>
+
+    <text x="1495" y="480" text-anchor="start" fill="#FFB86B" font-weight="700">контур HPA</text>
+    <text x="1265" y="560" text-anchor="start" fill="#FF6E91" font-weight="700">контур Hybrid</text>
+
+    <text x="860" y="805" text-anchor="middle" fill="#7CF7D4" font-weight="700">масштабирование Deployment replicas (Pod)</text>
+  </g>
+</svg>

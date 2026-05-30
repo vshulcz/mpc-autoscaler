@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="820" viewBox="0 0 1600 820" role="img" aria-labelledby="title desc">
+  <title id="title">Что балансирует QP-задача</title>
+  <desc id="desc">Инфографика, объясняющая компоненты целевой функции: штраф за перегрузку, вариацию и ёмкость.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#08111F"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="820" fill="url(#bg)"/>
+
+  <g opacity="0.03" stroke="#ffffff" stroke-width="1">
+    <path d="M0 205H1600M0 410H1600M0 615H1600"/>
+    <path d="M200 0V820M400 0V820M600 0V820M800 0V820M1000 0V820M1200 0V820M1400 0V820"/>
+  </g>
+
+  <text x="90" y="90" fill="#F5F7FB" font-family="Inter,Arial,sans-serif" font-size="52" font-weight="800">Что балансирует QP-задача</text>
+  <text x="90" y="140" fill="#9FB4D8" font-family="Inter,Arial,sans-serif" font-size="28" font-weight="500">Целевая функция минимизирует конфликтующие штрафы на горизонте планирования</text>
+
+  <g font-family="Inter,Arial,sans-serif">
+    <rect x="90" y="210" width="420" height="320" rx="24" fill="#241827" stroke="#FF6E91" stroke-width="2"/>
+
+    <text x="130" y="275" fill="#FFD2DF" font-size="38" font-weight="800">
+      α b<tspan dy="8" font-size="24">k</tspan><tspan dy="-20" font-size="24">2</tspan>
+    </text>
+    <text x="130" y="325" fill="#F5F7FB" font-size="24" font-weight="700">штраф за перегрузку</text>
+    <text x="130" y="360" fill="#9FB4D8" font-size="18" font-weight="500">накопленный дефицит ёмкости</text>
+    <text x="130" y="385" fill="#9FB4D8" font-size="18" font-weight="500">штрафуется квадратично</text>
+
+    <path d="M 130 500 L 470 500 M 130 500 L 130 400" stroke="#4A5B78" stroke-width="2" stroke-linecap="round"/>
+    <path d="M 130 490 Q 300 490 460 400 L 460 500 L 130 500 Z" fill="#FF6E91" opacity="0.1"/>
+    <path d="M 130 490 Q 300 490 460 400" fill="none" stroke="#FF6E91" stroke-width="6" stroke-linecap="round"/>
+  </g>
+
+  <g font-family="Inter,Arial,sans-serif">
+    <rect x="590" y="210" width="420" height="320" rx="24" fill="#122036" stroke="#58C7FF" stroke-width="2"/>
+
+    <text x="630" y="275" fill="#D9F5FF" font-size="38" font-weight="800">
+      β Δx<tspan dy="8" font-size="24">k</tspan><tspan dy="-20" font-size="24">2</tspan>
+    </text>
+    <text x="630" y="325" fill="#F5F7FB" font-size="24" font-weight="700">штраф за вариацию масштаба</text>
+    <text x="630" y="360" fill="#9FB4D8" font-size="18" font-weight="500">предотвращение микро-осцилляций</text>
+    <text x="630" y="385" fill="#9FB4D8" font-size="18" font-weight="500">и снижение нагрузки на API</text>
+
+    <path d="M 630 500 L 970 500 M 630 500 L 630 400" stroke="#4A5B78" stroke-width="2" stroke-linecap="round"/>
+    <path d="M 630 450 L 670 390 L 710 470 L 750 390 L 790 470 L 830 390 L 870 470 L 910 390 L 950 450" fill="none" stroke="#58C7FF" stroke-width="4" stroke-linejoin="round" opacity="0.3" stroke-dasharray="6 4"/>
+    <path d="M 630 450 Q 790 450 950 430" fill="none" stroke="#58C7FF" stroke-width="6" stroke-linecap="round"/>
+  </g>
+
+  <g font-family="Inter,Arial,sans-serif">
+    <rect x="1090" y="210" width="420" height="320" rx="24" fill="#14221F" stroke="#7CF7D4" stroke-width="2"/>
+
+    <text x="1130" y="275" fill="#D8FFF6" font-size="38" font-weight="800">
+      γ x<tspan dy="8" font-size="24">k</tspan>
+    </text>
+    <text x="1130" y="325" fill="#F5F7FB" font-size="24" font-weight="700">штраф за резерв ёмкости</text>
+    <text x="1130" y="360" fill="#9FB4D8" font-size="18" font-weight="500">избыточные реплики стоят денег</text>
+    <text x="1130" y="385" fill="#9FB4D8" font-size="18" font-weight="500">и сжигают облачный бюджет</text>
+
+    <rect x="1140" y="470" width="320" height="30" rx="8" fill="#7CF7D4" opacity="0.2" stroke="#7CF7D4" stroke-width="2"/>
+    <rect x="1140" y="430" width="320" height="30" rx="8" fill="#7CF7D4" opacity="0.4" stroke="#7CF7D4" stroke-width="2"/>
+    <rect x="1140" y="390" width="320" height="30" rx="8" fill="#7CF7D4" opacity="0.1" stroke="#7CF7D4" stroke-width="2" stroke-dasharray="6 4"/>
+    <text x="1300" y="480" text-anchor="middle" fill="#7CF7D4" font-size="72" font-weight="800">$ $ $</text>
+  </g>
+
+  <g stroke="#C8D7F4" stroke-width="4" fill="none" opacity="0.8">
+    <path d="M 300 530 L 300 580 Q 300 600 320 600 L 780 600 Q 800 600 800 620 L 800 640" stroke-linecap="round"/>
+    <path d="M 1300 530 L 1300 580 Q 1300 600 1280 600 L 820 600 Q 800 600 800 620 L 800 640" stroke-linecap="round"/>
+    <path d="M 800 530 L 800 640" stroke-linecap="round"/>
+  </g>
+
+  <polygon points="788,635 812,635 800,650" fill="#C8D7F4"/>
+
+  <g font-family="Inter,Arial,sans-serif">
+    <rect x="400" y="650" width="800" height="110" rx="24" fill="#0B1527" stroke="#C8D7F4" stroke-width="2"/>
+    <text x="800" y="705" text-anchor="middle" fill="#F5F7FB" font-size="28" font-weight="800">Солвер OSQP минимизирует сумму штрафов (J → min)</text>
+    <text x="800" y="740" text-anchor="middle" fill="#9FB4D8" font-size="20" font-weight="500">и находит единственную компромиссную траекторию числа реплик</text>
+  </g>
+</svg>

@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="860" viewBox="0 0 1600 860" role="img" aria-labelledby="title desc">
+  <title id="title">Запрошенные и готовые реплики</title>
+  <desc id="desc">Схематичная иллюстрация физического лага: дефицит ёмкости на пике и избыток после него.</desc>
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#08111F"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+
+    <pattern id="deficit-hatch" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="16" stroke="#FF4F8B" stroke-width="3" opacity="0.3"/>
+    </pattern>
+
+    <pattern id="surplus-hatch" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="16" stroke="#7CF7D4" stroke-width="3" opacity="0.2"/>
+    </pattern>
+
+    <marker id="arrow-left" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 10 0 L 2 5 L 10 10 Z" fill="#9FB4D8"/>
+    </marker>
+    <marker id="arrow-right" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 8 5 L 0 10 Z" fill="#9FB4D8"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="860" fill="url(#bg)"/>
+
+  <text x="120" y="95" fill="#F5F7FB" font-family="Inter,Arial,sans-serif" font-size="52" font-weight="800">Запрошенные и готовые реплики</text>
+  <text x="120" y="140" fill="#9FB4D8" font-family="Inter,Arial,sans-serif" font-size="24" font-weight="500">Схематичная иллюстрация физического лага кластера (Sim-to-Real gap)</text>
+
+  <g opacity="0.05" stroke="#ffffff" stroke-width="1">
+    <path d="M 120 250 H 1480 M 120 350 H 1480 M 120 450 H 1480 M 120 550 H 1480 M 120 650 H 1480"/>
+    <path d="M 200 200 V 700 M 400 200 V 700 M 600 200 V 700 M 800 200 V 700 M 1000 200 V 700 M 1200 200 V 700 M 1400 200 V 700"/>
+  </g>
+
+  <g font-family="Inter,Arial,sans-serif">
+
+    <polygon points="450,650 450,250 700,250 730,370 650,450" fill="url(#deficit-hatch)"/>
+    <polygon points="450,650 450,250 700,250 730,370 650,450" fill="#FF4F8B" opacity="0.1"/>
+
+    <polygon points="730,370 800,650 1150,650 1000,250 850,250" fill="url(#surplus-hatch)"/>
+    <polygon points="730,370 800,650 1150,650 1000,250 850,250" fill="#7CF7D4" opacity="0.05"/>
+
+
+    <path d="M 120 650 L 400 650 L 450 250 L 700 250 L 800 650 L 1480 650" fill="none" stroke="#58C7FF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <path d="M 120 650 L 450 650 L 650 450 L 850 250 L 1000 250 L 1150 650 L 1480 650" fill="none" stroke="#FFB86B" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+
+    <line x1="450" y1="200" x2="850" y2="200" stroke="#9FB4D8" stroke-width="2" marker-start="url(#arrow-left)" marker-end="url(#arrow-right)"/>
+    <line x1="450" y1="200" x2="450" y2="240" stroke="#9FB4D8" stroke-width="2" opacity="0.5"/>
+    <line x1="850" y1="200" x2="850" y2="240" stroke="#9FB4D8" stroke-width="2" opacity="0.5"/>
+    <text x="650" y="185" text-anchor="middle" fill="#C8D7F4" font-size="20" font-weight="700">лаг готовности Pod: ≈ 40 секунд</text>
+
+    <line x1="400" y1="770" x2="700" y2="770" stroke="#FF4F8B" stroke-width="4" opacity="0.8"/>
+    <line x1="400" y1="760" x2="400" y2="780" stroke="#FF4F8B" stroke-width="4" opacity="0.8"/>
+    <line x1="700" y1="760" x2="700" y2="780" stroke="#FF4F8B" stroke-width="4" opacity="0.8"/>
+    <text x="550" y="805" text-anchor="middle" fill="#FF9FBC" font-size="22" font-weight="700">пик нагрузки: 30 секунд</text>
+
+
+    <line x1="400" y1="650" x2="400" y2="720" stroke="#58C7FF" stroke-width="2" stroke-dasharray="6 4" opacity="0.6"/>
+    <text x="400" y="740" text-anchor="middle" fill="#9FB4D8" font-size="18" font-weight="500">начало пика</text>
+
+    <line x1="700" y1="250" x2="700" y2="720" stroke="#58C7FF" stroke-width="2" stroke-dasharray="6 4" opacity="0.6"/>
+    <text x="700" y="740" text-anchor="middle" fill="#9FB4D8" font-size="18" font-weight="500">конец пика</text>
+
+    <line x1="850" y1="250" x2="850" y2="720" stroke="#FFB86B" stroke-width="2" stroke-dasharray="6 4" opacity="0.6"/>
+    <text x="850" y="740" text-anchor="middle" fill="#9FB4D8" font-size="18" font-weight="500">ёмкость готова</text>
+
+    <g transform="translate(1140, 60)">
+      <rect x="0" y="0" width="400" height="210" rx="16" fill="#0B1527" stroke="#263856" stroke-width="2"/>
+
+      <line x1="30" y1="45" x2="70" y2="45" stroke="#58C7FF" stroke-width="6" stroke-linecap="round"/>
+      <text x="90" y="52" fill="#D9F5FF" font-size="22" font-weight="700">Запрошенные реплики</text>
+
+      <line x1="30" y1="90" x2="70" y2="90" stroke="#FFB86B" stroke-width="6" stroke-linecap="round"/>
+      <text x="90" y="97" fill="#FFE3BD" font-size="22" font-weight="700">Готовые реплики</text>
+
+      <rect x="30" y="125" width="40" height="20" rx="4" fill="url(#deficit-hatch)"/>
+      <rect x="30" y="125" width="40" height="20" rx="4" fill="#FF4F8B" opacity="0.1" stroke="#FF4F8B" stroke-width="2"/>
+      <text x="90" y="142" fill="#FF9FBC" font-size="20" font-weight="500">Дефицит (Риск SLA)</text>
+
+      <rect x="30" y="170" width="40" height="20" rx="4" fill="url(#surplus-hatch)"/>
+      <rect x="30" y="170" width="40" height="20" rx="4" fill="#7CF7D4" opacity="0.05" stroke="#7CF7D4" stroke-width="2"/>
+      <text x="90" y="187" fill="#C9FFF3" font-size="20" font-weight="500">Избыток (Расход бюджета)</text>
+    </g>
+
+  </g>
+</svg>
