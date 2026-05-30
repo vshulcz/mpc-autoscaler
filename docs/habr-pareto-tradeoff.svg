@@ -1,47 +1,94 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="920" viewBox="0 0 1600 920" role="img" aria-labelledby="title desc">
-  <title id="title">Autoscaling cost and latency trade-off map</title>
-  <desc id="desc">Scatter plot of AWS proxy cost versus worst p95 latency for HPA60, Hybrid-SA, proxy-HPA+safety and no-QP contours.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="860" viewBox="0 0 1600 860" role="img" aria-labelledby="title desc">
+  <title id="title">Карта компромисса: Стоимость vs Задержки (Spike)</title>
+  <desc id="desc">Диаграмма рассеяния, показывающая Парето-границу. Оптимальные контуры находятся в левом верхнем углу.</desc>
+
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#08111f"/><stop offset="1" stop-color="#111827"/></linearGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#08111F"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+
+    <radialGradient id="ideal-zone" cx="15%" cy="25%" r="50%">
+      <stop offset="0%" stop-color="#7CF7D4" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#7CF7D4" stop-opacity="0"/>
+    </radialGradient>
   </defs>
-  <rect width="1600" height="920" fill="url(#bg)"/>
-  <text x="90" y="90" fill="#f5f7fb" font-family="Inter,Arial,sans-serif" font-size="52" font-weight="800">Компромисс: стоимость и p95</text>
-  <text x="94" y="140" fill="#9fb4d8" font-family="Inter,Arial,sans-serif" font-size="28">левее дешевле, выше меньше p95</text>
 
-  <g transform="translate(180 190)" font-family="Inter,Arial,sans-serif">
-    <rect x="0" y="0" width="1120" height="560" fill="#0b1527" stroke="#2a3b5c" stroke-width="2"/>
-    <g stroke="#263856" stroke-width="1">
-      <path d="M0 112H1120M0 224H1120M0 336H1120M0 448H1120"/>
-      <path d="M224 0V560M448 0V560M672 0V560M896 0V560"/>
+  <rect width="1600" height="860" fill="url(#bg)"/>
+
+  <rect x="200" y="220" width="1200" height="500" fill="url(#ideal-zone)"/>
+
+  <text x="120" y="80" fill="#F5F7FB" font-family="Inter,Arial,sans-serif" font-size="52" font-weight="800">Компромисс: Стоимость инфраструктуры vs Задержка</text>
+  <text x="120" y="130" fill="#9FB4D8" font-family="Inter,Arial,sans-serif" font-size="26" font-weight="500">Проекция Парето-границы для сценария Spike. Ближе к левому верхнему углу — лучше.</text>
+
+  <g opacity="0.1" stroke="#ffffff" stroke-width="1">
+    <path d="M 200 720 H 1400"/>
+    <path d="M 200 595 H 1400"/>
+    <path d="M 200 470 H 1400"/>
+    <path d="M 200 345 H 1400"/>
+    <path d="M 200 220 H 1400"/>
+
+    <path d="M 200 220 V 720"/>
+    <path d="M 467 220 V 720"/>
+    <path d="M 733 220 V 720"/>
+    <path d="M 1000 220 V 720"/>
+    <path d="M 1267 220 V 720"/>
+  </g>
+
+  <path d="M 200 720 H 1440" stroke="#C8D7F4" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 200 720 V 180" stroke="#C8D7F4" stroke-width="3" stroke-linecap="round"/>
+
+  <polygon points="1432,712 1448,720 1432,728" fill="#C8D7F4"/>
+  <polygon points="192,188 200,172 208,188" fill="#C8D7F4"/>
+
+  <g font-family="Inter,Arial,sans-serif" font-size="20" fill="#9FB4D8" font-weight="600">
+    <text x="800" y="800" text-anchor="middle">Прокси-оценка стоимости ресурсов AWS ($/час)</text>
+
+    <text transform="translate(70, 470) rotate(-90)" x="0" y="20" text-anchor="middle">Худший p95 в сценарии Spike (мс)</text>
+
+    <text x="200" y="755" text-anchor="middle">0.02</text>
+    <text x="467" y="755" text-anchor="middle">0.04</text>
+    <text x="733" y="755" text-anchor="middle">0.06</text>
+    <text x="1000" y="755" text-anchor="middle">0.08</text>
+    <text x="1267" y="755" text-anchor="middle">0.10</text>
+
+    <text x="180" y="725" text-anchor="end">175</text>
+    <text x="180" y="600" text-anchor="end">150</text>
+    <text x="180" y="475" text-anchor="end">125</text>
+    <text x="180" y="350" text-anchor="end">100</text>
+    <text x="180" y="225" text-anchor="end">75</text>
+  </g>
+
+  <g font-family="Inter,Arial,sans-serif">
+
+    <text x="240" y="255" fill="#7CF7D4" font-size="22" font-weight="800">↖ Идеальная зона</text>
+    <text x="240" y="280" fill="#7CF7D4" font-size="16" font-weight="500" opacity="0.8">минимум затрат и задержек</text>
+
+    <path d="M 249 562 L 321 337" fill="none" stroke="#7CF7D4" stroke-width="4" stroke-dasharray="8 6" opacity="0.8"/>
+
+    <g transform="translate(240, 460) rotate(-72)">
+      <text x="20" y="20" text-anchor="middle" fill="#7CF7D4" font-size="20" font-weight="700" opacity="0.9">Парето-граница</text>
     </g>
-    <line x1="0" y1="560" x2="1120" y2="560" stroke="#c8d7f4" stroke-width="3"/>
-    <line x1="0" y1="560" x2="0" y2="0" stroke="#c8d7f4" stroke-width="3"/>
-    <text x="420" y="630" fill="#c8d7f4" font-size="24">AWS-оценка, $/ч</text>
-    <text x="-125" y="300" fill="#c8d7f4" font-size="24" transform="rotate(-90 -125 300)">худший p95, мс</text>
 
-    <g font-size="22" font-weight="700">
-      <circle cx="46" cy="383" r="14" fill="#aeb8c8"/>
-      <text x="70" y="391" fill="#cdd6e6">без QP</text>
+    <circle cx="249" cy="562" r="14" fill="#AEB8C8"/>
+    <circle cx="249" cy="562" r="22" fill="#AEB8C8" opacity="0.2"/>
+    <text x="285" y="555" fill="#CDD6E6" font-size="22" font-weight="700">без QP</text>
+    <text x="285" y="580" fill="#9FB4D8" font-size="16">максимальная экономия</text>
 
-      <circle cx="113" cy="131" r="14" fill="#7cf7d4"/>
-      <text x="135" y="139" fill="#d8fff6">proxy-HPA+safety</text>
+    <circle cx="321" cy="337" r="16" fill="#7CF7D4"/>
+    <circle cx="321" cy="337" r="26" fill="#7CF7D4" opacity="0.25"/>
+    <text x="360" y="325" fill="#D8FFF6" font-size="22" font-weight="700">proxy-HPA+safety</text>
+    <text x="360" y="350" fill="#7CF7D4" font-size="16" font-weight="600">Оптимален</text>
 
-      <circle cx="158" cy="544" r="16" fill="#ff6e91"/>
-      <text x="180" y="506" fill="#ffd2df">Hybrid-SA</text>
-      <text x="180" y="534" fill="#ff9fbc" font-size="18">низкая стоимость, высокий p95</text>
+    <circle cx="369" cy="706" r="16" fill="#FF6E91"/>
+    <circle cx="369" cy="706" r="26" fill="#FF6E91" opacity="0.25"/>
+    <text x="405" y="680" fill="#FFD2DF" font-size="22" font-weight="700">Hybrid-SA</text>
+    <text x="405" y="705" fill="#FF9FBC" font-size="16">не доминирует: проигрывает пик</text>
 
-      <circle cx="1004" cy="247" r="16" fill="#58c7ff"/>
-      <text x="760" y="238" fill="#d9f5ff">HPA60</text>
-      <text x="697" y="268" fill="#9fb4d8" font-size="18">выше стоимость, ниже худший p95</text>
+    <circle cx="1276" cy="441" r="16" fill="#58C7FF"/>
+    <circle cx="1276" cy="441" r="26" fill="#58C7FF" opacity="0.25"/>
+    <text x="1235" y="430" text-anchor="end" fill="#D9F5FF" font-size="22" font-weight="700">Консервативный HPA60</text>
+    <text x="1235" y="455" text-anchor="end" fill="#9FB4D8" font-size="16">дороже в 3 раза, но задержка выше идеала</text>
 
-    </g>
-
-    <text x="16" y="598" fill="#9fb4d8" font-size="18">0.02</text>
-    <text x="332" y="598" fill="#9fb4d8" font-size="18">0.05</text>
-    <text x="668" y="598" fill="#9fb4d8" font-size="18">0.08</text>
-    <text x="1070" y="598" fill="#9fb4d8" font-size="18">0.11</text>
-    <text x="-60" y="566" fill="#9fb4d8" font-size="18">175</text>
-    <text x="-60" y="318" fill="#9fb4d8" font-size="18">120</text>
-    <text x="-50" y="36" fill="#9fb4d8" font-size="18">75</text>
   </g>
 </svg>
