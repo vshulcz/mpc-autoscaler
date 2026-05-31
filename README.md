@@ -337,9 +337,20 @@ helm upgrade --install toy-load toy-load/deploy/helm/toy-load \
 
 ## Verifying Release Downloads
 
-GitHub Releases include cross-platform `toy-load` binaries, a packaged Helm
-chart, and `SHA256SUMS`. Verify downloaded assets before unpacking or installing
-them.
+See [docs/RELEASE.md](docs/RELEASE.md) for the release process and exact
+release outputs.
+
+GitHub Releases include a compact asset inventory:
+
+- Linux `toy-load` binaries for `amd64` and `arm64`
+- macOS `toy-load` binaries for `amd64` and `arm64`
+- Helm package
+- `SHA256SUMS`
+- GHCR image: `ghcr.io/vshulcz/toy-load:<tag>`, `:latest`, `:sha-<short-sha>`
+- SBOM
+- provenance
+
+Verify downloaded assets before unpacking or installing them.
 
 Linux:
 
