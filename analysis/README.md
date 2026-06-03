@@ -79,6 +79,14 @@ PYTHONPATH=analysis python3 -m mpc_autoscaler_analysis.offline.validate_trace --
 PYTHONPATH=analysis python3 -m mpc_autoscaler_analysis.offline.simulation --help
 PYTHONPATH=analysis python3 -m mpc_autoscaler_analysis.online.control_loop --help
 ```
+## CLI Commands
+
+| Command | Purpose | Example |
+|---|---|---|
+| `mpc-generate-synthetic-trace` | Generate synthetic traces for testing | `mpc-generate-synthetic-trace --help` |
+| `mpc-validate-trace` | Validate trace files | `mpc-validate-trace --trace-csv <trace.csv>` |
+| `mpc-offline-sim` | Run offline simulation | `mpc-offline-sim --trace-csv <trace.csv> --out-dir <out-dir>` |
+| `mpc-summarize-run` | Summarize simulation results | `mpc-summarize-run --run-dir <run-dir> --out-phase-csv <phase.csv> --out-control-csv <control.csv>` |
 
 ## Thesis Reproduction
 
