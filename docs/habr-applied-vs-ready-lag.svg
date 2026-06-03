@@ -16,8 +16,8 @@
       <line x1="0" y1="0" x2="0" y2="16" stroke="#7CF7D4" stroke-width="3" opacity="0.2"/>
     </pattern>
 
-    <marker id="arrow-left" viewBox="0 0 10 10" refX="2" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
-      <path d="M 10 0 L 2 5 L 10 10 Z" fill="#9FB4D8"/>
+    <marker id="arrow-left" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 8 5 L 0 10 Z" fill="#9FB4D8"/>
     </marker>
     <marker id="arrow-right" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
       <path d="M 0 0 L 8 5 L 0 10 Z" fill="#9FB4D8"/>
