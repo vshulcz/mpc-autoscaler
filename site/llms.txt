@@ -1,0 +1,33 @@
+# mpc-autoscaler
+
+> A reproducible Kubernetes autoscaling lab comparing reactive Horizontal Pod Autoscaler (HPA) baselines with a short-horizon Model Predictive Control (MPC) controller. It ships a controllable `toy-load` workload (Go), a Prometheus/Grafana monitoring stack, repeatable experiment runners, and an offline MPC simulator so autoscaling claims can be inspected and rebuilt rather than taken on trust.
+
+## Key facts
+
+- Project: mpc-autoscaler — Model Predictive Control vs HPA for Kubernetes autoscaling.
+- Author: vshulcz (https://github.com/vshulcz).
+- Repository: https://github.com/vshulcz/mpc-autoscaler
+- License: Apache-2.0 (https://www.apache.org/licenses/LICENSE-2.0).
+- Latest release: v0.1.0 (Linux/macOS binaries, Helm package, checksums, GHCR image `ghcr.io/vshulcz/toy-load:v0.1.0`, SBOM, provenance).
+- Languages/stack: Go (workload), Python (analysis + offline simulator), Helm, Prometheus, Grafana, Kubernetes.
+
+## Key result and caveat
+
+- On one tracked 200 rps spike, the tuned Hybrid-SA MPC variant cut burst p95 latency by about 38% versus the CPU-HPA baseline, with both runs holding 100% request success.
+- Caveat (important nuance): on a short 30-second spike the predictive controller LOST. New Pods only became Ready after roughly 40 seconds, i.e. after the spike had already ended, so the predicted extra capacity arrived too late to help. Predictive autoscaling is only useful when readiness lag is shorter than the demand event it anticipates.
+- Numeric result claims are tied to documented evidence roots; comparator cells that are not yet published are marked as indexed rather than implied.
+
+## Site pages
+
+- [Overview / home](https://vshulcz.github.io/mpc-autoscaler/): project summary, value, evidence preview.
+- [Architecture](https://vshulcz.github.io/mpc-autoscaler/architecture.html): system boundary — toy-load workload, Prometheus metrics, HPA and MPC controllers, runners, evidence paths.
+- [Experiments / evidence](https://vshulcz.github.io/mpc-autoscaler/experiments.html): spike results, benchmark matrix, Grafana panel metrics, evidence roots, release artifacts.
+- [Reproducibility](https://vshulcz.github.io/mpc-autoscaler/reproducibility.html): tiered reproduction — local quality gates, offline MPC simulation, saved evidence summaries, live cluster runs.
+
+## GitHub references
+
+- [RESULTS.md](https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/RESULTS.md): the result snapshot, full caveats, and run paths.
+- [BENCHMARK_MATRIX.md](https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/BENCHMARK_MATRIX.md): benchmark scope rules and rebuild path.
+- [ARCHITECTURE.md](https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/ARCHITECTURE.md): documented system boundaries.
+- [REPRODUCIBILITY.md](https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/REPRODUCIBILITY.md): full reproduction checklist.
+- [v0.1.0 release](https://github.com/vshulcz/mpc-autoscaler/releases/tag/v0.1.0): published artifacts.

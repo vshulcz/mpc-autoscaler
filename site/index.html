@@ -13,25 +13,53 @@
     <meta property="og:title" content="Model Predictive Control Kubernetes Autoscaling Lab">
     <meta property="og:description" content="Compare Kubernetes HPA and Model Predictive Control in a reproducible autoscaling lab with Prometheus/Grafana evidence and scoped starter tasks.">
     <meta property="og:url" content="https://vshulcz.github.io/mpc-autoscaler/">
-    <meta property="og:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/figures/ten-second-demo.gif">
+    <meta property="og:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/og/og-cover.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="MPC vs HPA — Kubernetes autoscaling lab comparing reactive HPA with a short-horizon Model Predictive Control controller.">
+    <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Model Predictive Control Kubernetes Autoscaling Lab">
     <meta name="twitter:description" content="Reproducible HPA vs MPC autoscaling experiments with Prometheus metrics, Grafana evidence, and good first issues.">
-    <meta name="twitter:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/figures/ten-second-demo.gif">
+    <meta name="twitter:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/og/og-cover.png">
+    <link rel="icon" href="/mpc-autoscaler/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/mpc-autoscaler/apple-touch-icon.png">
     <link rel="stylesheet" href="assets/style.css">
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "SoftwareSourceCode",
-        "name": "mpc-autoscaler",
-        "description": "Model Predictive Control Kubernetes autoscaling lab comparing reactive HPA baselines with a short-horizon MPC controller.",
-        "codeRepository": "https://github.com/vshulcz/mpc-autoscaler",
-        "url": "https://vshulcz.github.io/mpc-autoscaler/",
-        "license": "https://www.apache.org/licenses/LICENSE-2.0",
-        "programmingLanguage": ["Go", "Python", "Helm"],
-        "keywords": "Model Predictive Control Kubernetes autoscaling, Kubernetes autoscaling, HPA vs MPC, HPA, MPC, Prometheus, Grafana, reproducibility, good first issue",
-        "applicationCategory": "Research software",
-        "isAccessibleForFree": true
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://vshulcz.github.io/mpc-autoscaler/#website",
+            "name": "mpc-autoscaler",
+            "url": "https://vshulcz.github.io/mpc-autoscaler/",
+            "description": "Reproducible Kubernetes autoscaling lab comparing reactive HPA baselines with a short-horizon Model Predictive Control controller.",
+            "inLanguage": "en",
+            "author": { "@id": "https://github.com/vshulcz#person" }
+          },
+          {
+            "@type": "SoftwareSourceCode",
+            "@id": "https://github.com/vshulcz/mpc-autoscaler#software",
+            "name": "mpc-autoscaler",
+            "description": "Model Predictive Control Kubernetes autoscaling lab comparing reactive HPA baselines with a short-horizon MPC controller.",
+            "url": "https://vshulcz.github.io/mpc-autoscaler/",
+            "codeRepository": "https://github.com/vshulcz/mpc-autoscaler",
+            "license": "https://www.apache.org/licenses/LICENSE-2.0",
+            "programmingLanguage": ["Go", "Python"],
+            "runtimePlatform": "Kubernetes",
+            "keywords": "Model Predictive Control Kubernetes autoscaling, Kubernetes autoscaling, HPA vs MPC, HPA, MPC, Prometheus, Grafana, reproducibility, good first issue",
+            "isPartOf": { "@id": "https://vshulcz.github.io/mpc-autoscaler/#website" },
+            "author": { "@id": "https://github.com/vshulcz#person" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://github.com/vshulcz#person",
+            "name": "vshulcz",
+            "url": "https://github.com/vshulcz"
+          }
+        ]
       }
     </script>
   </head>

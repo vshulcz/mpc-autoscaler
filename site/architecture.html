@@ -12,12 +12,45 @@
     <meta property="og:title" content="MPC Autoscaler Architecture">
     <meta property="og:description" content="System boundary for Kubernetes HPA vs MPC autoscaling experiments: workload, metrics, controller, runners, and evidence.">
     <meta property="og:url" content="https://vshulcz.github.io/mpc-autoscaler/architecture.html">
-    <meta property="og:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/figures/ten-second-demo.gif">
+    <meta property="og:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/og/og-cover.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="MPC vs HPA — Kubernetes autoscaling lab comparing reactive HPA with a short-horizon Model Predictive Control controller.">
+    <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="MPC Autoscaler Architecture">
     <meta name="twitter:description" content="Kubernetes autoscaling lab architecture with toy-load, Prometheus, HPA, MPC, runners, and evidence paths.">
-    <meta name="twitter:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/figures/ten-second-demo.gif">
+    <meta name="twitter:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/og/og-cover.png">
+    <link rel="icon" href="/mpc-autoscaler/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/mpc-autoscaler/apple-touch-icon.png">
     <link rel="stylesheet" href="assets/style.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "TechArticle",
+            "headline": "Small service, visible metrics, explicit controller loop.",
+            "description": "Architecture overview for a reproducible Kubernetes autoscaling lab with toy-load, Prometheus metrics, HPA baselines, MPC controller, and evidence paths.",
+            "image": "https://vshulcz.github.io/mpc-autoscaler/assets/og/og-cover.png",
+            "mainEntityOfPage": "https://vshulcz.github.io/mpc-autoscaler/architecture.html",
+            "author": {
+              "@type": "Person",
+              "name": "vshulcz",
+              "url": "https://github.com/vshulcz"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vshulcz.github.io/mpc-autoscaler/" },
+              { "@type": "ListItem", "position": 2, "name": "Architecture", "item": "https://vshulcz.github.io/mpc-autoscaler/architecture.html" }
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <header class="shell nav">

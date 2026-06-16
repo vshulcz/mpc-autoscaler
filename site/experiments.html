@@ -12,12 +12,66 @@
     <meta property="og:title" content="Evidence for Kubernetes HPA vs MPC Autoscaling">
     <meta property="og:description" content="Representative spike results, benchmark matrix, Grafana dashboard metrics, release artifacts, and evidence aliases for autoscaling experiments.">
     <meta property="og:url" content="https://vshulcz.github.io/mpc-autoscaler/experiments.html">
-    <meta property="og:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/figures/ten-second-demo.gif">
+    <meta property="og:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/og/og-cover.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="MPC vs HPA — Kubernetes autoscaling lab comparing reactive HPA with a short-horizon Model Predictive Control controller.">
+    <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Evidence for HPA vs MPC Autoscaling">
     <meta name="twitter:description" content="Representative spike results, benchmark matrix, Grafana metrics, and caveats for Kubernetes autoscaling experiments.">
-    <meta name="twitter:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/figures/ten-second-demo.gif">
+    <meta name="twitter:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/og/og-cover.png">
+    <link rel="icon" href="/mpc-autoscaler/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/mpc-autoscaler/apple-touch-icon.png">
     <link rel="stylesheet" href="assets/style.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "TechArticle",
+            "headline": "Run summaries, dashboard assets, and release artifacts.",
+            "description": "Evidence for Kubernetes HPA vs MPC autoscaling experiments: representative spike results, benchmark matrix, Grafana dashboard metrics, release artifacts, and caveats.",
+            "image": "https://vshulcz.github.io/mpc-autoscaler/assets/og/og-cover.png",
+            "mainEntityOfPage": "https://vshulcz.github.io/mpc-autoscaler/experiments.html",
+            "author": {
+              "@type": "Person",
+              "name": "vshulcz",
+              "url": "https://github.com/vshulcz"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vshulcz.github.io/mpc-autoscaler/" },
+              { "@type": "ListItem", "position": 2, "name": "Evidence", "item": "https://vshulcz.github.io/mpc-autoscaler/experiments.html" }
+            ]
+          },
+          {
+            "@type": "Dataset",
+            "name": "HPA vs MPC Kubernetes autoscaling benchmark matrix",
+            "description": "Benchmark matrix and evidence roots for reactive CPU-HPA baselines and a tuned Hybrid-SA Model Predictive Control controller across step, spike, and seasonality scenarios. On one tracked 200 rps spike the MPC variant cut burst p95 latency by about 38% versus the CPU-HPA baseline, both at 100% success; on a short 30s spike the predictive controller lost because new Pods became Ready (~40s) after the spike ended.",
+            "url": "https://vshulcz.github.io/mpc-autoscaler/experiments.html",
+            "license": "https://www.apache.org/licenses/LICENSE-2.0",
+            "keywords": ["Kubernetes autoscaling", "HPA", "MPC", "Model Predictive Control", "Prometheus", "Grafana", "benchmark", "p95 latency"],
+            "creator": {
+              "@type": "Person",
+              "name": "vshulcz",
+              "url": "https://github.com/vshulcz"
+            },
+            "isAccessibleForFree": true,
+            "distribution": [
+              {
+                "@type": "DataDownload",
+                "encodingFormat": "text/csv",
+                "contentUrl": "https://github.com/vshulcz/mpc-autoscaler/blob/main/experiments/EVIDENCE_MAP.csv"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <header class="shell nav">

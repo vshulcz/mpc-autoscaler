@@ -12,12 +12,45 @@
     <meta property="og:title" content="Reproduce Kubernetes HPA vs MPC Autoscaling Experiments">
     <meta property="og:description" content="Start with local trace validation, run offline MPC simulation, then rebuild saved evidence or live Kubernetes runs.">
     <meta property="og:url" content="https://vshulcz.github.io/mpc-autoscaler/reproducibility.html">
-    <meta property="og:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/figures/ten-second-demo.gif">
+    <meta property="og:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/og/og-cover.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="MPC vs HPA — Kubernetes autoscaling lab comparing reactive HPA with a short-horizon Model Predictive Control controller.">
+    <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Reproduce HPA vs MPC Autoscaling Experiments">
     <meta name="twitter:description" content="Local checks, offline MPC simulation, saved evidence summaries, and live Kubernetes HPA/MPC runs.">
-    <meta name="twitter:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/figures/ten-second-demo.gif">
+    <meta name="twitter:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/og/og-cover.png">
+    <link rel="icon" href="/mpc-autoscaler/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/mpc-autoscaler/apple-touch-icon.png">
     <link rel="stylesheet" href="assets/style.css">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "TechArticle",
+            "headline": "Pick the lightest tier that answers your question.",
+            "description": "Reproduction paths for Kubernetes autoscaling experiments: local checks, offline MPC simulation, saved evidence summaries, and live cluster HPA/MPC runs.",
+            "image": "https://vshulcz.github.io/mpc-autoscaler/assets/og/og-cover.png",
+            "mainEntityOfPage": "https://vshulcz.github.io/mpc-autoscaler/reproducibility.html",
+            "author": {
+              "@type": "Person",
+              "name": "vshulcz",
+              "url": "https://github.com/vshulcz"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vshulcz.github.io/mpc-autoscaler/" },
+              { "@type": "ListItem", "position": 2, "name": "Reproducibility", "item": "https://vshulcz.github.io/mpc-autoscaler/reproducibility.html" }
+            ]
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <header class="shell nav">
@@ -65,14 +98,14 @@ bash loadgen/scripts/run_mpc_experiment_incluster.sh spike</code></pre></div></d
       <section class="section grid grid-2">
         <article class="card">
           <span class="card-tag">traces</span>
-          <h2>Offline trace examples</h2>
+          <h3>Offline trace examples</h3>
           <p>The repository ships baseline step, spike, and seasonality CSV traces for local validation and offline simulation.</p>
           <p>Use them with <code>mpc-validate-trace</code> before running <code>mpc-offline-sim</code> to check schema and timing assumptions.</p>
           <p><a href="https://github.com/vshulcz/mpc-autoscaler/tree/main/analysis/mpc_autoscaler_analysis/data/traces">Open trace examples</a></p>
         </article>
         <article class="card">
           <span class="card-tag">commands</span>
-          <h2>Validate, then simulate</h2>
+          <h3>Validate, then simulate</h3>
           <pre><code>mpc-validate-trace \
   --trace-csv analysis/mpc_autoscaler_analysis/data/traces/baseline_spike_profile_dt15.csv
 
