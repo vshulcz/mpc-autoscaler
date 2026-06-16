@@ -60,6 +60,12 @@ jobs:
       - name: Repository checks
         run: make check
 
+      - name: Verify analysis package installs and CLIs run
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e analysis
+          mpc-validate-trace --trace-csv analysis/mpc_autoscaler_analysis/data/traces/baseline_spike_profile_dt15.csv
+
       - name: Render optional monitoring assets
         run: |
           helm template toy-load toy-load/deploy/helm/toy-load \

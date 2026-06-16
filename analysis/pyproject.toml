@@ -47,4 +47,4 @@ packages = [
 ]
 
 [tool.setuptools.package-data]
-mpc_autoscaler_analysis.data = ["traces/*.csv"]
+"mpc_autoscaler_analysis.data" = ["traces/*.csv"]
