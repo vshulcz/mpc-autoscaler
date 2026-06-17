@@ -6,7 +6,7 @@ This repository combines three kinds of work:
 - `analysis/`: offline and online MPC tooling.
 - `deploy/`, `dashboards/`, and `loadgen/`: experiment infrastructure and repeatable runners.
 
-Small, focused pull requests are easier to review than broad mixed changes. The project has two useful contribution lanes: research feedback for baselines, traces, and failure cases; and micro PRs for small verified docs, examples, links, and metric explanations. Broad wording-only rewrites are lower priority, but narrow AI-assisted fixes are welcome when they are checked against real files or commands.
+Small, focused pull requests are easier to review than broad mixed changes. The project has two useful contribution lanes: research feedback for baselines, traces, and failure cases; and micro PRs for small verified docs, examples, links, and metric explanations. Broad wording-only rewrites are lower priority, but narrow fixes are welcome when they are checked against real files or commands.
 
 ## Best First Feedback
 
@@ -26,9 +26,9 @@ Then open a reproduction feedback issue or Q&A comment with:
 - the output path or error;
 - one concrete thing that would make the result easier to trust, reproduce, or compare.
 
-## AI-Assisted Micro PRs
+## Micro PRs
 
-AI-assisted pull requests are welcome when they stay small and verifiable. Good micro PRs fix one command, one link, one metric explanation, one setup note, or one example that can be checked quickly.
+Micro pull requests are welcome when they stay small and verifiable. Good micro PRs fix one command, one link, one metric explanation, one setup note, or one example that can be checked quickly.
 
 Fast path:
 

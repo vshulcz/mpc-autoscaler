@@ -1,5 +1,5 @@
 name: Micro contribution
-description: Propose a small AI-assisted or manual PR with a narrow, verifiable scope.
+description: Propose a small PR with a narrow, verifiable scope.
 title: "micro: "
 labels:
   - good first issue
@@ -8,7 +8,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Use this for small docs, examples, links, metric explanations, or CLI snippets. AI-assisted drafts are welcome when the proposed change is manually verified.
+        Use this for small docs, examples, links, metric explanations, or CLI snippets. Drafts are welcome when the proposed change is manually verified.
   - type: dropdown
     id: kind
     attributes:
@@ -56,8 +56,3 @@ body:
           required: true
         - label: I will keep the PR focused on one small topic.
           required: true
-  - type: textarea
-    id: ai
-    attributes:
-      label: AI assistance, if any
-      description: Optional. If AI helped draft the change, say what you manually verified.

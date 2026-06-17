@@ -25,7 +25,6 @@
 - Issue:
 - Exact file or page touched:
 - One thing verified: command, link target, metric name, file path, or rendered page
-- AI-assisted draft? If yes, what did you manually verify?
 - [ ] Scope is one topic and preferably one file
 - [ ] No generated artifacts, raw experiment outputs, fabricated paths, or unbacked benchmark claims
 

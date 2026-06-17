@@ -1,6 +1,6 @@
 # Micro Contributions
 
-This lane is for small, reviewable pull requests, including AI-assisted work. The goal is to turn small contributor effort into verified improvements without accepting vague, fabricated, or risky changes.
+This lane is for small, reviewable pull requests. The goal is to turn small contributor effort into verified improvements without accepting vague, fabricated, or risky changes.
 
 ## Good Micro PRs
 
@@ -14,16 +14,16 @@ Good micro PRs change one small thing and prove it with a quick check.
 | Trace example | Add one small trace usage example using committed files. | Use `mpc-validate-trace --trace-csv <path>`. |
 | Error-message note | Document one common setup error and the shortest fix. | Mention the command or environment where the error appears. |
 
-## AI-Assisted PR Rules
+## PR Rules
 
-AI-generated drafts are welcome when the contributor verifies them. A pull request is easier to merge when it follows these rules:
+Drafts are welcome when the contributor verifies them. A pull request is easier to merge when it follows these rules:
 
 - touch one topic only;
 - cite exact file paths, commands, metrics, or issue numbers;
 - do not invent benchmark claims, results, paths, releases, or contributors;
 - do not add generated experiment outputs or raw artifacts;
 - run `git diff --check` before opening the PR;
-- say what was AI-assisted and what was manually verified.
+- say what you manually verified.
 
 ## Avoid These
 
