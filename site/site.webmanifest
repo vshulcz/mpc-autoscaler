@@ -1,0 +1,14 @@
+{
+  "name": "MPC vs HPA — Kubernetes autoscaling lab",
+  "short_name": "mpc-autoscaler",
+  "description": "Reproducible Kubernetes autoscaling lab comparing reactive HPA with a short-horizon MPC controller.",
+  "start_url": "/mpc-autoscaler/",
+  "scope": "/mpc-autoscaler/",
+  "display": "minimal-ui",
+  "theme_color": "#0d1117",
+  "background_color": "#0d1117",
+  "icons": [
+    { "src": "/mpc-autoscaler/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/mpc-autoscaler/apple-touch-icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" }
+  ]
+}

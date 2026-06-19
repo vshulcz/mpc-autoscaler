@@ -3,15 +3,26 @@ message: "If you use this repository in academic work, please cite it using this
 title: "mpc-autoscaler: predictive autoscaling experiments for Kubernetes"
 type: software
 authors:
-  - name: "vshulcz"
+  - alias: vshulcz
+    name: "vshulcz"
 repository-code: "https://github.com/vshulcz/mpc-autoscaler"
 url: "https://github.com/vshulcz/mpc-autoscaler"
 license: "Apache-2.0"
 version: "0.1.0"
+date-released: 2026-06-19
+identifiers:
+  - type: url
+    value: "https://github.com/vshulcz/mpc-autoscaler/releases/tag/v0.1.0"
+    description: "Tagged GitHub release for the cited version."
 keywords:
   - kubernetes
   - autoscaling
   - model-predictive-control
   - hpa
   - reproducible-research
-abstract: "Research software for comparing reactive Kubernetes autoscaling baselines with a Model Predictive Control loop under repeatable traffic profiles."
+abstract: >-
+  Research software for comparing reactive Kubernetes autoscaling baselines
+  with a short-horizon Model Predictive Control loop under repeatable
+  traffic profiles. Includes a tunable Go workload (toy-load), an HPA
+  baseline, an MPC controller, an offline simulator, and curated evidence
+  with linked rebuild commands.

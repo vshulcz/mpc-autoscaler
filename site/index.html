@@ -3,28 +3,31 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Model Predictive Control Kubernetes Autoscaling | HPA vs MPC Lab</title>
-    <meta name="description" content="Model Predictive Control Kubernetes autoscaling lab comparing reactive HPA baselines with a short-horizon MPC controller, Prometheus metrics, Grafana evidence, and good first issues.">
+    <title>MPC vs HPA — Kubernetes autoscaling lab</title>
+    <meta name="description" content="A reproducible lab to test whether Model Predictive Control can scale Kubernetes earlier than the HPA — and where it fails. Includes one tracked spike pair, evidence paths, and a 60-second reproduction.">
     <meta name="robots" content="index,follow">
     <meta name="google-site-verification" content="FiO9iElaYNmGO-TNwAAKNSG3QcGYCET2BD0c-ECpHAo">
     <link rel="canonical" href="https://vshulcz.github.io/mpc-autoscaler/">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="mpc-autoscaler">
-    <meta property="og:title" content="Model Predictive Control Kubernetes Autoscaling Lab">
-    <meta property="og:description" content="Compare Kubernetes HPA and Model Predictive Control in a reproducible autoscaling lab with Prometheus/Grafana evidence and scoped starter tasks.">
+    <meta property="og:title" content="MPC vs HPA — Kubernetes autoscaling lab">
+    <meta property="og:description" content="Predict-and-scale vs react-and-scale on Kubernetes, with one tracked spike pair, a known failure case, and a 60-second reproduction.">
     <meta property="og:url" content="https://vshulcz.github.io/mpc-autoscaler/">
     <meta property="og:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/og/og-cover.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="MPC vs HPA — Kubernetes autoscaling lab comparing reactive HPA with a short-horizon Model Predictive Control controller.">
+    <meta property="og:image:alt" content="MPC cut p95 latency 38% on a 200 rps spike; on a 30s burst it lost because new Pods became Ready 40s after the decision.">
     <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Model Predictive Control Kubernetes Autoscaling Lab">
-    <meta name="twitter:description" content="Reproducible HPA vs MPC autoscaling experiments with Prometheus metrics, Grafana evidence, and good first issues.">
+    <meta name="twitter:title" content="MPC vs HPA — Kubernetes autoscaling lab">
+    <meta name="twitter:description" content="On one 200 rps spike MPC cut p95 38%. On a 30s burst it lost — Pods became Ready 40s after the decision. Reproduce both.">
     <meta name="twitter:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/og/og-cover.png">
     <link rel="icon" href="/mpc-autoscaler/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/mpc-autoscaler/apple-touch-icon.png">
+    <link rel="manifest" href="/mpc-autoscaler/site.webmanifest">
+    <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
     <link rel="stylesheet" href="assets/style.css">
     <script type="application/ld+json">
       {
@@ -80,29 +83,26 @@
         <div class="hero-copy">
           <div class="kicker-row">
             <div class="eyebrow">MPC vs HPA</div>
-            <span class="release-pill">research software</span>
+            <span class="release-pill">v0.1.0 · one tracked spike pair</span>
           </div>
-          <h1>Model Predictive Control for Kubernetes autoscaling, compared with HPA.</h1>
-          <p class="lead">A controlled Kubernetes lab for comparing reactive HPA baselines with a short-horizon MPC controller, with current numbers, caveats, and reproduction paths up front.</p>
+          <h1>Predict-and-scale, or react-and-scale?</h1>
+          <p class="lead">On a tracked 200&nbsp;rps spike, a short-horizon MPC controller cut <strong>p95 latency by 38%</strong> against the HPA baseline. On a 30&nbsp;s burst it lost — new Pods became Ready about 40&nbsp;s after the decision. Both runs are reproducible from this repository.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/MPC_VS_HPA_60_SECONDS.md">60-second walkthrough</a>
-            <a class="button" href="experiments.html">Evidence</a>
-            <a class="button" href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/BENCHMARK_MATRIX.md">Benchmark matrix</a>
-            <a class="button" href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/RESULTS.md">Results</a>
-            <a class="button" href="https://github.com/vshulcz/mpc-autoscaler/discussions/categories/q-a">Q&amp;A</a>
-            <a class="button" href="https://github.com/vshulcz/mpc-autoscaler"><svg class="github-mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.62 7.62 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg><span>Star / watch on GitHub</span></a>
-            <a class="button" href="https://github.com/vshulcz/mpc-autoscaler/labels/good%20first%20issue">Good first issues</a>
+            <a class="button button-primary" href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/MPC_VS_HPA_60_SECONDS.md">Reproduce in 60&nbsp;s</a>
+            <a class="button" href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/RESULTS.md">Results &amp; evidence paths</a>
+            <a class="button" href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/LIMITATIONS.md">Where it fails</a>
+            <a class="button" href="https://github.com/vshulcz/mpc-autoscaler"><svg class="github-mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.62 7.62 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg><span>Source on GitHub</span></a>
           </div>
           <div class="chips" aria-label="Project badges">
             <span class="chip">Go 1.25</span>
             <span class="chip">Python 3.11+</span>
-            <span class="chip">GHCR image</span>
+            <span class="chip">Prometheus / Grafana</span>
             <span class="chip">Apache-2.0</span>
           </div>
-          <div class="proof-grid" aria-label="Project notes">
-            <span><strong>Fast path</strong> one walkthrough before the full repository.</span>
-            <span><strong>Curated evidence</strong> claims link back to source paths.</span>
-            <span><strong>Follow progress</strong> new baselines, traces, failure cases.</span>
+          <div class="proof-grid" aria-label="What you get">
+            <span><strong>One verified pair</strong> 200&nbsp;rps spike, MPC vs HPA, with raw traces.</span>
+            <span><strong>One known failure</strong> 30&nbsp;s burst &amp; ready-lag, documented end to end.</span>
+            <span><strong>Reproducible</strong> offline simulation or live Kubernetes cluster.</span>
           </div>
         </div>
         <aside class="hero-panel control-console" aria-label="Project status summary">
@@ -152,34 +152,34 @@
       </section>
 
       <section class="shell section panel">
-        <h2>Why follow this Model Predictive Control Kubernetes autoscaling project?</h2>
-        <p>Star or watch the GitHub repository if you want updates on reproducible HPA vs MPC experiments, future KEDA or predictive baselines, production-like traces, failure cases, and Grafana/Prometheus evidence. The project is useful when you want an inspectable autoscaling lab, not a black-box benchmark claim.</p>
-        <p><a href="https://github.com/vshulcz/mpc-autoscaler">Open the GitHub repository</a> or browse <a href="https://github.com/vshulcz/mpc-autoscaler/labels/good%20first%20issue">good first issues</a>.</p>
+        <h2>What this repository actually contains</h2>
+        <p>A Go workload (<code>toy-load</code>) with tunable CPU, sleep, jitter, payload, and error-rate; a Python short-horizon MPC controller; one curated MPC-vs-HPA spike pair with raw traces and Grafana figures; and an offline simulator for sweeps without a cluster. Every figure links back to the source path that produced it.</p>
+        <p><a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/BENCHMARK_MATRIX.md">Benchmark matrix</a> · <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/METHODOLOGY.md">Methodology</a> · <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/REPRODUCIBILITY.md">Reproducibility</a></p>
       </section>
 
       <section class="shell section">
         <div class="section-head section-head-row">
           <div>
-            <div class="eyebrow">Practitioner Value</div>
-            <h2>Useful as an autoscaling lab, not a production replacement.</h2>
+            <div class="eyebrow">Scope</div>
+            <h2>Useful as a lab. Not a production autoscaler.</h2>
           </div>
-          <p>Use it to test workload knobs, metrics, HPA behavior, predictive control ideas, and evidence packaging.</p>
+          <p>Designed to probe knobs, baselines, and failure cases — not to replace the HPA in production.</p>
         </div>
         <div class="grid grid-3">
           <article class="card">
             <span class="card-tag">Use</span>
-            <h3>Inspectable workload</h3>
-            <p><code>toy-load</code> exposes controllable CPU, sleep, jitter, payload, error-rate, health, readiness, and Prometheus endpoints.</p>
+            <h3>Tunable workload</h3>
+            <p><code>toy-load</code> exposes CPU, sleep, jitter, payload, and error-rate knobs plus health, readiness, and Prometheus endpoints.</p>
           </article>
           <article class="card">
             <span class="card-tag">Compare</span>
-            <h3>Policy playground</h3>
-            <p>Run reactive HPA-style baselines beside MPC recommendations, then compare p95, p99, success, and replica movement.</p>
+            <h3>Two policies, same trace</h3>
+            <p>Replay a recorded load against the HPA and against the MPC controller; compare p95, p99, success rate, and replica trajectory.</p>
           </article>
           <article class="card">
             <span class="card-tag">Trust</span>
-            <h3>Visible caveats</h3>
-            <p>Published claims point to exact evidence paths. Missing benchmark cells stay visible instead of being implied.</p>
+            <h3>Claims linked to artifacts</h3>
+            <p>Every published number cites the run that produced it. Missing benchmark cells are kept visible instead of being implied.</p>
           </article>
         </div>
       </section>
@@ -194,7 +194,7 @@
         </div>
         <div class="grid grid-2">
           <figure class="figure showcase-card">
-            <img src="assets/figures/ten-second-demo.gif" alt="Ten-second autoscaling loop demo">
+            <img src="assets/figures/ten-second-demo.gif" alt="Ten-second autoscaling loop demo" width="900" height="480" loading="lazy" decoding="async">
             <figcaption class="figure-caption">Traffic profile, workload metrics, HPA and MPC policies, then evidence paths and caveats.</figcaption>
           </figure>
           <article class="card proof-card">
@@ -267,12 +267,12 @@
         </div>
         <div class="evidence-wall">
           <figure class="figure showcase-card evidence-primary">
-            <img src="assets/figures/architecture.svg" alt="MPC autoscaler architecture diagram">
+            <img src="assets/figures/architecture.svg" alt="MPC autoscaler architecture diagram" width="960" height="540" loading="lazy" decoding="async">
             <figcaption class="figure-caption">System boundary: traffic generator, workload, Prometheus, reactive HPA, predictive MPC, and analysis pipeline.</figcaption>
           </figure>
           <div class="evidence-stack">
             <figure class="figure showcase-card">
-              <img src="assets/figures/spike-comparison.svg" alt="Spike experiment sample chart">
+              <img src="assets/figures/spike-comparison.svg" alt="Spike experiment sample chart" width="960" height="540" loading="lazy" decoding="async">
               <figcaption class="figure-caption">Tuned Hybrid-SA control trace: burst detection, safety scale-up, solver status, and controlled downscale from one curated spike run.</figcaption>
             </figure>
             <article class="card proof-card">

@@ -24,6 +24,9 @@
     <meta name="twitter:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/og/og-cover.png">
     <link rel="icon" href="/mpc-autoscaler/favicon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/mpc-autoscaler/apple-touch-icon.png">
+    <link rel="manifest" href="/mpc-autoscaler/site.webmanifest">
+    <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
     <link rel="stylesheet" href="assets/style.css">
     <script type="application/ld+json">
       {
@@ -90,7 +93,7 @@
         <div>
           <div class="eyebrow">Experiment Evidence</div>
           <h1>Run summaries, dashboard assets, and release artifacts.</h1>
-          <p class="lead">Lightweight previews only. Raw runs stay out of Git; committed manifests point to curated evidence roots and reproducible rebuild commands.</p>
+          <p class="lead">Raw runs stay out of Git; committed manifests point to curated evidence roots and reproducible rebuild commands.</p>
         </div>
         <aside class="page-hero-card">
           <span class="card-tag">curated</span>
@@ -108,15 +111,15 @@
           <p>Each preview points back to source files, release artifacts, or documented evidence roots.</p>
         </div>
         <figure class="figure gallery-card gallery-primary">
-          <img src="assets/figures/spike-comparison.svg" alt="Hybrid-SA spike control trace">
+          <img src="assets/figures/spike-comparison.svg" alt="Hybrid-SA spike control trace" width="960" height="540" loading="lazy" decoding="async">
           <figcaption class="figure-caption">Hybrid-SA spike trace from curated evidence: burst detection, solver status, safety scale-up behavior, and controlled downscale from one tracked run. Treat this preview as evidence context, not an aggregate result claim.</figcaption>
         </figure>
         <figure class="figure gallery-card">
-          <img src="assets/figures/grafana-dashboard.svg" alt="Grafana dashboard preview">
+          <img src="assets/figures/grafana-dashboard.svg" alt="Grafana dashboard preview" width="960" height="540" loading="lazy" decoding="async">
           <figcaption class="figure-caption">Dashboard preview based on committed Grafana JSON: request rate, errors, latency quantiles, in-flight requests, targets, CPU, and memory.</figcaption>
         </figure>
         <figure class="figure gallery-card">
-          <img src="assets/figures/release-flow.svg" alt="Release workflow preview">
+          <img src="assets/figures/release-flow.svg" alt="Release workflow preview" width="960" height="540" loading="lazy" decoding="async">
           <figcaption class="figure-caption">Release lane: annotated semver tag, binary builds, Helm package, GHCR image, checksums, and GitHub Release.</figcaption>
         </figure>
         <article class="card release-card">
@@ -127,11 +130,11 @@
           <p><code>ghcr.io/vshulcz/toy-load:v0.1.0</code></p>
         </article>
         <figure class="figure gallery-card gallery-primary">
-          <img src="assets/figures/hpa-vs-mpc-spike.svg" alt="Representative HPA versus Hybrid-SA spike result">
+          <img src="assets/figures/hpa-vs-mpc-spike.svg" alt="Representative HPA versus Hybrid-SA spike result" width="960" height="540" loading="lazy" decoding="async">
           <figcaption class="figure-caption">Representative tracked spike pair: Hybrid-SA MPC shows lower burst p95/p99/max latency while both runs keep 100% success. Full caveats and run paths are in <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/RESULTS.md">docs/RESULTS.md</a>.</figcaption>
         </figure>
         <figure class="figure gallery-card">
-          <img src="assets/figures/ten-second-demo.gif" alt="Ten-second autoscaling demo">
+          <img src="assets/figures/ten-second-demo.gif" alt="Ten-second autoscaling demo" width="900" height="480" loading="lazy" decoding="async">
           <figcaption class="figure-caption">Fast reader path: traffic profile, metrics, HPA/MPC policy comparison, benchmark matrix, and caveats in one view.</figcaption>
         </figure>
       </section>

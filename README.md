@@ -13,20 +13,18 @@ In one tracked 200 rps spike, the MPC controller cut burst **p95 latency ~38%** 
 
 Then I shortened the spike to 30 seconds — and MPC lost. New Pods became Ready about **40 seconds** after the decision, *after the spike was already over*. The bottleneck wasn't the algorithm; it was the time Kubernetes needs to deliver ready capacity.
 
-That gap — a correct decision arriving before usable capacity — is what this repo lets you measure, reproduce, and break.
-
-This is not a production autoscaler. It is a runnable experiment system: a controllable Go workload, Helm deployment, Prometheus metrics, an HPA baseline, an MPC controller, an offline simulator, and evidence docs.
+That gap — a correct decision arriving before usable capacity — is what this repo lets you measure, reproduce, and break. It is a lab, not a production autoscaler: a tunable Go workload, an HPA baseline, an MPC controller, an offline simulator, and evidence docs that link every published number to the run that produced it.
 
 ## Results snapshot
 
-One representative tracked spike pair (not an aggregate benchmark — see [`docs/RESULTS.md`](docs/RESULTS.md) and [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md) before drawing conclusions):
+One representative tracked spike pair. See [`docs/RESULTS.md`](docs/RESULTS.md) and [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md) before generalising.
 
 | Controller | Burst throughput | Burst p95 | Burst p99 | Max latency | Success | Max replicas |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | HPA60 baseline | 197.91 rps | 85.175 ms | 128.983 ms | 276.229 ms | 100.00% | 27 |
 | Hybrid-SA MPC | 199.90 rps | 52.483 ms | 71.048 ms | 97.157 ms | 100.00% | 28 |
 
-The honest twist: on a short 30s spike the same controller loses on tail latency, because readiness lag (~40s) is longer than the spike. The point of the lab is to make every such case inspectable, not to claim MPC always wins.
+On a 30 s spike the same controller loses on tail latency, because readiness lag (~40 s) is longer than the spike — see [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md).
 
 ## Try it in 60 seconds (no cluster needed)
 
@@ -140,16 +138,15 @@ Useful targets: `make help`, `make fmt`, `make check`, `make coverage`. `make ch
 <details>
 <summary><strong>Observability, CI, releases, supply-chain</strong></summary>
 
-`toy-load` exports `toy_http_requests_total`, `toy_http_request_duration_seconds`, `toy_in_flight_requests`, `toy_work_cpu_ms`, and `toy_errors_total`. Example PromQL and metric meanings are in [`docs/API.md`](docs/API.md).
+**Metrics.** `toy-load` exports `toy_http_requests_total`, `toy_http_request_duration_seconds`, `toy_in_flight_requests`, `toy_work_cpu_seconds`, `toy_errors_total`, and `toy_panics_total`. PromQL examples in [`docs/API.md`](docs/API.md).
 
-CI runs gofmt / `go vet` / `go test`, Go + Python coverage, dependency-light Python tests, a packaged `analysis` install check, shell syntax checks, `actionlint`, dashboard/Helm schema validation, Helm lint + template, Kustomize render, CodeQL (Go + Python), `govulncheck`, Trivy fs + image scanning, OpenSSF Scorecard, and dependency review. Images publish to `ghcr.io/vshulcz/toy-load` with SBOM + provenance. Release is tag-driven — see [`docs/RELEASE.md`](docs/RELEASE.md). Verify release downloads against `SHA256SUMS` (instructions in [`docs/RELEASE.md`](docs/RELEASE.md)).
+**CI.** gofmt, `go vet`, `go test` (race), Go + Python coverage, packaged `analysis` install, shell + actionlint, dashboard/Helm schema validation, Helm lint + template, Kustomize render.
 
-Status badges: [Release](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/release.yaml) ·
-[Pages](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/pages.yaml) ·
-[Security](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/security.yaml) ·
-[CodeQL](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/codeql.yaml) ·
-[Trivy](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/trivy.yaml) ·
-[OpenSSF Scorecard](https://securityscorecards.dev/viewer/?uri=github.com/vshulcz/mpc-autoscaler)
+**Security.** CodeQL (Go + Python), `govulncheck`, Trivy fs + image scans, OpenSSF Scorecard, dependency review. All third-party Actions pinned by SHA.
+
+**Releases.** Tag-driven via [`docs/RELEASE.md`](docs/RELEASE.md). Images publish to `ghcr.io/vshulcz/toy-load` with SBOM + provenance. Verify downloads against `SHA256SUMS`.
+
+**Status badges:** [Release](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/release.yaml) · [Pages](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/pages.yaml) · [Security](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/security.yaml) · [CodeQL](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/codeql.yaml) · [Trivy](https://github.com/vshulcz/mpc-autoscaler/actions/workflows/trivy.yaml) · [OpenSSF Scorecard](https://securityscorecards.dev/viewer/?uri=github.com/vshulcz/mpc-autoscaler)
 </details>
 
 ## License
