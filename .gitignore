@@ -38,7 +38,10 @@ loadgen/results/
 /bin/
 /toy-load/bin/
 
-# Editor
+# Editor / agent tooling
 .idea/
 .vscode/
+.opencode/
+.swarm/
+.claude/
 *.swp

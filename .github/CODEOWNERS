@@ -1,1 +1,28 @@
+# CODEOWNERS — required reviewers per path.
+# https://docs.github.com/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default owner for anything not matched below.
 * @vshulcz
+
+# Build, release, security, and CI surfaces — high blast radius.
+/.github/                  @vshulcz
+/.github/workflows/        @vshulcz
+/SECURITY.md               @vshulcz
+/LICENSE                   @vshulcz
+/CITATION.cff              @vshulcz
+
+# Helm chart and raw Kubernetes manifests.
+/toy-load/deploy/          @vshulcz
+
+# Go workload.
+/toy-load/                 @vshulcz
+
+# Python analysis package and controllers.
+/analysis/                 @vshulcz
+
+# Public docs and site.
+/docs/                     @vshulcz
+/site/                     @vshulcz
+/README.md                 @vshulcz
+/ROADMAP.md                @vshulcz
+/CONTRIBUTING.md           @vshulcz

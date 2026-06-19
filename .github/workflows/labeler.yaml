@@ -12,8 +12,9 @@ jobs:
   label:
     name: Label Pull Request
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
-      - uses: actions/labeler@v6.1.0
+      - uses: actions/labeler@f27b608878404679385c85cfa523b85ccb86e213 # v6.1.0
         with:
           sync-labels: true
           dot: true
