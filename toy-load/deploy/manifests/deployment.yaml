@@ -19,6 +19,8 @@ spec:
         prometheus.io/port: "9090"
         prometheus.io/path: "/metrics"
     spec:
+      automountServiceAccountToken: false
+      terminationGracePeriodSeconds: 30
       securityContext:
         runAsNonRoot: true
         runAsUser: 65532
@@ -40,12 +42,18 @@ spec:
               value: "/metrics"
             - name: READ_TIMEOUT
               value: "5s"
+            - name: READ_HEADER_TIMEOUT
+              value: "5s"
             - name: WRITE_TIMEOUT
               value: "20s"
             - name: IDLE_TIMEOUT
               value: "60s"
+            - name: SHUTDOWN_TIMEOUT
+              value: "25s"
             - name: MAX_HEADER_BYTES
               value: "1048576"
+            - name: MAX_QUERY_ID_BYTES
+              value: "256"
             - name: LOG_LEVEL
               value: "info"
             - name: APP_NAME
@@ -75,3 +83,9 @@ spec:
               port: http
             initialDelaySeconds: 5
             timeoutSeconds: 2
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir: {}

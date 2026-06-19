@@ -107,23 +107,29 @@ Configuration is environment-based.
 | `PORT` | HTTP listen port. | `9090` |
 | `METRICS_PATH` | Prometheus metrics path. Must start with `/` and not overlap built-in endpoints. | `/metrics` |
 | `READ_TIMEOUT` | HTTP read timeout. Must be a positive Go duration. | `5s` |
+| `READ_HEADER_TIMEOUT` | HTTP header read timeout. Protects against slow-header clients. | `5s` |
 | `WRITE_TIMEOUT` | HTTP write timeout. Must be a positive Go duration. | `20s` |
 | `IDLE_TIMEOUT` | HTTP idle timeout. Must be a positive Go duration. | `60s` |
+| `SHUTDOWN_TIMEOUT` | Graceful shutdown deadline. Must exceed the worst-case `/work` duration so in-flight requests can finish. | `25s` |
 | `MAX_HEADER_BYTES` | Maximum HTTP request header size in bytes. | `1048576` |
+| `MAX_QUERY_ID_BYTES` | Maximum length of the optional `?id=` query parameter. Clamped silently to cap log size. | `256` |
 | `LOG_LEVEL` | Log level: `debug`, `info`, `warn`, `warning`, or `error`. | `info` |
 | `APP_NAME` | Name attached to structured logs. | `toy-load` |
+
+> Set Kubernetes `terminationGracePeriodSeconds` to at least `SHUTDOWN_TIMEOUT + 5s` so the pod is not killed before graceful shutdown completes.
 
 ## Metrics
 
 | Metric | Labels | Meaning |
 | --- | --- | --- |
-| `toy_http_requests_total` | `method`, `path`, `code` | Request count. |
-| `toy_http_request_duration_seconds` | `method`, `path` | Request latency histogram. |
-| `toy_in_flight_requests` | none | Current in-flight request count. |
-| `toy_work_cpu_ms` | none | Requested CPU work. |
-| `toy_work_sleep_ms` | none | Requested fixed sleep. |
-| `toy_work_jitter_ms` | none | Requested jitter bound. |
+| `toy_http_requests_total` | `method`, `path`, `code` | Request count, every route. |
+| `toy_http_request_duration_seconds` | `method`, `path` | Request latency histogram, buckets reach 30s. |
+| `toy_in_flight_requests` | none | Current in-flight `/work` request count. |
+| `toy_work_cpu_seconds` | none | Requested CPU work, in seconds (Prometheus base unit). |
+| `toy_work_sleep_seconds` | none | Requested fixed sleep, in seconds. |
+| `toy_work_jitter_seconds` | none | Requested jitter bound, in seconds. |
 | `toy_errors_total` | `path`, `reason` | Application error counters. |
+| `toy_panics_total` | `path` | Recovered handler panics. |
 
 Useful PromQL:
 
@@ -144,9 +150,11 @@ helm upgrade --install toy-load deploy/helm/toy-load \
 ```
 
 The chart configures non-root execution, read-only root filesystem, dropped Linux
-capabilities, probes, resource requests, HPA, and Prometheus scrape annotations.
-Prometheus Operator resources and Grafana dashboard ConfigMap are disabled by
-default because they require cluster-specific CRDs/controllers.
+capabilities, no service-account token mount, a 30 s termination grace period,
+a PodDisruptionBudget keeping `minAvailable=1`, probes, resource requests, HPA,
+and Prometheus scrape annotations. NetworkPolicy and Prometheus Operator
+resources, plus the Grafana dashboard ConfigMap, are off by default because they
+require cluster-specific CRDs/controllers or a known scrape source.
 
 ### Helm Values Reference
 
@@ -155,10 +163,13 @@ The chart values schema is kept at
 
 | Area | Values | Defaults | Change when |
 | --- | --- | --- | --- |
-| Image | `image.repository`, `image.tag`, `image.pullPolicy` | `ghcr.io/vshulcz/toy-load`, `main`, `IfNotPresent` | Pin a release or commit tag, use a forked/private image, or force image refreshes during development. |
+| Image | `image.repository`, `image.tag`, `image.digest`, `image.pullPolicy` | `ghcr.io/vshulcz/toy-load`, `main`, `""`, `IfNotPresent` | Pin a release tag, pin by `sha256:` digest for reproducibility, use a forked/private image, or force image refreshes during development. |
 | Service | `service.type`, `service.port`, `service.targetPort` | `ClusterIP`, `80`, `http` | Expose the workload with `NodePort`/`LoadBalancer`, or map traffic through non-default service ports. |
 | Resources | `resources.requests.cpu`, `resources.requests.memory`, `resources.limits.cpu`, `resources.limits.memory` | `100m`, `64Mi`, `500m`, `256Mi` | Match cluster capacity, tune pod scheduling, or adjust the CPU signal used by HPA. |
 | HPA | `autoscaling.enabled`, `autoscaling.minReplicas`, `autoscaling.maxReplicas`, `autoscaling.targetCPUUtilizationPercentage`, `autoscaling.behavior` | `true`, `2`, `12`, `60`, scale up `200%/30s`, scale down `50%/60s` with `300s` stabilization | Disable the chart-managed HPA for external controllers, or tune replica bounds and scaling speed for experiments. |
+| Pod hardening | `automountServiceAccountToken`, `terminationGracePeriodSeconds`, `topologySpreadConstraints` | `false`, `30`, `[]` | The workload never calls the Kubernetes API, so the token mount stays off. Raise grace period if you increase `SHUTDOWN_TIMEOUT`. Add spread constraints to distribute replicas across zones/nodes. |
+| Disruption | `podDisruptionBudget.enabled`, `podDisruptionBudget.minAvailable`, `podDisruptionBudget.maxUnavailable` | `true`, `1`, unset | Keep at least one replica alive during voluntary disruption (node drains, rolling updates). |
+| Network policy | `networkPolicy.enabled`, `networkPolicy.ingress.from` | `false`, `[]` | Enable to restrict ingress to the HTTP port; populate `from` with namespace/pod selectors of your scrape source. |
 | Prometheus Operator | `prometheusOperator.enabled`, `prometheusOperator.serviceMonitor.*`, `prometheusOperator.podMonitor.*` | `false`; ServiceMonitor interval `30s`, scrape timeout `10s`, release namespace; PodMonitor disabled, interval `30s`, release namespace | Install `ServiceMonitor`/`PodMonitor` resources in clusters with Prometheus Operator CRDs instead of relying on scrape annotations. |
 | Dashboard | `dashboard.enabled`, `dashboard.namespace` | `false`, release namespace | Create the Grafana dashboard ConfigMap when a Grafana sidecar watches ConfigMaps labeled `grafana_dashboard=1`. |
 

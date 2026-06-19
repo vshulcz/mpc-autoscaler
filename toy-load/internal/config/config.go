@@ -10,38 +10,50 @@ import (
 
 // Config captures runtime configuration driven by environment variables.
 type Config struct {
-	Port           int
-	MetricsPath    string
-	ReadTimeout    time.Duration
-	WriteTimeout   time.Duration
-	IdleTimeout    time.Duration
-	MaxHeaderBytes int
-	LogLevel       string
-	AppName        string
+	Port              int
+	MetricsPath       string
+	ReadTimeout       time.Duration
+	ReadHeaderTimeout time.Duration
+	WriteTimeout      time.Duration
+	IdleTimeout       time.Duration
+	ShutdownTimeout   time.Duration
+	MaxHeaderBytes    int
+	MaxQueryIDBytes   int
+	LogLevel          string
+	AppName           string
 }
 
 const (
-	defaultPort           = 9090
-	defaultMetricsPath    = "/metrics"
-	defaultReadTimeout    = 5 * time.Second
-	defaultWriteTimeout   = 20 * time.Second
-	defaultIdleTimeout    = 60 * time.Second
-	defaultMaxHeaderBytes = 1 << 20
-	defaultLogLevel       = "info"
-	defaultAppName        = "toy-load"
+	defaultPort              = 9090
+	defaultMetricsPath       = "/metrics"
+	defaultReadTimeout       = 5 * time.Second
+	defaultReadHeaderTimeout = 5 * time.Second
+	defaultWriteTimeout      = 20 * time.Second
+	defaultIdleTimeout       = 60 * time.Second
+	// defaultShutdownTimeout exceeds the worst-case /work duration
+	// (cpu_ms + sleep_ms + jitter_ms <= 15s) with margin so in-flight
+	// requests can finish before the listener closes.
+	defaultShutdownTimeout = 25 * time.Second
+	defaultMaxHeaderBytes  = 1 << 20
+	defaultMaxQueryIDBytes = 256
+	defaultLogLevel        = "info"
+	defaultAppName         = "toy-load"
 )
 
 // Load reads configuration from the environment.
 func Load() (Config, error) {
 	cfg := Config{
-		Port:           defaultPort,
-		MetricsPath:    defaultMetricsPath,
-		ReadTimeout:    defaultReadTimeout,
-		WriteTimeout:   defaultWriteTimeout,
-		IdleTimeout:    defaultIdleTimeout,
-		MaxHeaderBytes: defaultMaxHeaderBytes,
-		LogLevel:       defaultLogLevel,
-		AppName:        defaultAppName,
+		Port:              defaultPort,
+		MetricsPath:       defaultMetricsPath,
+		ReadTimeout:       defaultReadTimeout,
+		ReadHeaderTimeout: defaultReadHeaderTimeout,
+		WriteTimeout:      defaultWriteTimeout,
+		IdleTimeout:       defaultIdleTimeout,
+		ShutdownTimeout:   defaultShutdownTimeout,
+		MaxHeaderBytes:    defaultMaxHeaderBytes,
+		MaxQueryIDBytes:   defaultMaxQueryIDBytes,
+		LogLevel:          defaultLogLevel,
+		AppName:           defaultAppName,
 	}
 
 	if v := getEnv("PORT"); v != "" {
@@ -70,6 +82,17 @@ func Load() (Config, error) {
 		cfg.ReadTimeout = d
 	}
 
+	if v := getEnv("READ_HEADER_TIMEOUT"); v != "" {
+		d, err := time.ParseDuration(v)
+		if err != nil {
+			return Config{}, fmt.Errorf("invalid READ_HEADER_TIMEOUT: %w", err)
+		}
+		if d <= 0 {
+			return Config{}, fmt.Errorf("READ_HEADER_TIMEOUT must be > 0")
+		}
+		cfg.ReadHeaderTimeout = d
+	}
+
 	if v := getEnv("WRITE_TIMEOUT"); v != "" {
 		d, err := time.ParseDuration(v)
 		if err != nil {
@@ -92,12 +115,31 @@ func Load() (Config, error) {
 		cfg.IdleTimeout = d
 	}
 
+	if v := getEnv("SHUTDOWN_TIMEOUT"); v != "" {
+		d, err := time.ParseDuration(v)
+		if err != nil {
+			return Config{}, fmt.Errorf("invalid SHUTDOWN_TIMEOUT: %w", err)
+		}
+		if d <= 0 {
+			return Config{}, fmt.Errorf("SHUTDOWN_TIMEOUT must be > 0")
+		}
+		cfg.ShutdownTimeout = d
+	}
+
 	if v := getEnv("MAX_HEADER_BYTES"); v != "" {
 		n, err := strconv.Atoi(v)
 		if err != nil || n <= 0 {
 			return Config{}, fmt.Errorf("invalid MAX_HEADER_BYTES: %q", v)
 		}
 		cfg.MaxHeaderBytes = n
+	}
+
+	if v := getEnv("MAX_QUERY_ID_BYTES"); v != "" {
+		n, err := strconv.Atoi(v)
+		if err != nil || n <= 0 {
+			return Config{}, fmt.Errorf("invalid MAX_QUERY_ID_BYTES: %q", v)
+		}
+		cfg.MaxQueryIDBytes = n
 	}
 
 	if v := getEnv("LOG_LEVEL"); v != "" {

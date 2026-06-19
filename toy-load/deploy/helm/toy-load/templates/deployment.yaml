@@ -36,11 +36,17 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       serviceAccountName: {{ include "toy-load.serviceAccountName" . }}
+      automountServiceAccountToken: {{ .Values.automountServiceAccountToken }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: toy-load
+          {{- if .Values.image.digest }}
+          image: "{{ .Values.image.repository }}@{{ .Values.image.digest }}"
+          {{- else }}
           image: "{{ .Values.image.repository }}:{{ default .Chart.AppVersion .Values.image.tag }}"
+          {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
@@ -52,12 +58,18 @@ spec:
               value: "{{ .Values.config.metricsPath }}"
             - name: READ_TIMEOUT
               value: "{{ .Values.config.readTimeout }}"
+            - name: READ_HEADER_TIMEOUT
+              value: "{{ .Values.config.readHeaderTimeout }}"
             - name: WRITE_TIMEOUT
               value: "{{ .Values.config.writeTimeout }}"
             - name: IDLE_TIMEOUT
               value: "{{ .Values.config.idleTimeout }}"
+            - name: SHUTDOWN_TIMEOUT
+              value: "{{ .Values.config.shutdownTimeout }}"
             - name: MAX_HEADER_BYTES
               value: "{{ int .Values.config.maxHeaderBytes }}"
+            - name: MAX_QUERY_ID_BYTES
+              value: "{{ int .Values.config.maxQueryIDBytes }}"
             - name: LOG_LEVEL
               value: "{{ .Values.config.logLevel }}"
             - name: APP_NAME
@@ -76,6 +88,13 @@ spec:
               path: {{ .Values.readinessProbe.path }}
               port: http
             {{- toYaml (omit .Values.readinessProbe "path") | nindent 12 }}
+          # Writable scratch since rootfs is read-only.
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir: {}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -86,5 +105,9 @@ spec:
       {{- end }}
       {{- with .Values.tolerations }}
       tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.topologySpreadConstraints }}
+      topologySpreadConstraints:
         {{- toYaml . | nindent 8 }}
       {{- end }}

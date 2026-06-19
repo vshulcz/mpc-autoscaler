@@ -8,7 +8,7 @@ import (
 )
 
 func TestParseParamsDefaults(t *testing.T) {
-	params, err := ParseParams(url.Values{})
+	params, err := ParseParams(url.Values{}, 0)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -24,7 +24,7 @@ func TestParseParamsClamps(t *testing.T) {
 		"jitter_ms":     []string{"9999"},
 		"payload_bytes": []string{"2000000"},
 	}
-	params, err := ParseParams(values)
+	params, err := ParseParams(values, 0)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -49,7 +49,7 @@ func TestParseParamsOptionalFields(t *testing.T) {
 		"err_rate":      []string{"0.25"},
 	}
 
-	params, err := ParseParams(values)
+	params, err := ParseParams(values, 0)
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -59,11 +59,11 @@ func TestParseParamsOptionalFields(t *testing.T) {
 }
 
 func TestParseParamsInvalidFormat(t *testing.T) {
-	_, err := ParseParams(url.Values{"cpu_ms": []string{"bad"}})
+	_, err := ParseParams(url.Values{"cpu_ms": []string{"bad"}}, 0)
 	if err == nil {
 		t.Fatal("expected error for invalid integer")
 	}
-	_, err = ParseParams(url.Values{"err_rate": []string{"-1"}})
+	_, err = ParseParams(url.Values{"err_rate": []string{"-1"}}, 0)
 	if err == nil {
 		t.Fatal("expected error for invalid err_rate")
 	}

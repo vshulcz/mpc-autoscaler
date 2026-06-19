@@ -9,9 +9,43 @@
       "properties": {
         "repository": { "type": "string", "minLength": 1 },
         "tag": { "type": "string" },
+        "digest": { "type": "string" },
         "pullPolicy": { "type": "string", "enum": ["Always", "IfNotPresent", "Never"] }
       }
     },
+    "automountServiceAccountToken": { "type": "boolean" },
+    "terminationGracePeriodSeconds": { "type": "integer", "minimum": 0 },
+    "podDisruptionBudget": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "minAvailable": {
+          "oneOf": [
+            { "type": "integer", "minimum": 0 },
+            { "type": "string", "pattern": "^[0-9]+%$" }
+          ]
+        },
+        "maxUnavailable": {
+          "oneOf": [
+            { "type": "integer", "minimum": 0 },
+            { "type": "string", "pattern": "^[0-9]+%$" }
+          ]
+        }
+      }
+    },
+    "networkPolicy": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "ingress": {
+          "type": "object",
+          "properties": {
+            "from": { "type": "array" }
+          }
+        }
+      }
+    },
+    "topologySpreadConstraints": { "type": "array" },
     "service": {
       "type": "object",
       "properties": {
@@ -31,9 +65,12 @@
         "port": { "type": "integer", "minimum": 1, "maximum": 65535 },
         "metricsPath": { "type": "string", "pattern": "^/", "not": { "enum": ["/", "/healthz", "/readyz", "/work"] } },
         "readTimeout": { "type": "string", "minLength": 1 },
+        "readHeaderTimeout": { "type": "string", "minLength": 1 },
         "writeTimeout": { "type": "string", "minLength": 1 },
         "idleTimeout": { "type": "string", "minLength": 1 },
+        "shutdownTimeout": { "type": "string", "minLength": 1 },
         "maxHeaderBytes": { "type": "integer", "minimum": 1 },
+        "maxQueryIDBytes": { "type": "integer", "minimum": 1 },
         "logLevel": { "type": "string", "enum": ["debug", "info", "warn", "warning", "error"] },
         "appName": { "type": "string", "minLength": 1 }
       }

@@ -1,0 +1,23 @@
+{{- if .Values.networkPolicy.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "toy-load.fullname" . }}
+  namespace: {{ include "toy-load.namespace" . }}
+  labels:
+    {{- include "toy-load.labels" . | nindent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      {{- include "toy-load.selectorLabels" . | nindent 6 }}
+  policyTypes:
+    - Ingress
+  ingress:
+    - ports:
+        - protocol: TCP
+          port: {{ .Values.config.port }}
+      {{- with .Values.networkPolicy.ingress.from }}
+      from:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}

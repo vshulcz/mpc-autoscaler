@@ -1,0 +1,19 @@
+# Default-deny + allow ingress to HTTP port from any namespace.
+# Restrict 'from' to your scrape source (e.g. Prometheus namespace) in production.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: toy-load
+  namespace: default
+  labels:
+    app: toy-load
+spec:
+  podSelector:
+    matchLabels:
+      app: toy-load
+  policyTypes:
+    - Ingress
+  ingress:
+    - ports:
+        - protocol: TCP
+          port: 9090

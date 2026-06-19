@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"log/slog"
 	"net/http"
+	"runtime/debug"
 	"strconv"
 	"strings"
 	"sync/atomic"
@@ -38,6 +39,20 @@ type rootResponse struct {
 	Metrics string `json:"metrics"`
 }
 
+// routePattern returns a low-cardinality label for HTTP metrics.
+// Unknown paths collapse to "other" so we never explode cardinality
+// on a misconfigured scraper or scanner.
+func (s *Server) routePattern(rawPath string) string {
+	switch rawPath {
+	case "/", "/healthz", "/readyz", "/work":
+		return rawPath
+	}
+	if rawPath == s.cfg.MetricsPath {
+		return s.cfg.MetricsPath
+	}
+	return "other"
+}
+
 // New builds the HTTP server with handlers and middleware.
 func New(cfg config.Config, logger *slog.Logger, collectors *metrics.Collectors, sim *workload.Simulator, gatherer prometheus.Gatherer) *Server {
 	s := &Server{
@@ -54,16 +69,25 @@ func New(cfg config.Config, logger *slog.Logger, collectors *metrics.Collectors,
 	mux.HandleFunc("/work", s.workHandler)
 	mux.Handle(cfg.MetricsPath, promhttp.HandlerFor(gatherer, promhttp.HandlerOpts{}))
 
+	handler := s.recoverMiddleware(s.observeMiddleware(mux))
+
 	s.server = &http.Server{
-		Addr:           fmt.Sprintf(":%d", cfg.Port),
-		Handler:        mux,
-		ReadTimeout:    cfg.ReadTimeout,
-		WriteTimeout:   cfg.WriteTimeout,
-		IdleTimeout:    cfg.IdleTimeout,
-		MaxHeaderBytes: cfg.MaxHeaderBytes,
+		Addr:              fmt.Sprintf(":%d", cfg.Port),
+		Handler:           handler,
+		ReadTimeout:       cfg.ReadTimeout,
+		ReadHeaderTimeout: cfg.ReadHeaderTimeout,
+		WriteTimeout:      cfg.WriteTimeout,
+		IdleTimeout:       cfg.IdleTimeout,
+		MaxHeaderBytes:    cfg.MaxHeaderBytes,
 	}
 
 	return s
+}
+
+// Handler returns the fully-wrapped HTTP handler (recover + observe + mux).
+// Exposed for integration tests so middleware behaviour is exercised.
+func (s *Server) Handler() http.Handler {
+	return s.server.Handler
 }
 
 // Run starts the HTTP server and blocks until shutdown.
@@ -83,9 +107,9 @@ func (s *Server) Run(ctx context.Context) error {
 	select {
 	case <-ctx.Done():
 		s.ready.Store(false)
-		shutdownCtx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		shutdownCtx, cancel := context.WithTimeout(context.Background(), s.cfg.ShutdownTimeout)
 		defer cancel()
-		s.logger.Info("shutting down HTTP server")
+		s.logger.Info("shutting down HTTP server", "timeout", s.cfg.ShutdownTimeout)
 		if err := s.server.Shutdown(shutdownCtx); err != nil {
 			s.logger.Error("server shutdown failed", "error", err)
 			return err
@@ -94,6 +118,69 @@ func (s *Server) Run(ctx context.Context) error {
 	case err := <-errCh:
 		return err
 	}
+}
+
+// statusRecorder captures the response status code for metrics middleware.
+// It also records bytes written if downstream wants to add a size histogram.
+type statusRecorder struct {
+	http.ResponseWriter
+	status      int
+	wroteHeader bool
+}
+
+func (r *statusRecorder) WriteHeader(code int) {
+	if r.wroteHeader {
+		return
+	}
+	r.status = code
+	r.wroteHeader = true
+	r.ResponseWriter.WriteHeader(code)
+}
+
+func (r *statusRecorder) Write(b []byte) (int, error) {
+	if !r.wroteHeader {
+		r.WriteHeader(http.StatusOK)
+	}
+	return r.ResponseWriter.Write(b)
+}
+
+// observeMiddleware records request duration and counter for every route.
+// Without this middleware, request metrics covered only /work, which made
+// dashboards under-report scraper, health and 404/405 traffic.
+func (s *Server) observeMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now()
+		rec := &statusRecorder{ResponseWriter: w, status: http.StatusOK}
+		next.ServeHTTP(rec, r)
+		path := s.routePattern(r.URL.Path)
+		s.metrics.RequestDuration.WithLabelValues(r.Method, path).Observe(time.Since(start).Seconds())
+		s.metrics.RequestCounter.WithLabelValues(r.Method, path, strconv.Itoa(rec.status)).Inc()
+	})
+}
+
+// recoverMiddleware turns handler panics into structured 500 responses,
+// keeping connection accounting and metrics consistent. Without it a
+// panic closes the connection abruptly and bypasses both metrics and logs.
+func (s *Server) recoverMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		defer func() {
+			rec := recover()
+			if rec == nil {
+				return
+			}
+			path := s.routePattern(r.URL.Path)
+			s.metrics.PanicCounter.WithLabelValues(path).Inc()
+			s.logger.Error("handler panic",
+				"method", r.Method,
+				"path", path,
+				"panic", fmt.Sprintf("%v", rec),
+				"stack", string(debug.Stack()),
+			)
+			// Best-effort: only write if no body yet.
+			http.Error(w, http.StatusText(http.StatusInternalServerError), http.StatusInternalServerError)
+		}()
+		next.ServeHTTP(w, r)
+	})
 }
 
 func (s *Server) rootHandler(w http.ResponseWriter, r *http.Request) {
@@ -140,10 +227,9 @@ func (s *Server) workHandler(w http.ResponseWriter, r *http.Request) {
 	s.metrics.InFlight.Inc()
 	defer s.metrics.InFlight.Dec()
 
-	params, err := workload.ParseParams(r.URL.Query())
+	params, err := workload.ParseParams(r.URL.Query(), s.cfg.MaxQueryIDBytes)
 	if err != nil {
 		s.metrics.ErrorCounter.WithLabelValues(path, "bad_request").Inc()
-		s.observeRequest(r.Method, path, http.StatusBadRequest, start)
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
@@ -151,9 +237,9 @@ func (s *Server) workHandler(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
 	result := s.sim.Execute(ctx, params)
 
-	s.metrics.WorkCPU.Observe(float64(params.CPUMillis))
-	s.metrics.WorkSleep.Observe(float64(params.SleepMillis))
-	s.metrics.WorkJitter.Observe(float64(params.JitterMillis))
+	s.metrics.WorkCPU.Observe(float64(params.CPUMillis) / 1000.0)
+	s.metrics.WorkSleep.Observe(float64(params.SleepMillis) / 1000.0)
+	s.metrics.WorkJitter.Observe(float64(params.JitterMillis) / 1000.0)
 
 	status := http.StatusOK
 	body := buildResponseBody(params)
@@ -163,12 +249,10 @@ func (s *Server) workHandler(w http.ResponseWriter, r *http.Request) {
 		s.metrics.ErrorCounter.WithLabelValues(path, "err_rate").Inc()
 	}
 
-	s.observeRequest(r.Method, path, status, start)
 	writePlain(w, status, body)
 
 	if logger := s.logger; logger != nil {
 		logger.Debug("work request",
-			"id", params.ID,
 			"method", r.Method,
 			"status", status,
 			"duration_ms", time.Since(start).Milliseconds(),
@@ -189,11 +273,6 @@ func allowGet(w http.ResponseWriter, r *http.Request) bool {
 	w.Header().Set("Allow", http.MethodGet)
 	http.Error(w, http.StatusText(http.StatusMethodNotAllowed), http.StatusMethodNotAllowed)
 	return false
-}
-
-func (s *Server) observeRequest(method, path string, status int, start time.Time) {
-	s.metrics.RequestDuration.WithLabelValues(method, path).Observe(time.Since(start).Seconds())
-	s.metrics.RequestCounter.WithLabelValues(method, path, strconv.Itoa(status)).Inc()
 }
 
 func writePlain(w http.ResponseWriter, status int, body string) {

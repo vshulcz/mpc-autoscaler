@@ -1,0 +1,12 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: toy-load
+  namespace: default
+  labels:
+    app: toy-load
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: toy-load

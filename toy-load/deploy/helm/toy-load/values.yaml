@@ -3,6 +3,9 @@ replicaCount: 2
 image:
   repository: ghcr.io/vshulcz/toy-load
   tag: "main"
+  # digest pins the image by content; takes precedence over tag when set.
+  # Recommended for reproducible deploys (e.g. "sha256:deadbeef...").
+  digest: ""
   pullPolicy: IfNotPresent
 
 imagePullSecrets: []
@@ -14,6 +17,13 @@ serviceAccount:
   create: false
   annotations: {}
   name: ""
+
+# Disable the default token mount; the workload makes no Kubernetes API calls.
+automountServiceAccountToken: false
+
+# Must exceed config.shutdownTimeout so the kubelet does not SIGKILL the pod
+# before in-flight /work requests drain. Default leaves ~5s margin over 25s.
+terminationGracePeriodSeconds: 30
 
 podAnnotations: {}
 podLabels: {}
@@ -27,9 +37,12 @@ config:
   port: 9090
   metricsPath: /metrics
   readTimeout: 5s
+  readHeaderTimeout: 5s
   writeTimeout: 20s
   idleTimeout: 60s
+  shutdownTimeout: 25s
   maxHeaderBytes: 1048576
+  maxQueryIDBytes: 256
   logLevel: info
   appName: toy-load
 
@@ -59,6 +72,18 @@ autoscaling:
         - type: Percent
           value: 50
           periodSeconds: 60
+
+# Minimum number of pods that must stay available during voluntary disruption.
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
+# Network policy restricting ingress to the HTTP port.
+# Default ingress is open from any namespace; refine via from[] for stricter posture.
+networkPolicy:
+  enabled: false
+  ingress:
+    from: []   # e.g. [{ namespaceSelector: { matchLabels: { name: monitoring } } }]
 
 podSecurityContext:
   runAsNonRoot: true
@@ -90,6 +115,7 @@ readinessProbe:
 nodeSelector: {}
 tolerations: []
 affinity: {}
+topologySpreadConstraints: []
 
 prometheusOperator:
   enabled: false

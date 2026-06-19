@@ -41,14 +41,20 @@ type Result struct {
 }
 
 // ParseParams validates and clamps query parameters into Params.
-func ParseParams(values url.Values) (Params, error) {
+// maxIDBytes caps the optional `id` field to avoid log/cardinality blow-up
+// from oversized client-supplied identifiers. Pass <= 0 to disable the cap.
+func ParseParams(values url.Values, maxIDBytes int) (Params, error) {
+	id := values.Get("id")
+	if maxIDBytes > 0 && len(id) > maxIDBytes {
+		id = id[:maxIDBytes]
+	}
 	params := Params{
 		CPUMillis:    defaultCPUMillis,
 		SleepMillis:  defaultSleepMs,
 		JitterMillis: defaultJitterMs,
 		ErrRate:      defaultErrRate,
 		PayloadBytes: defaultPayload,
-		ID:           values.Get("id"),
+		ID:           id,
 	}
 
 	var err error
@@ -71,7 +77,7 @@ func ParseParams(values url.Values) (Params, error) {
 			return Params{}, fmt.Errorf("err_rate: %w", parseErr)
 		}
 		if f < 0 || f > 1 {
-			return Params{}, errors.New("value must be between 0 and 1")
+			return Params{}, errors.New("err_rate: value must be between 0 and 1")
 		}
 		params.ErrRate = f
 	}

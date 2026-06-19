@@ -18,9 +18,13 @@ import (
 
 func newTestServer(t *testing.T) (*Server, *metrics.Collectors) {
 	t.Helper()
+	return newTestServerWithCfg(t, config.Config{MetricsPath: "/metrics"})
+}
 
-	cfg := config.Config{
-		MetricsPath: "/metrics",
+func newTestServerWithCfg(t *testing.T, cfg config.Config) (*Server, *metrics.Collectors) {
+	t.Helper()
+	if cfg.MetricsPath == "" {
+		cfg.MetricsPath = "/metrics"
 	}
 	logger := slog.New(slog.NewTextHandler(io.Discard, &slog.HandlerOptions{Level: slog.LevelDebug}))
 	reg := prometheus.NewRegistry()
@@ -117,22 +121,80 @@ func TestWorkHandlerMetrics(t *testing.T) {
 	t.Parallel()
 
 	srv, collectors := newTestServer(t)
-
 	req := httptest.NewRequest(http.MethodGet, "/work?cpu_ms=1&sleep_ms=0&jitter_ms=0", nil)
 	rr := httptest.NewRecorder()
-
-	srv.workHandler(rr, req)
+	srv.Handler().ServeHTTP(rr, req)
 
 	if rr.Code != http.StatusOK {
 		t.Fatalf("expected status 200, got %d", rr.Code)
 	}
-
 	if got := testutil.ToFloat64(collectors.RequestCounter.WithLabelValues(http.MethodGet, "/work", "200")); got != 1 {
 		t.Fatalf("unexpected request counter: %v", got)
 	}
-
 	if got := testutil.ToFloat64(collectors.InFlight); got != 0 {
 		t.Fatalf("expected in-flight gauge reset, got %v", got)
+	}
+}
+
+func TestObserveMiddlewareCoversAllRoutes(t *testing.T) {
+	t.Parallel()
+
+	srv, collectors := newTestServer(t)
+	for _, path := range []string{"/healthz", "/readyz", "/metrics", "/", "/missing"} {
+		req := httptest.NewRequest(http.MethodGet, path, nil)
+		rr := httptest.NewRecorder()
+		srv.Handler().ServeHTTP(rr, req)
+	}
+
+	want := []struct {
+		path string
+		code string
+	}{
+		{"/healthz", "200"},
+		{"/readyz", "503"},
+		{"/metrics", "200"},
+		{"/", "200"},
+		{"other", "404"},
+	}
+	for _, w := range want {
+		got := testutil.ToFloat64(collectors.RequestCounter.WithLabelValues(http.MethodGet, w.path, w.code))
+		if got != 1 {
+			t.Fatalf("expected counter %s %s = 1, got %v", w.path, w.code, got)
+		}
+	}
+}
+
+func TestRecoverMiddlewareReturns500AndIncrementsPanic(t *testing.T) {
+	t.Parallel()
+
+	srv, collectors := newTestServer(t)
+	panicHandler := http.HandlerFunc(func(http.ResponseWriter, *http.Request) {
+		panic("boom")
+	})
+	handler := srv.recoverMiddleware(srv.observeMiddleware(panicHandler))
+
+	req := httptest.NewRequest(http.MethodGet, "/work", nil)
+	rr := httptest.NewRecorder()
+	handler.ServeHTTP(rr, req)
+
+	if rr.Code != http.StatusInternalServerError {
+		t.Fatalf("expected 500 after panic, got %d", rr.Code)
+	}
+	if got := testutil.ToFloat64(collectors.PanicCounter.WithLabelValues("/work")); got != 1 {
+		t.Fatalf("expected panic counter=1, got %v", got)
+	}
+}
+
+func TestParseParamsClampsID(t *testing.T) {
+	t.Parallel()
+
+	srv, _ := newTestServerWithCfg(t, config.Config{MetricsPath: "/metrics", MaxQueryIDBytes: 4})
+	req := httptest.NewRequest(http.MethodGet, "/work?id=abcdefghij", nil)
+	rr := httptest.NewRecorder()
+	srv.Handler().ServeHTTP(rr, req)
+
+	if rr.Code != http.StatusOK {
+		t.Fatalf("expected 200, got %d", rr.Code)
 	}
 }
 

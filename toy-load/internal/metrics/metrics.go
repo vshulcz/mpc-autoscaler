@@ -13,6 +13,7 @@ type Collectors struct {
 	WorkSleep       prometheus.Histogram
 	WorkJitter      prometheus.Histogram
 	ErrorCounter    *prometheus.CounterVec
+	PanicCounter    *prometheus.CounterVec
 }
 
 // NewCollectors registers collectors on the provided registerer.
@@ -27,9 +28,18 @@ func NewCollectors(reg prometheus.Registerer) *Collectors {
 		),
 		RequestDuration: prometheus.NewHistogramVec(
 			prometheus.HistogramOpts{
-				Name:    "toy_http_request_duration_seconds",
-				Help:    "Histogram of request durations.",
-				Buckets: []float64{0.001, 0.002, 0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5},
+				Name: "toy_http_request_duration_seconds",
+				Help: "Histogram of request durations in seconds.",
+				// Buckets reach 30s to cover worst-case /work
+				// (cpu_ms + sleep_ms + jitter_ms <= 15s) plus margin
+				// for graceful-shutdown windows. Lower buckets keep
+				// p50/p95 resolution on healthy traffic.
+				Buckets: []float64{
+					0.001, 0.002, 0.005,
+					0.01, 0.02, 0.05,
+					0.1, 0.2, 0.5,
+					1, 2, 5, 10, 15, 20, 30,
+				},
 			},
 			[]string{"method", "path"},
 		),
@@ -38,20 +48,27 @@ func NewCollectors(reg prometheus.Registerer) *Collectors {
 			Help: "Number of in-flight requests.",
 		}),
 		WorkCPU: prometheus.NewHistogram(prometheus.HistogramOpts{
-			Name:    "toy_work_cpu_ms",
-			Help:    "Histogram of requested CPU work in milliseconds.",
+			Name:    "toy_work_cpu_seconds",
+			Help:    "Histogram of requested CPU work in seconds.",
 			Buckets: workBuckets(),
 		}),
 		WorkSleep: prometheus.NewHistogram(prometheus.HistogramOpts{
-			Name:    "toy_work_sleep_ms",
-			Help:    "Histogram of requested sleep duration in milliseconds.",
+			Name:    "toy_work_sleep_seconds",
+			Help:    "Histogram of requested sleep duration in seconds.",
 			Buckets: workBuckets(),
 		}),
 		WorkJitter: prometheus.NewHistogram(prometheus.HistogramOpts{
-			Name:    "toy_work_jitter_ms",
-			Help:    "Histogram of requested jitter bounds in milliseconds.",
+			Name:    "toy_work_jitter_seconds",
+			Help:    "Histogram of requested jitter bounds in seconds.",
 			Buckets: workBuckets(),
 		}),
+		PanicCounter: prometheus.NewCounterVec(
+			prometheus.CounterOpts{
+				Name: "toy_panics_total",
+				Help: "Total recovered handler panics by route.",
+			},
+			[]string{"path"},
+		),
 		ErrorCounter: prometheus.NewCounterVec(
 			prometheus.CounterOpts{
 				Name: "toy_errors_total",
@@ -69,6 +86,7 @@ func NewCollectors(reg prometheus.Registerer) *Collectors {
 		c.WorkSleep,
 		c.WorkJitter,
 		c.ErrorCounter,
+		c.PanicCounter,
 		prometheus.NewGoCollector(),
 		prometheus.NewProcessCollector(prometheus.ProcessCollectorOpts{}),
 	)
@@ -76,6 +94,7 @@ func NewCollectors(reg prometheus.Registerer) *Collectors {
 	return c
 }
 
+// workBuckets covers work parameters in seconds (1ms .. 5s).
 func workBuckets() []float64 {
-	return []float64{1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000}
+	return []float64{0.001, 0.002, 0.005, 0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5}
 }
