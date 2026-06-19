@@ -1,51 +1,83 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">MPC vs HPA — Kubernetes autoscaling lab</title>
-  <desc id="desc">Cover image for the mpc-autoscaler project comparing reactive HPA baselines with a short-horizon Model Predictive Control controller in Kubernetes.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="t d">
+  <title id="t">MPC vs HPA — Kubernetes autoscaling lab</title>
+  <desc id="d">Social cover for the mpc-autoscaler project. On one tracked 200 rps spike, a short-horizon Model Predictive Control controller cut p95 latency by 38 percent against an HPA baseline.</desc>
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#07111f"/>
-      <stop offset="0.58" stop-color="#0d1a2e"/>
-      <stop offset="1" stop-color="#121826"/>
+      <stop offset="0" stop-color="#06101e"/>
+      <stop offset="0.55" stop-color="#0c1830"/>
+      <stop offset="1" stop-color="#0f1a2c"/>
+    </linearGradient>
+    <linearGradient id="num" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7cf7d4"/>
+      <stop offset="1" stop-color="#3fb8ff"/>
     </linearGradient>
     <linearGradient id="mpc" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#58c7ff"/>
+      <stop offset="0" stop-color="#5cc8ff"/>
       <stop offset="1" stop-color="#7cf7d4"/>
     </linearGradient>
     <linearGradient id="hpa" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#ffb86b"/>
-      <stop offset="1" stop-color="#ff4f8b"/>
+      <stop offset="1" stop-color="#ff6e91"/>
     </linearGradient>
   </defs>
 
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <g opacity="0.10" stroke="#ffffff" stroke-width="1">
-    <path d="M0 158H1200M0 316H1200M0 474H1200"/>
-    <path d="M300 0V630M600 0V630M900 0V630"/>
+
+  <!-- subtle grid -->
+  <g opacity="0.07" stroke="#9fb4d8" stroke-width="1">
+    <path d="M0 105H1200M0 210H1200M0 315H1200M0 420H1200M0 525H1200"/>
+    <path d="M150 0V630M300 0V630M450 0V630M600 0V630M750 0V630M900 0V630M1050 0V630"/>
   </g>
 
-  <text x="80" y="118" fill="#f5f7fb" font-family="Inter,Arial,sans-serif" font-size="62" font-weight="800">MPC vs HPA</text>
-  <text x="80" y="172" fill="#aebfdd" font-family="Inter,Arial,sans-serif" font-size="32" font-weight="600">Kubernetes autoscaling lab</text>
-  <text x="80" y="222" fill="#7f93b5" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="500">Reactive HPA baselines vs a short-horizon Model Predictive Control controller</text>
+  <!-- top eyebrow -->
+  <g font-family="Inter, system-ui, Arial, sans-serif">
+    <text x="72" y="86" fill="#7f93b5" font-size="22" font-weight="600" letter-spacing="3">MPC-AUTOSCALER · KUBERNETES AUTOSCALING LAB</text>
+  </g>
 
-  <g transform="translate(80 270)">
-    <rect x="0" y="0" width="1040" height="252" rx="26" fill="#0b1527" stroke="#2a3b5c" stroke-width="2"/>
+  <!-- left: big number + caption -->
+  <g font-family="Inter, system-ui, Arial, sans-serif">
+    <text x="72" y="292" fill="url(#num)" font-size="220" font-weight="900" letter-spacing="-6">−38%</text>
+    <text x="72" y="346" fill="#e7eef9" font-size="34" font-weight="700">p95 latency on a tracked 200 rps spike</text>
+    <text x="72" y="384" fill="#9fb0cd" font-size="22" font-weight="500">Predictive (MPC) vs reactive (HPA) on the same workload, same image, same load.</text>
+  </g>
 
-    <g font-family="Inter,Arial,sans-serif" font-size="18" font-weight="700">
-      <circle cx="44" cy="40" r="7" fill="#5cc8ff"/>
-      <text x="60" y="46" fill="#d8fff6">MPC (predictive)</text>
-      <circle cx="244" cy="40" r="7" fill="#ff6e91"/>
-      <text x="260" y="46" fill="#ffd2df">CPU-HPA (reactive)</text>
+  <!-- honest counter-finding pill -->
+  <g transform="translate(72 420)" font-family="Inter, system-ui, Arial, sans-serif">
+    <rect x="0" y="0" width="540" height="64" rx="14" fill="#1a2540" stroke="#2f4070" stroke-width="1.5"/>
+    <circle cx="30" cy="32" r="6" fill="#ff8aa6"/>
+    <text x="50" y="38" fill="#ffd6df" font-size="20" font-weight="700">…and where it loses: 30 s burst, readiness lag ~40 s.</text>
+  </g>
+
+  <!-- right: micro trace illustration -->
+  <g transform="translate(720 130)">
+    <rect x="0" y="0" width="400" height="320" rx="22" fill="#0a1426" stroke="#22325a" stroke-width="2"/>
+
+    <g font-family="Inter, system-ui, Arial, sans-serif" font-size="15" font-weight="700">
+      <circle cx="28" cy="40" r="6" fill="#5cc8ff"/>
+      <text x="42" y="45" fill="#d8eefb">MPC</text>
+      <circle cx="120" cy="40" r="6" fill="#ff6e91"/>
+      <text x="134" y="45" fill="#ffd2df">HPA</text>
+      <text x="368" y="45" text-anchor="end" fill="#7f93b5" font-size="13" font-weight="500">latency under burst</text>
     </g>
 
-    <rect x="430" y="70" width="170" height="150" rx="18" fill="#ff4f8b" opacity="0.08" stroke="#ff6e91" stroke-width="1.2"/>
-    <text x="515" y="92" text-anchor="middle" fill="#ffb6c8" font-family="Inter,Arial,sans-serif" font-size="20" font-weight="800">spike</text>
+    <!-- spike window background -->
+    <rect x="170" y="80" width="80" height="200" rx="10" fill="#ff4f8b" opacity="0.10"/>
+    <text x="210" y="98" text-anchor="middle" fill="#ffa6bd" font-size="13" font-weight="700">spike</text>
 
-    <path d="M40 200 C200 198 320 196 410 150 C470 118 500 90 540 86 C620 80 740 170 1000 196" fill="none" stroke="url(#mpc)" stroke-width="6" stroke-linecap="round"/>
-    <path d="M40 202 C260 202 380 200 470 178 C560 156 620 132 700 144 C800 158 900 186 1000 200" fill="none" stroke="url(#hpa)" stroke-width="6" stroke-linecap="round"/>
+    <!-- axis baseline -->
+    <path d="M28 278 H372" stroke="#22325a" stroke-width="1.2"/>
 
-    <text x="40" y="240" fill="#9fb0cd" font-family="Inter,Arial,sans-serif" font-size="16">latency under a 200 rps burst</text>
+    <!-- HPA: latency hump during burst -->
+    <path d="M28 268 C90 268 140 266 170 200 C195 150 220 130 250 142 C290 158 330 200 372 244" fill="none" stroke="url(#hpa)" stroke-width="5" stroke-linecap="round"/>
+    <!-- MPC: small bump, lower peak -->
+    <path d="M28 268 C90 268 140 264 170 230 C195 208 220 196 250 200 C290 208 330 232 372 256" fill="none" stroke="url(#mpc)" stroke-width="5" stroke-linecap="round"/>
+
+    <text x="200" y="304" text-anchor="middle" fill="#7f93b5" font-family="Inter, system-ui, Arial, sans-serif" font-size="12" font-weight="500">time →</text>
   </g>
 
-  <text x="80" y="572" fill="#7cf7d4" font-family="Inter,Arial,sans-serif" font-size="22" font-weight="700">~38% lower burst p95 latency on one tracked 200 rps spike, both at 100% success</text>
-  <text x="80" y="606" fill="#7f93b5" font-family="Inter,Arial,sans-serif" font-size="18" font-weight="500">github.com/vshulcz/mpc-autoscaler · Apache-2.0 · v0.1.0</text>
+  <!-- footer line -->
+  <g font-family="Inter, system-ui, Arial, sans-serif">
+    <text x="72" y="588" fill="#7f93b5" font-size="20" font-weight="500">github.com/vshulcz/mpc-autoscaler</text>
+    <text x="1128" y="588" text-anchor="end" fill="#7f93b5" font-size="20" font-weight="500">Apache-2.0 · reproducible</text>
+  </g>
 </svg>
