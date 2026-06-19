@@ -39,6 +39,8 @@ mpc-offline-sim \
 
 This validates the bundled spike trace and runs the offline simulator end to end (writes `summary.json`, `trajectory.csv`, and a plot). For staged paths — offline sim, saved evidence, live cluster runs — see [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md).
 
+Prefer not to install anything? The [browser demo](https://vshulcz.github.io/mpc-autoscaler/demo.html) renders the same trajectory inline and links every number back to a reproducible source.
+
 ## Contribute
 
 You do not need a Kubernetes cluster for many useful first contributions.
@@ -79,7 +81,7 @@ Supported scenarios: `step` (sustained increase), `spike` (short burst), `season
 | [`docs/RESULTS.md`](docs/RESULTS.md) | Exact numbers, evidence paths, caveats, rebuild commands. |
 | [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md) | Experiment design and the MPC formulation. |
 | [`docs/LIMITATIONS.md`](docs/LIMITATIONS.md) | What these numbers do **not** prove. |
-| [`docs/BENCHMARK_MATRIX.md`](docs/BENCHMARK_MATRIX.md) | Which cells have published numbers vs. indexed evidence roots. |
+| [`docs/BENCHMARK_MATRIX.md`](docs/BENCHMARK_MATRIX.md) | Alias for `RESULTS.md` (kept for legacy links). |
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Component boundaries, data flow, extension points. |
 | [`docs/API.md`](docs/API.md) | Public contracts and scripting surfaces. |
 | [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md) | Staged reproduction paths. |
