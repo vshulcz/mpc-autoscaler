@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Browser demo — MPC vs HPA autoscaling</title>
+    <meta name="description" content="See the offline MPC simulator output in your browser without installing anything. Real cluster numbers and reproduction commands included.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://vshulcz.github.io/mpc-autoscaler/demo.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="mpc-autoscaler">
+    <meta property="og:title" content="MPC vs HPA — browser demo">
+    <meta property="og:description" content="Offline simulator output rendered inline. No install required. Real cluster numbers and reproduction commands below.">
+    <meta property="og:url" content="https://vshulcz.github.io/mpc-autoscaler/demo.html">
+    <meta property="og:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/og/og-cover.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="MPC cut p95 latency 38% on a 200 rps spike; on a 30s burst it lost because new Pods became Ready 40s after the decision.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MPC vs HPA — browser demo">
+    <meta name="twitter:description" content="See the offline simulator output without installing anything. Real cluster numbers below.">
+    <meta name="twitter:image" content="https://vshulcz.github.io/mpc-autoscaler/assets/og/og-cover.png">
+    <link rel="icon" href="/mpc-autoscaler/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/mpc-autoscaler/apple-touch-icon.png">
+    <link rel="manifest" href="/mpc-autoscaler/site.webmanifest">
+    <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <link rel="stylesheet" href="assets/style.css">
+  </head>
+  <body>
+    <header class="shell nav">
+      <a class="brand" href="index.html">mpc-autoscaler</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="demo.html">Demo</a>
+        <a href="architecture.html">Architecture</a>
+        <a href="reproducibility.html">Reproducibility</a>
+        <a href="experiments.html">Evidence</a>
+        <a href="https://github.com/vshulcz/mpc-autoscaler/discussions/categories/q-a">Q&amp;A</a>
+        <a class="github-link" href="https://github.com/vshulcz/mpc-autoscaler" aria-label="Open GitHub repository"><svg class="github-mark" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82A7.62 7.62 0 0 1 8 3.86c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg><span>GitHub</span></a>
+      </nav>
+    </header>
+
+    <main class="shell">
+      <section class="hero page-hero">
+        <div>
+          <div class="eyebrow">Browser demo</div>
+          <h1>See the controller in motion — no install required.</h1>
+          <p class="lead">The two charts below are rendered from real output of the offline simulator on the bundled 200&nbsp;rps spike trace (<code>baseline_spike_profile_dt15.csv</code>). The same files you can reproduce locally with one command.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#reproduce">Reproduce locally</a>
+            <a class="button" href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/RESULTS.md">Live cluster results</a>
+            <a class="button" href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/LIMITATIONS.md">Where it fails</a>
+          </div>
+        </div>
+        <aside class="page-hero-card">
+          <span class="card-tag">surprise</span>
+          <strong>same offline SLO</strong>
+          <p>HPA and MPC both miss 2 of 26 steps in this offline run. So where does the <strong>−38% p95</strong> on a real cluster come from? <a href="#readiness-lag">Readiness lag.</a></p>
+        </aside>
+      </section>
+
+      <section class="section panel" aria-label="Offline simulator output">
+        <h2>What the offline simulator sees</h2>
+        <p>Both panels use the same input demand and the same scaling bounds (2&ndash;12 replicas, step ≤ 2). HPA is a CPU-target reactive baseline at 60%. MPC is a short-horizon (8-step) QP with normalized objective.</p>
+
+        <figure>
+          <img src="assets/demo/demand-vs-forecast.svg" alt="Demand and MPC short-horizon forecast over a 200 rps spike. Forecast peaks lower than the actual spike because the spike fires within a single step." width="960" height="420" loading="lazy" decoding="async">
+          <figcaption>Demand jumps from 20&nbsp;rps to 200&nbsp;rps for 30&nbsp;s. The MPC forecast catches the spike one step late — the inherent lag of any reactive forecaster.</figcaption>
+        </figure>
+
+        <figure>
+          <img src="assets/demo/replica-trajectory.svg" alt="Replica trajectory for HPA and MPC during the spike. Both ramp up; MPC holds replicas longer after the burst." width="960" height="420" loading="lazy" decoding="async">
+          <figcaption>HPA drains aggressively after the burst; MPC holds extra capacity for the forecast horizon. In this offline view MPC costs more replicas with no SLO win — the readiness-lag advantage does not show up here.</figcaption>
+        </figure>
+
+        <div class="proof-grid" aria-label="Offline numbers">
+          <span><strong>HPA avg 3.46 replicas</strong> max 6, SLO miss 2 / 26 steps.</span>
+          <span><strong>MPC avg 4.77 replicas</strong> max 8, SLO miss 2 / 26 steps.</span>
+          <span><strong>Offline verdict</strong> MPC uses ~38% more replicas, same SLO.</span>
+        </div>
+      </section>
+
+      <section class="section panel" id="readiness-lag" aria-label="Why offline differs from a real cluster">
+        <h2>Why the live cluster tells a different story</h2>
+        <p>The offline simulator assumes new replicas are ready instantly. A real Kubernetes cluster does not. On the tracked spike pair, new Pods became <strong>Ready ~40&nbsp;s</strong> after the scaling decision. HPA decides only when CPU already saturates, so its new capacity arrives after the latency damage is done. MPC scales on the forecast and gets there earlier.</p>
+        <p>Same load, same workload, same image. The number that flips:</p>
+        <div class="proof-grid">
+          <span><strong>HPA p95 ≈ 85&nbsp;ms</strong> on the live 200&nbsp;rps spike.</span>
+          <span><strong>MPC p95 ≈ 52&nbsp;ms</strong> &mdash; about 38% lower.</span>
+          <span><strong>30&nbsp;s burst</strong> MPC still loses — the lag is longer than the event.</span>
+        </div>
+        <p>Sources: <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/RESULTS.md">docs/RESULTS.md</a> (evidence paths) and <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/LIMITATIONS.md">docs/LIMITATIONS.md</a> (what the numbers do not prove).</p>
+      </section>
+
+      <section class="section grid grid-2" id="reproduce">
+        <article class="card">
+          <span class="card-tag">30 seconds</span>
+          <h3>Reproduce the figures above</h3>
+          <pre><code>python3 -m pip install -e analysis
+mpc-offline-sim \
+  --trace-csv analysis/mpc_autoscaler_analysis/data/traces/baseline_spike_profile_dt15.csv \
+  --out-dir /tmp/demo</code></pre>
+          <p>Outputs land in <code>/tmp/demo/</code> as <code>trajectory.csv</code>, <code>summary.json</code>, and a PNG. The CSV behind this page is the same file; download it to compare:</p>
+          <p><a href="assets/demo/trajectory.csv">trajectory.csv</a> &middot; <a href="assets/demo/summary.json">summary.json</a></p>
+        </article>
+        <article class="card">
+          <span class="card-tag">2 minutes</span>
+          <h3>Run it on a live cluster</h3>
+          <pre><code>helm upgrade --install toy-load \
+  toy-load/deploy/helm/toy-load \
+  --namespace default --create-namespace
+
+bash loadgen/scripts/run_hpa_experiment_incluster.sh spike
+bash loadgen/scripts/run_mpc_experiment_incluster.sh spike</code></pre>
+          <p>This is the path that produces the live numbers above. Full walkthrough: <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/MPC_VS_HPA_60_SECONDS.md">MPC vs HPA in 60 seconds</a>.</p>
+        </article>
+      </section>
+    </main>
+
+    <footer class="shell footer">
+      Methodology: <a href="https://github.com/vshulcz/mpc-autoscaler/blob/main/docs/METHODOLOGY.md">docs/METHODOLOGY.md</a>.
+      Questions: <a href="https://github.com/vshulcz/mpc-autoscaler/discussions/categories/q-a">Q&amp;A Discussions</a>.
+      Apache-2.0 &middot; <a href="https://github.com/vshulcz/mpc-autoscaler">vshulcz/mpc-autoscaler</a>.
+    </footer>
+  </body>
+</html>

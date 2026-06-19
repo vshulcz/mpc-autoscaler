@@ -1,0 +1,54 @@
+{
+  "config": {
+    "forecast": "es",
+    "horizon": 8,
+    "history_window": 60,
+    "es_alpha": 0.35,
+    "capacity_per_replica": 25.0,
+    "rho_star": 0.7,
+    "alpha": 15.0,
+    "beta": 4.0,
+    "gamma": 0.08,
+    "min_replicas": 2,
+    "max_replicas": 12,
+    "max_step": 2,
+    "initial_replicas": 2,
+    "hpa_target": 0.6,
+    "hpa_scale_down_hold_steps": 5,
+    "dt_seconds": 15,
+    "normalized_objective": true,
+    "normalization_reference_replicas": 12.0
+  },
+  "n_points": 26,
+  "hpa": {
+    "avg_replicas": 3.4615384615384617,
+    "max_replicas": 6,
+    "replica_variation_sum_abs_delta": 6.0,
+    "utilization_mean": 0.49230769230769234,
+    "utilization_p95": 1.6,
+    "slo_violation_ratio": 0.07692307692307693,
+    "overflow_mean_replicas": 0.6483516483516484,
+    "overflow_p95_replicas": 5.571428571428571
+  },
+  "mpc": {
+    "avg_replicas": 4.769230769230769,
+    "max_replicas": 8,
+    "replica_variation_sum_abs_delta": 6.0,
+    "utilization_mean": 0.46282051282051284,
+    "utilization_p95": 1.6,
+    "slo_violation_ratio": 0.07692307692307693,
+    "overflow_mean_replicas": 0.6483516483516484,
+    "overflow_p95_replicas": 5.571428571428571
+  },
+  "mpc_backlog": {
+    "b0_mean": 438.46153846153845,
+    "b0_p95": 2981.25,
+    "b0_max": 4425.0
+  },
+  "delta_mpc_minus_hpa": {
+    "avg_replicas": 1.3076923076923075,
+    "replica_variation_sum_abs_delta": 0.0,
+    "slo_violation_ratio": 0.0,
+    "overflow_mean_replicas": 0.0
+  }
+}
