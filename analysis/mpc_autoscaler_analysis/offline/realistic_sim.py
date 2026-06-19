@@ -277,7 +277,11 @@ def run_simulation(
     hpa_last_obs_rps: float = 0.0
 
     dt = float(sim.control_step_s)
-    scrape_ratio = max(1, sim.scrape_interval_s // sim.control_step_s)
+    # Scrape cadence is driven by wall-clock seconds, not by step index.
+    # Using integer step % ratio truncates non-multiple intervals
+    # (e.g. scrape=30s, control=20s would scrape every step instead of every 1.5).
+    scrape_interval = max(float(sim.scrape_interval_s), dt)
+    next_scrape_time = 0.0
 
     for step in range(n_steps):
         true_rps = float(rps_trace[step])
@@ -288,7 +292,13 @@ def run_simulation(
         hpa_ready = hpa_ready_queue.pop(0) if hpa_ready_queue else hpa_desired
 
         # Refresh observed metrics on scrape ticks and hold them between scrapes.
-        if step % scrape_ratio == 0:
+        now_seconds = step * dt
+        if now_seconds + 1e-9 >= next_scrape_time:
+            next_scrape_time = now_seconds + scrape_interval
+            scrape_tick = True
+        else:
+            scrape_tick = False
+        if scrape_tick:
             obs_rps_mpc = true_rps
             obs_rps_hpa = true_rps
             obs_inflight_mpc = observed_inflight(true_rps, max(1, mpc_ready), physics)

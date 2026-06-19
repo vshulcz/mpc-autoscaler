@@ -15,11 +15,33 @@ import time
 import urllib.parse
 from dataclasses import dataclass
 from pathlib import Path
+import re
 
 from mpc_autoscaler_analysis.mpc import greedy_replica_action, solve_backlog_mpc, update_backlog
 
 
 SOLVED_STATUSES = {"optimal", "optimal_inaccurate"}
+
+# PromQL duration: positive integer followed by a unit. Conservative subset.
+_PROM_DURATION_RE = re.compile(r"^[0-9]+(ms|s|m|h|d|w|y)$")
+
+
+def escape_promql_label(value: str) -> str:
+    """Escape a string for safe use inside a PromQL label matcher value.
+
+    PromQL strings are double-quoted; backslash, quote and newline must be
+    escaped to prevent injection through CLI-provided namespace/deployment names.
+    """
+    return value.replace("\\", "\\\\").replace('"', '\\"').replace("\n", "\\n")
+
+
+def validate_promql_duration(value: str, *, name: str) -> str:
+    """Return ``value`` if it is a valid PromQL duration, else raise ValueError."""
+    if not _PROM_DURATION_RE.match(value):
+        raise ValueError(
+            f"{name!s} must match PromQL duration (e.g. '30s', '1m', '2h'); got {value!r}"
+        )
+    return value
 
 
 @dataclass
@@ -39,6 +61,39 @@ class MPCConfig:
     dt_seconds: int        # Delta_t: control step length
     normalized_objective: bool
     constraint_tolerance: float
+
+    def __post_init__(self) -> None:
+        if self.horizon <= 0:
+            raise ValueError(f"horizon must be > 0, got {self.horizon}")
+        if self.alpha < 0 or self.beta < 0 or self.gamma < 0:
+            raise ValueError(
+                f"alpha, beta, gamma must be >= 0; got {self.alpha}, {self.beta}, {self.gamma}"
+            )
+        if not (0.0 < self.rho_star <= 1.0):
+            raise ValueError(f"rho_star must be in (0, 1], got {self.rho_star}")
+        if self.capacity_per_replica <= 0:
+            raise ValueError(
+                f"capacity_per_replica must be > 0, got {self.capacity_per_replica}"
+            )
+        if self.normalization_reference_replicas <= 0:
+            raise ValueError(
+                "normalization_reference_replicas must be > 0, "
+                f"got {self.normalization_reference_replicas}"
+            )
+        if self.min_replicas < 1:
+            raise ValueError(f"min_replicas must be >= 1, got {self.min_replicas}")
+        if self.max_replicas < self.min_replicas:
+            raise ValueError(
+                f"max_replicas ({self.max_replicas}) must be >= min_replicas ({self.min_replicas})"
+            )
+        if self.max_step < 1:
+            raise ValueError(f"max_step must be >= 1, got {self.max_step}")
+        if self.dt_seconds <= 0:
+            raise ValueError(f"dt_seconds must be > 0, got {self.dt_seconds}")
+        if self.constraint_tolerance < 0:
+            raise ValueError(
+                f"constraint_tolerance must be >= 0, got {self.constraint_tolerance}"
+            )
 
 
 def parse_args() -> argparse.Namespace:
@@ -146,8 +201,13 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--max-step", type=int, default=2)
     p.add_argument(
         "--normalized-objective",
-        action="store_true",
-        help="Use objective terms scaled by backlog, step and replica ranges.",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help=(
+            "Use objective terms scaled by backlog, step and replica ranges. "
+            "Default matches offline simulation; pass --no-normalized-objective "
+            "to reproduce legacy un-normalized behaviour."
+        ),
     )
     p.add_argument(
         "--constraint-tolerance",
@@ -420,17 +480,21 @@ def main() -> int:
         constraint_tolerance=args.constraint_tolerance,
     )
 
+    ns_label = escape_promql_label(args.namespace)
+    job_label = escape_promql_label(args.deployment)
+    rate_window = validate_promql_duration(args.metric_rate_window, name="--metric-rate-window")
+
     rps_query = (
-        f'sum(rate(toy_http_requests_total{{namespace="{args.namespace}",'
-        f'job="{args.deployment}",path="/work"}}[{args.metric_rate_window}]))'
+        f'sum(rate(toy_http_requests_total{{namespace="{ns_label}",'
+        f'job="{job_label}",path="/work"}}[{rate_window}]))'
     )
     cpu_query = (
-        f'sum(rate(process_cpu_seconds_total{{namespace="{args.namespace}",'
-        f'job="{args.deployment}"}}[{args.metric_rate_window}]))'
+        f'sum(rate(process_cpu_seconds_total{{namespace="{ns_label}",'
+        f'job="{job_label}"}}[{rate_window}]))'
     )
     inflight_query = (
-        f'sum(toy_in_flight_requests{{namespace="{args.namespace}",'
-        f'job="{args.deployment}"}})'
+        f'sum(toy_in_flight_requests{{namespace="{ns_label}",'
+        f'job="{job_label}"}})'
     )
 
     started = time.time()

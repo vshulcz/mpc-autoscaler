@@ -20,6 +20,15 @@ dependencies = [
   "matplotlib>=3.9",
 ]
 
+[project.optional-dependencies]
+# Tooling for the online controller. Live runs shell out to `kubectl`, which
+# must be installed separately.
+dev = [
+  "pytest>=8",
+  "mypy>=1.10",
+  "ruff>=0.5",
+]
+
 [project.scripts]
 mpc-summarize-run = "mpc_autoscaler_analysis.cli.summarize_run:main"
 mpc-summarize-costs = "mpc_autoscaler_analysis.cli.summarize_costs:main"
@@ -47,4 +56,5 @@ packages = [
 ]
 
 [tool.setuptools.package-data]
+"mpc_autoscaler_analysis" = ["py.typed"]
 "mpc_autoscaler_analysis.data" = ["traces/*.csv"]
