@@ -149,6 +149,27 @@ STARTED_AT_UTC="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
 echo "Running in-cluster scenario=${SCENARIO} target=${TARGET_URL}"
 
 WATCH_PID=""
+LOG_PID=""
+cleanup() {
+  local rc=$?
+  if [[ -n "${LOG_PID}" ]]; then
+    kill "${LOG_PID}" >/dev/null 2>&1 || true
+    wait "${LOG_PID}" >/dev/null 2>&1 || true
+    LOG_PID=""
+  fi
+  if [[ -n "${WATCH_PID}" ]]; then
+    kill "${WATCH_PID}" >/dev/null 2>&1 || true
+    wait "${WATCH_PID}" >/dev/null 2>&1 || true
+    WATCH_PID=""
+  fi
+  if [[ -n "${POD_NAME:-}" ]]; then
+    kubectl ${KUBECTL_OPTS} -n "$KUBE_NAMESPACE" delete pod "$POD_NAME" \
+      --ignore-not-found --wait=false >/dev/null 2>&1 || true
+  fi
+  return "$rc"
+}
+trap cleanup EXIT INT TERM
+
 if [[ "${WATCH_REPLICAS_INTERVAL}" =~ ^[0-9]+$ && "${WATCH_REPLICAS_INTERVAL}" -gt 0 ]]; then
   echo "ts_utc,elapsed_s,spec_replicas,ready_replicas,available_replicas,hpa_current_replicas,hpa_desired_replicas" > "${REPLICA_WATCH_CSV}"
   WATCH_START_EPOCH="$(date -u +%s)"

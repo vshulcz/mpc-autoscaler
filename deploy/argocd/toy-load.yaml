@@ -10,7 +10,8 @@ spec:
     namespace: default
   source:
     repoURL: https://github.com/vshulcz/mpc-autoscaler.git
-    targetRevision: main
+    # Pin to a release tag for reproducibility. Override to `main` only for active development.
+    targetRevision: v0.1.0
     path: toy-load/deploy/helm/toy-load
     helm:
       releaseName: toy-load
