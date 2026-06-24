@@ -138,6 +138,42 @@ step,rps
 This is invalid because `timestamp_s` is missing. Malformed values are also
 reported with row numbers, for example `rps=fast` or `timestamp_s=-30`.
 
+### Validation output examples
+
+Successful validation:
+
+```text
+$ mpc-validate-trace --trace-csv analysis/mpc_autoscaler_analysis/data/traces/baseline_step_profile_dt15.csv
+✓ Trace passed validation: 3 columns x 67 rows
+  columns: step, timestamp_s, rps
+  sample range: [0, 66]
+  time range:   [0 s, 990 s]
+  rps range:   [20, 80]
+```
+
+Failed validation (missing column):
+
+```text
+$ cat /tmp/bad.csv
+step,rps
+0,20
+1,40
+
+$ mpc-validate-trace --trace-csv /tmp/bad.csv
+✗ Trace validation failed:
+  column "timestamp_s" is required but missing
+  row 1: cannot parse "rps" value on step 0
+```
+
+Failed validation (malformed value):
+
+```text
+$ mpc-validate-trace --trace-csv /tmp/bad.csv
+✗ Trace validation failed:
+  row 0: timestamp_s=-30 (must be >= 0)
+  row 2: rps=fast (not a number)
+```
+
 Generated grid-search outputs are written under `analysis/out/offline/`:
 
 ```bash
