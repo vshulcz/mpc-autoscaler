@@ -41,7 +41,7 @@ mpc-grid-search = "mpc_autoscaler_analysis.offline.grid_search:main"
 mpc-realistic-grid = "mpc_autoscaler_analysis.offline.realistic_sim:main"
 
 [build-system]
-requires = ["setuptools>=69"]
+requires = ["setuptools>=83.0.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
