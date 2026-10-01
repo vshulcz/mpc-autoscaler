@@ -130,6 +130,8 @@ For changes limited to documentation (no code, workflow, or configuration change
 - [ ] links are valid (existing anchors, absolute URLs, or relative paths);
 - [ ] no generated artifacts, experiments, or credentials are included.
 
+For docs-only micro PRs where `make check` is not relevant, run `git diff --check`; code, configuration, Helm, workflow, and release changes still require the stronger checks above.
+
 This keeps docs-only PRs lightweight and fast to review.
 
 ## Pull Request Title Examples
